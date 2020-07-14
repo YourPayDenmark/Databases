@@ -1,0 +1,12 @@
+
+{
+    "name": "yourpay/webservice-commons",
+    "description": "common classes for webservice including controllers",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Emil",
+            "email": "eej@yourpay.io"
+        }
+    ]
+}
