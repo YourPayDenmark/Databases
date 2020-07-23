@@ -4452,6 +4452,19 @@ ALTER TABLE `yourpark_parking`
 --
 ALTER TABLE `yourpark_zones`
   ADD CONSTRAINT `yourpark_zones_ibfk_1` FOREIGN KEY (`zone_id`) REFERENCES `yourpark_parking` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+--Tilføj in_use kolone i tabel robots
+--
+ALTER TABLE `robots`
+  ADD in_use int NOT NULL DEFAULT 0;
+
+--
+--Tilføj last_used kolone i tabel robots
+--
+ALTER TABLE `robots`
+  ADD last_used int NOT NULL DEFAULT 0;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
