@@ -1,1 +1,2 @@
 SET GLOBAL sql_mode = 'NO_ENGINE_SUBSTITUTION';
+
