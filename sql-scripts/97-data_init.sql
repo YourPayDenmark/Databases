@@ -37,7 +37,7 @@ INSERT INTO `crm_login` (`user_id`, `username`, `fullname`, `mobileno`, `localno
 (1421, 'eej', '', 4521491689, 1, 'eej%40yourpay.io', 0x66663466313136363933636362383732646333356139616361343462333032613133373462396138, '', '', 'g6nnQn359oUuG', 1, 1, 'sa284400d0lvppap7dl7kbjh24', 0, 'padawan', 1, '2'),
 (97, 'lir', 'Linda Irene Rybank', 4521979865, 207, 'lir@yourpay.io', 0x35363132396437346166653636303863393861386433636530383339333466653865666562363638, '', '', 'pojisdagfpjoi3245lkjsafd', 1, 10, 'm1dkitrofm7hfi4skm2me7m730', 0, 'YouRock', 1, '1'),
 (198, 'alh', 'Alexander Haugaard', 4528342620, 216, 'alh', 0x65323163653637316438333565386664343462633831643438393638396361383436383830386337, '', '', 'lkjasdflkj32458u90dvfslkj34250', 1, 1, 'r5mrd0oac6ku5j3sq300119t47', 0, 'Marketing ', 1, '1'),
-(1349, 'jub', 'Julie', 4524675150, 215, 'jub@yourpay.io', 0x62356561643139326636353564646463343733343865306666373935353935313539623564396534, 'vjV1MN0owhmxmO5ru2P0MUtoIQvw3uKyOFzAsAZZSlweaBFF.1559734029.', '', 'W8tdLpziUXtIk', 1, 1, '6052qee2ff1f5l5f6pmtrdmeq1', 0, 'Wicket', 1, '1'),
+(1349, 'jub', 'Julie', 4524675150, 215, 'jub@yourpay.io', 0x62356561643139326636353564646463343733343865306666373935353935313539623564396534, 'vjV1MN0owhmxmO5ru2P0MUtoIQvw3uKyOFzAsAZZSlweaBFF.1559734029.', '', 'W8tdLpziUXtIk', 1, 1, '6052qee2ff1f5l5f6pmtrdmeq1', 0, 'Wicket', 1, '1');
 
 
 USE di_payments;
