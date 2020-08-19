@@ -1,5 +1,5 @@
 
-CREATE TABLE `crm_dashboard_queries` (
+CREATE TABLE `crm_queries` (
   `query_id` int NOT NULL,
   `query_owner` int NOT NULL,
   `query_active` smallint NOT NULL DEFAULT '0',
@@ -7,14 +7,17 @@ CREATE TABLE `crm_dashboard_queries` (
   `query_uid` varchar(80) NOT NULL,
   `query_groups` varchar(80) NOT NULL,
   `query_used` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 --
 -- Begrænsninger for dumpede tabeller
 --
 
 --
--- Indeks for tabel `crm_dashboard_queries`
+-- Indeks for tabel `crm_queries_queries`
 --
-ALTER TABLE `crm_dashboard_queries`
+ALTER TABLE `crm_queries`
   ADD PRIMARY KEY (`query_id`);
+
+ALTER TABLE `crm_queries` ADD `query_name` VARCHAR(255) NOT NULL AFTER `query_active`;
+ALTER TABLE `crm_queries` ADD `query_database` VARCHAR(60) NOT NULL AFTER `query_name`;
