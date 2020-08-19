@@ -4438,6 +4438,20 @@ ALTER TABLE `yourpark_parking`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- Tilføj in_use i tabel `robots`
+--
+
+ALTER TABLE `robots`
+ADD in_use smallint NOT NULL DEFAULT 0;
+
+--
+-- Tilføj last_used i tabel `robots`
+--
+
+ALTER TABLE `robots`
+ADD last_used varchar(60) NOT NULL DEFAULT '';
+
+--
 -- Begrænsninger for dumpede tabeller
 --
 
