@@ -2897,6 +2897,13 @@ ADD PRIMARY KEY (blacklist_id);
 ALTER TABLE blacklist_merchant_tokens
 MODIFY blacklist_id int(12) NOT NULL AUTO_INCREMENT;
 
+
+CREATE TABLE `deployments_performed` (
+  `deployment_id` int(11) NOT NULL,
+  `deployment_file` varchar(255) NOT NULL,
+  `deployment_timestamp` bigint(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Begrænsninger for dumpede tabeller
 --
