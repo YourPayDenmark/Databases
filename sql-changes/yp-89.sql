@@ -1,26 +1,8 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Vært: mysql
--- Genereringstid: 23. 08 2020 kl. 22:50:50
--- Serverversion: 8.0.20
--- PHP-version: 7.4.6
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
---
--- Database: `dinterminal`
---
-
--- --------------------------------------------------------
+USE dinterminal;
 
 --
 -- Struktur-dump for tabellen `crm_queries`
 --
-
 CREATE TABLE `crm_queries` (
                                `query_id` int NOT NULL,
                                `query_owner` int NOT NULL,
