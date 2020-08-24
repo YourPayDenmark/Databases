@@ -53,4 +53,27 @@ ALTER TABLE `crm_queries`
 --
 ALTER TABLE `crm_queries`
     MODIFY `query_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+
+
+CREATE TABLE `crm_dashboard` (
+                                 `crm_id` int NOT NULL,
+                                 `user_id` int NOT NULL,
+                                 `crm_element` longtext NOT NULL,
+                                 `crm_active` smallint NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+ALTER TABLE `crm_dashboard`
+    ADD PRIMARY KEY (`crm_id`);
+
+--
+-- Brug ikke AUTO_INCREMENT for slettede tabeller
+--
+
+--
+-- Tilføj AUTO_INCREMENT i tabel `crm_dashboard`
+--
+ALTER TABLE `crm_dashboard`
+    MODIFY `crm_id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
