@@ -1155,6 +1155,22 @@ CREATE TABLE `yourpay_cards_funding_transactions` (
   `transaction_timestamp` bigint(12) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+
+CREATE TABLE `funding_batch` (
+  `batch_seq_id` int(11) NOT NULL,
+  `batch_id` varchar(255) NOT NULL,
+  `batch_start` bigint(12) NOT NULL DEFAULT '0',
+  `batch_state` varchar(10) NOT NULL DEFAULT 'open',
+  `merchant_token` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `funding_batch`
+  ADD PRIMARY KEY (`batch_seq_id`);
+
+ALTER TABLE `funding_batch`
+  MODIFY `batch_seq_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Begrænsninger for dumpede tabeller
 --

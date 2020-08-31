@@ -71,7 +71,7 @@ INSERT INTO dinterminal.merchant_transfer_accounts_daily_overview (
 
 INSERT INTO dinterminal.customer_cvr
 (merchant_token, merchantid, merchantid_prod,customer_pos, cvr, psper,cvr_created
-)VALUES ("0wHSEzjTVcwZ6hxanaHDJFvzvtoY9Rf", 50000000, 50000003, 0,123456,1277,151476900);
+)VALUES ("UtZv3bY5fHEPBrKoqNJyEtREAgarbM", 50000000, 50000003, 0,123456,1277,151476900);
 
 INSERT INTO dinterminal.customer_cvr
 (merchant_token, merchantid,overall_merchantid, merchantid_prod,customer_pos, cvr, psper,cvr_created,institute_id
@@ -167,15 +167,15 @@ INSERT INTO dinterminal.crm_login_psp_monthly_data
 
 INSERT INTO dinterminal.app_user_invoicing
 (invoice_amount,invoice_currency,invoice_paid,invoice_next_retry,invoice_token,merchant_token
-)VALUES(100,208,0,151476900,"koasiufrmcjaiejt","0wHSEzjTVcwZ6hxanaHDJFvzvtoY9Rf");
+)VALUES(100,208,0,151476900,"koasiufrmcjaiejt","UtZv3bY5fHEPBrKoqNJyEtREAgarbM");
 
 INSERT INTO dinterminal.app_user_pricing
 (merchant_token,service,service_text,next_amount
-)VALUES("0wHSEzjTVcwZ6hxanaHDJFvzvtoY9Rf","service_test","service_text_test",100);
+)VALUES("UtZv3bY5fHEPBrKoqNJyEtREAgarbM","service_test","service_text_test",100);
 
 INSERT INTO dinterminal.bambora_merchants
 (merchant_token,file_confirm_name
-)VALUES("0wHSEzjTVcwZ6hxanaHDJFvzvtoY9Rf","file_confirm_name");
+)VALUES("UtZv3bY5fHEPBrKoqNJyEtREAgarbM","file_confirm_name");
 
 
 INSERT INTO dinterminal.merchant_transfer_accounts_daily_overview
@@ -381,7 +381,7 @@ VALUES
 INSERT INTO di_payments.payout_invoice
 (`time_lasttried`,`date_id`,`flag_status`,merchant_token)
 VALUES
-('100','0','0','0wHSEzjTVcwZ6hxanaHDJFvzvtoY9Rf');
+('100','0','0','UtZv3bY5fHEPBrKoqNJyEtREAgarbM');
 
 
 INSERT INTO di_payments.payon_transid
