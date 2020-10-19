@@ -106,8 +106,3 @@ ALTER TABLE `document_users`
 ALTER TABLE `document_access_log`
   ADD CONSTRAINT `document_access_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `document_users` (`user_id`),
   ADD CONSTRAINT `document_access_log_ibfk_2` FOREIGN KEY (`document_id`) REFERENCES `document_container` (`document_id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
