@@ -1,44 +1,24 @@
--- phpMyAdmin SQL Dump
--- version 4.9.4
--- https://www.phpmyadmin.net/
---
--- Vært: aurora-1.cluster-czl14h06ail9.eu-west-1.rds.amazonaws.com
--- Genereringstid: 12. 05 2020 kl. 13:31:56
--- Serverversion: 5.6.10
--- PHP-version: 7.0.33
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `di_payments`
 --
-
--- --------------------------------------------------------
 USE di_payments;
+-- --------------------------------------------------------
+
 --
 -- Struktur-dump for tabellen `02_callbacks`
 --
 
 CREATE TABLE `02_callbacks` (
-  `UniqueID` bigint(7) NOT NULL DEFAULT '0' COMMENT 'AutoID',
+  `UniqueID` bigint(7) NOT NULL COMMENT 'AutoID',
   `merchantid` bigint(12) DEFAULT NULL,
   `unixtime` bigint(12) DEFAULT NULL,
-  `tid` varchar(10) NOT NULL DEFAULT '' DEFAULT '',
-  `CallbackURL` longtext NOT NULL DEFAULT '',
-  `CallbackBody` longtext NOT NULL DEFAULT '',
+  `tid` varchar(10) NOT NULL DEFAULT '',
+  `CallbackURL` longtext NOT NULL,
+  `CallbackBody` longtext NOT NULL,
   `callbackstatus` enum('0','1','2') NOT NULL DEFAULT '0',
   `lasttry` varchar(12) NOT NULL DEFAULT '0',
   `tries` int(2) NOT NULL DEFAULT '0',
-  `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `last_updated` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -48,11 +28,11 @@ CREATE TABLE `02_callbacks` (
 --
 
 CREATE TABLE `02_callbacks_log` (
-  `logid` int(12) NOT NULL DEFAULT '0' COMMENT 'Unique Identifier',
+  `logid` int(12) NOT NULL COMMENT 'Unique Identifier',
   `UniqueId` int(12) DEFAULT NULL COMMENT 'UniqueID',
   `utimer` bigint(12) DEFAULT NULL COMMENT 'Unix Timestamp',
   `header` int(3) DEFAULT NULL COMMENT 'Header response',
-  `response` longtext NOT NULL DEFAULT '' COMMENT 'Response HTML'
+  `response` longtext NOT NULL COMMENT 'Response HTML'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -62,11 +42,11 @@ CREATE TABLE `02_callbacks_log` (
 --
 
 CREATE TABLE `02_cardnorequests` (
-  `request_id` int(8) NOT NULL DEFAULT '0' COMMENT 'AutoID',
-  `cardno` varchar(16) NOT NULL DEFAULT '',
-  `token` varchar(64) NOT NULL DEFAULT '',
-  `timestp` bigint(12) NOT NULL DEFAULT '0',
-  `ip` varchar(255) NOT NULL DEFAULT '' COMMENT 'Requester IP'
+  `request_id` int(8) NOT NULL COMMENT 'AutoID',
+  `cardno` varchar(16) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `timestp` bigint(12) NOT NULL,
+  `ip` varchar(255) NOT NULL COMMENT 'Requester IP'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -76,30 +56,30 @@ CREATE TABLE `02_cardnorequests` (
 --
 
 CREATE TABLE `02_cards` (
-  `ProcessID` int(11) NOT NULL DEFAULT '0' COMMENT 'AutoID',
-  `merchantid` bigint(7) NOT NULL DEFAULT '0',
-  `orderid` blob NOT NULL DEFAULT '',
-  `amount` int(35) NOT NULL DEFAULT '0',
-  `transfee` int(35) NOT NULL DEFAULT '0',
-  `group` blob NOT NULL DEFAULT '',
-  `currency` int(3) NOT NULL DEFAULT '0',
-  `description` blob NOT NULL DEFAULT '',
-  `cardtype` int(3) NOT NULL DEFAULT '0',
-  `instantcapture` smallint(1) NOT NULL DEFAULT '0',
-  `use3D` int(1) NOT NULL DEFAULT '0',
-  `accepturl` longblob NOT NULL DEFAULT '',
-  `declineurl` longblob NOT NULL DEFAULT '',
-  `callbackurl` longblob NOT NULL DEFAULT '',
-  `cardno` blob NOT NULL DEFAULT '',
-  `expmonth` int(2) NOT NULL DEFAULT '0',
-  `expyear` int(4) NOT NULL DEFAULT '0',
-  `cvc` int(3) NOT NULL DEFAULT '0',
-  `TransID` int(8) NOT NULL DEFAULT '0',
-  `date` int(8) NOT NULL DEFAULT '0',
-  `time` int(4) NOT NULL DEFAULT '0',
-  `cardid` int(2) NOT NULL DEFAULT '0',
+  `ProcessID` int(11) NOT NULL COMMENT 'AutoID',
+  `merchantid` bigint(7) NOT NULL,
+  `orderid` blob NOT NULL,
+  `amount` int(35) NOT NULL,
+  `transfee` int(35) NOT NULL,
+  `group` blob NOT NULL,
+  `currency` int(3) NOT NULL,
+  `description` blob NOT NULL,
+  `cardtype` int(3) NOT NULL,
+  `instantcapture` smallint(1) NOT NULL,
+  `use3D` int(1) NOT NULL,
+  `accepturl` longblob NOT NULL,
+  `declineurl` longblob NOT NULL,
+  `callbackurl` longblob NOT NULL,
+  `cardno` blob NOT NULL,
+  `expmonth` int(2) NOT NULL,
+  `expyear` int(4) NOT NULL,
+  `cvc` int(3) NOT NULL,
+  `TransID` int(8) NOT NULL,
+  `date` int(8) NOT NULL,
+  `time` int(4) NOT NULL,
+  `cardid` int(2) NOT NULL,
   `uxtime` bigint(12) NOT NULL DEFAULT '0',
-  `rebilling` int(1) NOT NULL DEFAULT '0'
+  `rebilling` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -109,8 +89,8 @@ CREATE TABLE `02_cards` (
 --
 
 CREATE TABLE `02_cardtypes` (
-  `cardno` bigint(6) NOT NULL DEFAULT '0',
-  `type` varchar(255) NOT NULL DEFAULT ''
+  `cardno` bigint(6) NOT NULL,
+  `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -120,24 +100,32 @@ CREATE TABLE `02_cardtypes` (
 --
 
 CREATE TABLE `02_chargebacks` (
-  `chargebackid` int(8) NOT NULL DEFAULT '0',
+  `chargebackid` int(8) NOT NULL,
   `TransID` int(7) NOT NULL DEFAULT '0',
-  `PaymentID` int(10) NOT NULL DEFAULT '0',
+  `PaymentID` int(10) NOT NULL,
   `merchantnumber` int(10) NOT NULL DEFAULT '0',
   `payment_institute` int(2) NOT NULL DEFAULT '0',
   `currency` int(3) NOT NULL DEFAULT '0',
-  `arn` varchar(255) NOT NULL DEFAULT '',
-  `amount` varchar(255) NOT NULL DEFAULT '',
+  `arn` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
   `chargeback_fee` int(5) NOT NULL DEFAULT '20000',
   `datestamp` bigint(12) NOT NULL DEFAULT '0',
-  `casetype` varchar(2555) NOT NULL DEFAULT '',
+  `casetype` varchar(2555) NOT NULL,
   `dateid` int(7) NOT NULL DEFAULT '0',
   `dateid_fee` int(7) NOT NULL DEFAULT '0',
   `status` smallint(1) NOT NULL DEFAULT '0' COMMENT '0 = Received, 1 = Pending Documentation, 2 = Documentation received, 3 = 2nd CBK, 4 = 3rd CBK, 5 = Pending acceptace from Issuer, 6 = Won, 7 = Lost',
-  `order_summary_file` varchar(255) NOT NULL DEFAULT '',
-  `invoice_file` varchar(255) NOT NULL DEFAULT '',
-  `track_and_trace_file` varchar(255) NOT NULL DEFAULT '',
-  `customer_dialogue_file` varchar(255) NOT NULL DEFAULT '',
+  `order_summary_file` varchar(255) NOT NULL,
+  `order_summary_file_key` varchar(12) NOT NULL,
+  `order_summary_file_token` varchar(120) NOT NULL,
+  `invoice_file` varchar(255) NOT NULL,
+  `invoice_file_key` varchar(12) NOT NULL,
+  `invoice_file_token` varchar(120) NOT NULL,
+  `track_and_trace_file` varchar(255) NOT NULL,
+  `track_and_trace_file_key` varchar(12) NOT NULL,
+  `track_and_trace_file_token` varchar(120) NOT NULL,
+  `customer_dialogue_file` varchar(255) NOT NULL,
+  `customer_dialogue_file_key` varchar(12) NOT NULL,
+  `customer_dialogue_file_token` varchar(120) NOT NULL,
   `days_left_to_represent` int(2) NOT NULL DEFAULT '5',
   `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -149,11 +137,11 @@ CREATE TABLE `02_chargebacks` (
 --
 
 CREATE TABLE `02_merchantfiles` (
-  `fileID` int(11) NOT NULL DEFAULT '0' COMMENT 'FileID',
-  `merchantid` bigint(10) NOT NULL DEFAULT '0' COMMENT 'MerchantID',
-  `datestamp` varchar(10) NOT NULL DEFAULT '' COMMENT 'DateStamp of Payments',
-  `transactions` int(10) NOT NULL DEFAULT '0',
-  `totalamount` int(10) NOT NULL DEFAULT '0'
+  `fileID` int(11) NOT NULL COMMENT 'FileID',
+  `merchantid` bigint(10) NOT NULL COMMENT 'MerchantID',
+  `datestamp` varchar(10) NOT NULL COMMENT 'DateStamp of Payments',
+  `transactions` int(10) NOT NULL,
+  `totalamount` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -163,24 +151,25 @@ CREATE TABLE `02_merchantfiles` (
 --
 
 CREATE TABLE `02_paymentcapture` (
-  `ActionID` int(12) NOT NULL DEFAULT '0',
-  `PaymentID` bigint(12) NOT NULL DEFAULT '0' COMMENT 'TransactionID',
-  `req_timestamp` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Unix Timestamp',
-  `actual_captures` bigint(12) NOT NULL DEFAULT '0' DEFAULT '0',
-  `actual_payout_stamp` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Timestamp for which day the transaction have been added for',
+  `ActionID` int(12) NOT NULL,
+  `PaymentID` bigint(12) NOT NULL COMMENT 'TransactionID',
+  `req_timestamp` bigint(12) NOT NULL COMMENT 'Unix Timestamp',
+  `actual_captures` bigint(12) NOT NULL DEFAULT '0',
+  `actual_payout_stamp` bigint(12) NOT NULL COMMENT 'Timestamp for which day the transaction have been added for',
   `FinanceID` bigint(12) NOT NULL DEFAULT '0',
+  `financial_date` int(10) NOT NULL,
   `payment_institute` int(3) NOT NULL DEFAULT '0',
   `short_id` varchar(32) NOT NULL DEFAULT '',
   `uniqueid` varchar(80) NOT NULL DEFAULT '',
   `capture_state` varchar(3) NOT NULL DEFAULT '',
-  `capture_reason` varchar(255) NOT NULL DEFAULT '',
-  `dateid` int(7) NOT NULL DEFAULT '0' COMMENT '-3 = No Bank Account',
+  `capture_reason` varchar(255) NOT NULL,
+  `dateid` int(7) NOT NULL DEFAULT '0' COMMENT '-3 = No Bank Account, -4 = TEST',
   `amount` int(8) DEFAULT NULL COMMENT 'Amount to capture',
-  `amount_one` int(10) NOT NULL DEFAULT '0',
-  `dateid_two` int(10) NOT NULL DEFAULT '0',
-  `amount_two` int(10) NOT NULL DEFAULT '0',
+  `amount_one` int(10) NOT NULL,
+  `dateid_two` int(10) NOT NULL,
+  `amount_two` int(10) NOT NULL,
   `captured` int(1) DEFAULT NULL COMMENT 'If Captured then 1',
-  `handlingtype` varchar(15) NOT NULL DEFAULT '' DEFAULT 'capture',
+  `handlingtype` varchar(15) NOT NULL DEFAULT 'capture',
   `institute` int(3) NOT NULL DEFAULT '0',
   `verified_payon_data` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Used by Capture PayON',
   `reprocess` smallint(1) NOT NULL DEFAULT '0',
@@ -196,25 +185,34 @@ CREATE TABLE `02_paymentcapture` (
 --
 
 CREATE TABLE `02_paymentcapture_finances` (
-  `FinanceID` int(11) NOT NULL DEFAULT '0',
-  `ActionID` int(11) NOT NULL DEFAULT '0',
+  `FinanceID` int(11) NOT NULL,
+  `ActionID` int(11) NOT NULL,
+  `TransID` int(12) NOT NULL DEFAULT '0',
+  `merchant_token` varchar(120) NOT NULL DEFAULT '0',
+  `dateid` int(7) NOT NULL DEFAULT '0',
   `payment_institute` int(2) NOT NULL DEFAULT '0',
   `currency` int(3) NOT NULL DEFAULT '0',
-  `req_timestamp` bigint(20) NOT NULL DEFAULT '0' COMMENT 'Payment Requested for Capture',
-  `actual_timestamp` bigint(20) NOT NULL DEFAULT '0' COMMENT 'Actual Timestamp for Capture',
-  `projected_merchant_settlement` bigint(12) NOT NULL DEFAULT '0',
+  `req_timestamp` bigint(20) NOT NULL COMMENT 'Payment Requested for Capture',
+  `actual_timestamp` bigint(20) NOT NULL COMMENT 'Actual Timestamp for Capture',
+  `local_currency` int(12) NOT NULL COMMENT 'Transaction Amount',
+  `projected_merchant_settlement` bigint(12) NOT NULL,
   `projected_funding_receival` bigint(12) NOT NULL DEFAULT '0',
-  `institute_release_timestamp` bigint(20) NOT NULL DEFAULT '0' COMMENT 'Timestamp for when the institute released the funds',
-  `raw_line` int(10) NOT NULL DEFAULT '0',
-  `merchant_paid_fee` int(8) NOT NULL DEFAULT '0',
-  `institute_paid_fee` int(8) NOT NULL DEFAULT '0',
-  `net_activity` int(10) NOT NULL DEFAULT '0',
-  `volume_activity` int(11) NOT NULL DEFAULT '0',
-  `arn` varchar(64) NOT NULL DEFAULT '',
-  `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `institute_transactionIdentifier` varchar(255) NOT NULL DEFAULT '',
-  `institute_authorizationCode` varchar(255) NOT NULL DEFAULT '',
-  `institute_merchantId` bigint(10) NOT NULL DEFAULT '0'
+  `institute_release_timestamp` bigint(20) NOT NULL COMMENT 'Timestamp for when the institute released the funds',
+  `raw_line` varchar(20) NOT NULL DEFAULT '0',
+  `invoiced_transaction` smallint(6) NOT NULL DEFAULT '0',
+  `merchant_paid_fee` int(8) NOT NULL,
+  `merchant_other_fees` int(5) NOT NULL DEFAULT '0',
+  `transid_volume` int(12) NOT NULL DEFAULT '0',
+  `institute_paid_fee` int(8) NOT NULL,
+  `institute_other_fees` int(5) NOT NULL DEFAULT '0',
+  `net_activity` int(10) NOT NULL,
+  `volume_activity` int(11) NOT NULL,
+  `arn` varchar(64) NOT NULL,
+  `last_updated` timestamp NOT NULL,
+  `institute_transactionIdentifier` varchar(255) NOT NULL,
+  `institute_authorizationCode` varchar(255) NOT NULL,
+  `institute_merchantId` bigint(10) NOT NULL,
+  `small_adjusted` smallint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -224,12 +222,12 @@ CREATE TABLE `02_paymentcapture_finances` (
 --
 
 CREATE TABLE `02_paymentcapture_finances_raw` (
-  `ImportID` bigint(20) NOT NULL DEFAULT '0',
-  `acquirer` varchar(50) NOT NULL DEFAULT '',
-  `raw_data` longtext NOT NULL DEFAULT '',
+  `ImportID` bigint(20) NOT NULL,
+  `acquirer` varchar(50) NOT NULL,
+  `raw_data` longtext NOT NULL,
   `registered` bigint(12) NOT NULL DEFAULT '0',
   `imported` smallint(1) NOT NULL DEFAULT '0',
-  `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `last_updated` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -239,9 +237,9 @@ CREATE TABLE `02_paymentcapture_finances_raw` (
 --
 
 CREATE TABLE `02_paymentdata` (
-  `PaymentID` int(15) NOT NULL DEFAULT '0',
-  `datakey` varchar(50) NOT NULL DEFAULT '',
-  `datavalue` varchar(50) NOT NULL DEFAULT ''
+  `PaymentID` int(15) NOT NULL,
+  `datakey` varchar(50) NOT NULL,
+  `datavalue` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -251,9 +249,9 @@ CREATE TABLE `02_paymentdata` (
 --
 
 CREATE TABLE `02_paymentnotes` (
-  `paymentid` int(10) NOT NULL DEFAULT '0',
-  `transid` int(12) NOT NULL DEFAULT '0',
-  `notetext` longtext NOT NULL DEFAULT ''
+  `paymentid` int(10) NOT NULL,
+  `transid` int(12) NOT NULL,
+  `notetext` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -263,14 +261,14 @@ CREATE TABLE `02_paymentnotes` (
 --
 
 CREATE TABLE `02_paymentrequest` (
-  `RequestID` bigint(12) NOT NULL DEFAULT '0',
-  `orderid` varchar(255) NOT NULL DEFAULT '',
-  `amount` int(12) NOT NULL DEFAULT '0',
+  `RequestID` bigint(12) NOT NULL,
+  `orderid` varchar(255) NOT NULL,
+  `amount` int(12) NOT NULL,
   `currency` int(3) NOT NULL DEFAULT '208',
   `person_name` varchar(255) NOT NULL,
   `person_email` varchar(255) NOT NULL,
-  `mailbody` longtext NOT NULL DEFAULT '',
-  `sent` smallint(1) NOT NULL DEFAULT '0'
+  `mailbody` longtext NOT NULL,
+  `sent` smallint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -280,9 +278,9 @@ CREATE TABLE `02_paymentrequest` (
 --
 
 CREATE TABLE `02_payments` (
-  `PaymentID` int(15) NOT NULL DEFAULT '0' COMMENT 'Auto¨ID',
-  `processing_platform` varchar(10) NOT NULL DEFAULT '',
-  `pay_method` enum('card','invoice','credit','resursbank','viabill','afterpay') NOT NULL DEFAULT 'card',
+  `PaymentID` int(15) NOT NULL COMMENT 'Auto¨ID',
+  `processing_platform` varchar(10) NOT NULL,
+  `pay_method` enum('card','invoice','credit','resursbank','viabill','afterpay','mobilepay','cash','unknown') NOT NULL DEFAULT 'card',
   `pos_trans` smallint(1) NOT NULL DEFAULT '0' COMMENT 'POS transaction',
   `merchantnumber` bigint(12) NOT NULL DEFAULT '0',
   `testtrans` int(11) NOT NULL DEFAULT '0' COMMENT '1 if test-trans',
@@ -340,8 +338,8 @@ CREATE TABLE `02_payments` (
   `platform` varchar(30) NOT NULL DEFAULT 'unknown',
   `platform_domain` varchar(95) NOT NULL DEFAULT '',
   `version` varchar(5) NOT NULL DEFAULT '' COMMENT 'Script Version',
-  `customerdetails` longblob NOT NULL DEFAULT '',
-  `customer_ip` blob NOT NULL DEFAULT '',
+  `customerdetails` longblob NOT NULL,
+  `customer_ip` blob NOT NULL,
   `fraud` varchar(10) NOT NULL DEFAULT '0',
   `paymentplatform` int(1) NOT NULL DEFAULT '1' COMMENT '1 = epay, 2 = multicards, 3 = payon',
   `channelID` bigint(12) NOT NULL DEFAULT '0',
@@ -375,8 +373,8 @@ CREATE TABLE `02_payments` (
 --
 
 CREATE TABLE `02_payments_sitereference` (
-  `payment_id` int(6) NOT NULL DEFAULT '0',
-  `site_reference` varchar(50) NOT NULL DEFAULT ''
+  `payment_id` int(6) NOT NULL,
+  `site_reference` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -386,14 +384,14 @@ CREATE TABLE `02_payments_sitereference` (
 --
 
 CREATE TABLE `02_payments_tracking` (
-  `PaymentID` bigint(20) NOT NULL DEFAULT '0',
-  `digitcode` varchar(15) NOT NULL DEFAULT '',
+  `PaymentID` bigint(20) NOT NULL,
+  `digitcode` varchar(15) NOT NULL,
   `delivery` enum('bring') NOT NULL,
-  `consignmentNumber` varchar(50) NOT NULL DEFAULT '',
-  `packageNumber` varchar(50) NOT NULL DEFAULT '',
-  `correlationId` varchar(50) NOT NULL DEFAULT '',
-  `label_url` varchar(255) NOT NULL DEFAULT '',
-  `last_checked` bigint(12) NOT NULL DEFAULT '0',
+  `consignmentNumber` varchar(50) NOT NULL,
+  `packageNumber` varchar(50) NOT NULL,
+  `correlationId` varchar(50) NOT NULL,
+  `label_url` varchar(255) NOT NULL,
+  `last_checked` bigint(12) NOT NULL,
   `state` smallint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -404,7 +402,7 @@ CREATE TABLE `02_payments_tracking` (
 --
 
 CREATE TABLE `02_payment_data` (
-  `PaymentID` int(10) NOT NULL DEFAULT '0' COMMENT 'PaymentID from 02_payments',
+  `PaymentID` int(10) NOT NULL COMMENT 'PaymentID from 02_payments',
   `bin` int(8) DEFAULT NULL,
   `bin_country` varchar(255) NOT NULL DEFAULT '',
   `pending_valid` smallint(1) NOT NULL DEFAULT '0'
@@ -417,8 +415,8 @@ CREATE TABLE `02_payment_data` (
 --
 
 CREATE TABLE `02_preparing_tokens` (
-  `tokenid` varchar(64) NOT NULL DEFAULT '',
-  `transid` int(12) NOT NULL DEFAULT '0'
+  `tokenid` varchar(64) NOT NULL,
+  `transid` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -428,7 +426,7 @@ CREATE TABLE `02_preparing_tokens` (
 --
 
 CREATE TABLE `02_rebilling` (
-  `RebillingID` int(12) NOT NULL DEFAULT '0' COMMENT 'AutoID',
+  `RebillingID` int(12) NOT NULL COMMENT 'AutoID',
   `original_orderid` varchar(50) NOT NULL DEFAULT '',
   `testtrans` smallint(1) NOT NULL DEFAULT '1',
   `schedule` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Use Schedule through Shopping Platform',
@@ -458,7 +456,7 @@ CREATE TABLE `02_rebilling` (
   `verified` smallint(1) NOT NULL DEFAULT '0',
   `lastused` bigint(12) NOT NULL DEFAULT '0',
   `lastMerchantID` int(8) DEFAULT NULL,
-  `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `last_updated` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -468,11 +466,11 @@ CREATE TABLE `02_rebilling` (
 --
 
 CREATE TABLE `02_rebilling_cardno` (
-  `rebilling_cid` int(11) NOT NULL DEFAULT '0',
+  `rebilling_cid` int(11) NOT NULL,
   `test` smallint(1) NOT NULL DEFAULT '0',
-  `cardtoken` longtext NOT NULL DEFAULT '',
-  `rebilling_short_id` varchar(50) NOT NULL DEFAULT '',
-  `merchant_token` varchar(100) NOT NULL DEFAULT ''
+  `cardtoken` longtext NOT NULL,
+  `rebilling_short_id` varchar(50) NOT NULL,
+  `merchant_token` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -482,16 +480,16 @@ CREATE TABLE `02_rebilling_cardno` (
 --
 
 CREATE TABLE `02_rebilling_products` (
-  `id` int(10) NOT NULL DEFAULT '0',
+  `id` int(10) NOT NULL,
   `state` int(2) NOT NULL DEFAULT '1' COMMENT '0 = Inactive, 1 = Active',
-  `subscription_id` varchar(20) NOT NULL DEFAULT '',
-  `subscription_product` int(7) NOT NULL DEFAULT '0',
-  `subscription_value` int(5) NOT NULL DEFAULT '0',
-  `subscription_date` int(5) NOT NULL DEFAULT '0',
-  `subscription_period` int(5) NOT NULL DEFAULT '0',
-  `subscription_last` int(5) NOT NULL DEFAULT '0',
+  `subscription_id` varchar(20) NOT NULL,
+  `subscription_product` int(7) NOT NULL,
+  `subscription_value` int(5) NOT NULL,
+  `subscription_date` int(5) NOT NULL,
+  `subscription_period` int(5) NOT NULL,
+  `subscription_last` int(5) NOT NULL,
   `subscription_next` bigint(12) NOT NULL DEFAULT '0',
-  `subscription_chained` varchar(15) NOT NULL DEFAULT ''
+  `subscription_chained` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -501,10 +499,10 @@ CREATE TABLE `02_rebilling_products` (
 --
 
 CREATE TABLE `02_rebillng_products_actions` (
-  `chained_id` varchar(12) NOT NULL DEFAULT '',
-  `action` varchar(255) NOT NULL DEFAULT '',
-  `value` int(7) NOT NULL DEFAULT '0',
-  `timestp` bigint(12) NOT NULL DEFAULT '0'
+  `chained_id` varchar(12) NOT NULL,
+  `action` varchar(255) NOT NULL,
+  `value` int(7) NOT NULL,
+  `timestp` bigint(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -514,16 +512,16 @@ CREATE TABLE `02_rebillng_products_actions` (
 --
 
 CREATE TABLE `02_subscriptiondata` (
-  `subscription_id` bigint(12) NOT NULL DEFAULT '0',
-  `PaymentID` bigint(12) NOT NULL DEFAULT '0',
+  `subscription_id` bigint(12) NOT NULL,
+  `PaymentID` bigint(12) NOT NULL,
   `identification_name` varchar(255) NOT NULL DEFAULT '',
   `choosen_product` varchar(255) NOT NULL DEFAULT '',
   `total_volume` bigint(12) NOT NULL DEFAULT '0',
   `monthly_volume` bigint(12) NOT NULL DEFAULT '0',
-  `timestamp_created` bigint(12) NOT NULL DEFAULT '0',
-  `timestamp_last_update` bigint(12) NOT NULL DEFAULT '0',
-  `timestamp_last_capture` bigint(12) NOT NULL DEFAULT '0',
-  `timestamp_next_capture` bigint(12) NOT NULL DEFAULT '0'
+  `timestamp_created` bigint(12) NOT NULL,
+  `timestamp_last_update` bigint(12) NOT NULL,
+  `timestamp_last_capture` bigint(12) NOT NULL,
+  `timestamp_next_capture` bigint(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -533,10 +531,10 @@ CREATE TABLE `02_subscriptiondata` (
 --
 
 CREATE TABLE `02_subscription_data` (
-  `data_id` int(12) NOT NULL DEFAULT '0',
-  `merchantid` bigint(12) NOT NULL DEFAULT '0',
-  `data_key` varchar(255) NOT NULL DEFAULT '',
-  `data_value` varchar(255) NOT NULL DEFAULT ''
+  `data_id` int(12) NOT NULL,
+  `merchantid` bigint(12) NOT NULL,
+  `data_key` varchar(255) NOT NULL,
+  `data_value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -546,12 +544,12 @@ CREATE TABLE `02_subscription_data` (
 --
 
 CREATE TABLE `02_touches` (
-  `TouchID` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Unique Identifier',
-  `PaymentID` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Reference to 02_payments',
-  `timestp` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Unixtimestamp for Touch',
-  `paction` varchar(255) NOT NULL DEFAULT '' COMMENT 'action preformed',
-  `action_text` varchar(255) NOT NULL DEFAULT '' COMMENT 'HTML text for action',
-  `LoginID` bigint(12) NOT NULL DEFAULT '0' COMMENT 'LoginID who preformed that touch'
+  `TouchID` bigint(12) NOT NULL COMMENT 'Unique Identifier',
+  `PaymentID` bigint(12) NOT NULL COMMENT 'Reference to 02_payments',
+  `timestp` bigint(12) NOT NULL COMMENT 'Unixtimestamp for Touch',
+  `paction` varchar(255) NOT NULL COMMENT 'action preformed',
+  `action_text` varchar(255) NOT NULL COMMENT 'HTML text for action',
+  `LoginID` bigint(12) NOT NULL COMMENT 'LoginID who preformed that touch'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -561,14 +559,14 @@ CREATE TABLE `02_touches` (
 --
 
 CREATE TABLE `3d_secure_redirect` (
-  `unique_id` longtext NOT NULL DEFAULT '',
-  `token` varchar(128) NOT NULL DEFAULT '',
-  `merchant_token` varchar(64) NOT NULL DEFAULT '',
-  `base64code` longtext NOT NULL DEFAULT '',
-  `requestblock` longtext NOT NULL DEFAULT '',
-  `md` longtext NOT NULL DEFAULT '',
-  `PaRes` longtext NOT NULL DEFAULT '',
-  `generationtime` bigint(12) NOT NULL DEFAULT '0'
+  `unique_id` longtext NOT NULL,
+  `token` varchar(128) NOT NULL,
+  `merchant_token` varchar(64) NOT NULL,
+  `base64code` longtext NOT NULL,
+  `requestblock` longtext NOT NULL,
+  `md` longtext NOT NULL,
+  `PaRes` longtext NOT NULL,
+  `generationtime` bigint(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -578,22 +576,22 @@ CREATE TABLE `3d_secure_redirect` (
 --
 
 CREATE TABLE `all_processing_responses` (
-  `response_id` bigint(20) NOT NULL DEFAULT '0',
-  `acknowledgement` varchar(3) NOT NULL DEFAULT '',
-  `method` varchar(20) NOT NULL DEFAULT '',
-  `response_xml` longtext NOT NULL DEFAULT '',
-  `timestamp` bigint(12) NOT NULL DEFAULT '0',
-  `state` varchar(255) NOT NULL DEFAULT '',
-  `merchantid` int(12) NOT NULL DEFAULT '0',
-  `type` varchar(3) NOT NULL DEFAULT '',
-  `transaction_id` varchar(50) NOT NULL DEFAULT '',
-  `amount` bigint(12) NOT NULL DEFAULT '0',
-  `currency` varchar(3) NOT NULL DEFAULT '',
-  `descriptor` varchar(255) NOT NULL DEFAULT '',
-  `xml_usage` varchar(50) NOT NULL DEFAULT '',
-  `cardholder` varchar(50) NOT NULL DEFAULT '',
-  `short_id` varchar(255) NOT NULL DEFAULT '',
-  `unique_id` varchar(255) NOT NULL DEFAULT ''
+  `response_id` bigint(20) NOT NULL,
+  `acknowledgement` varchar(3) NOT NULL,
+  `method` varchar(20) NOT NULL,
+  `response_xml` longtext NOT NULL,
+  `timestamp` bigint(12) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `merchantid` int(12) NOT NULL,
+  `type` varchar(3) NOT NULL,
+  `transaction_id` varchar(50) NOT NULL,
+  `amount` bigint(12) NOT NULL,
+  `currency` varchar(3) NOT NULL,
+  `descriptor` varchar(255) NOT NULL,
+  `xml_usage` varchar(50) NOT NULL,
+  `cardholder` varchar(50) NOT NULL,
+  `short_id` varchar(255) NOT NULL,
+  `unique_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -603,7 +601,7 @@ CREATE TABLE `all_processing_responses` (
 --
 
 CREATE TABLE `bambora_settings` (
-  `access_token` longtext NOT NULL DEFAULT '',
+  `access_token` longtext NOT NULL,
   `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -614,7 +612,7 @@ CREATE TABLE `bambora_settings` (
 --
 
 CREATE TABLE `binlist` (
-  `bin_id` int(7) NOT NULL DEFAULT '0',
+  `bin_id` int(7) NOT NULL,
   `card_bin` int(8) DEFAULT NULL,
   `scheme` varchar(50) NOT NULL DEFAULT '',
   `type` varchar(50) NOT NULL DEFAULT '',
@@ -638,11 +636,11 @@ CREATE TABLE `binlist` (
 --
 
 CREATE TABLE `blocked_ips` (
-  `iptolong` varchar(50) NOT NULL DEFAULT '',
-  `reason` varchar(50) NOT NULL DEFAULT '',
+  `iptolong` varchar(50) NOT NULL,
+  `reason` varchar(50) NOT NULL,
   `timestmp` datetime NOT NULL,
   `times` bigint(12) NOT NULL DEFAULT '0',
-  `token` varchar(255) NOT NULL DEFAULT ''
+  `token` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -652,19 +650,37 @@ CREATE TABLE `blocked_ips` (
 --
 
 CREATE TABLE `bring_packages` (
-  `package_id` bigint(10) NOT NULL DEFAULT '0',
-  `bring_consignmentId` bigint(20) NOT NULL DEFAULT '0',
-  `transid` int(10) NOT NULL DEFAULT '0',
-  `timeid` bigint(12) NOT NULL DEFAULT '0',
-  `merchantid` int(10) NOT NULL DEFAULT '0',
-  `transid_chained` int(10) NOT NULL DEFAULT '0',
-  `merchantid_chained` int(10) NOT NULL DEFAULT '0',
-  `amount` int(10) NOT NULL DEFAULT '0',
-  `state` varchar(255) NOT NULL DEFAULT '',
+  `package_id` bigint(10) NOT NULL,
+  `bring_consignmentId` bigint(20) NOT NULL,
+  `transid` int(10) NOT NULL,
+  `timeid` bigint(12) NOT NULL,
+  `merchantid` int(10) NOT NULL,
+  `transid_chained` int(10) NOT NULL,
+  `merchantid_chained` int(10) NOT NULL,
+  `amount` int(10) NOT NULL,
+  `state` varchar(255) NOT NULL,
   `last_state_check` bigint(12) NOT NULL DEFAULT '0',
   `captured` int(1) NOT NULL DEFAULT '0',
-  `mobile_sender` bigint(10) NOT NULL DEFAULT '0',
-  `mobile_receiver` bigint(10) NOT NULL DEFAULT '0'
+  `mobile_sender` bigint(10) NOT NULL,
+  `mobile_receiver` bigint(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur-dump for tabellen `cash_dropoff`
+--
+
+CREATE TABLE `cash_dropoff` (
+  `id` int(11) NOT NULL,
+  `bag_id` varchar(12) NOT NULL,
+  `merchant_token` varchar(72) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `currency` int(11) NOT NULL DEFAULT '208',
+  `dropoff_timestamp` bigint(12) NOT NULL DEFAULT '0',
+  `pickup_timestamp` bigint(12) NOT NULL DEFAULT '0',
+  `pickup_count` int(10) NOT NULL,
+  `dateid` int(7) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -674,8 +690,22 @@ CREATE TABLE `bring_packages` (
 --
 
 CREATE TABLE `economic_integration` (
-  `PaymentID` int(10) NOT NULL DEFAULT '0',
-  `draftInvoiceNumber` int(10) NOT NULL DEFAULT '0'
+  `PaymentID` int(10) NOT NULL,
+  `draftInvoiceNumber` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur-dump for tabellen `funding_batch`
+--
+
+CREATE TABLE `funding_batch` (
+  `batch_seq_id` int(11) NOT NULL,
+  `batch_id` varchar(255) NOT NULL,
+  `batch_start` bigint(12) NOT NULL DEFAULT '0',
+  `batch_state` varchar(10) NOT NULL DEFAULT 'open',
+  `merchant_token` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -685,13 +715,13 @@ CREATE TABLE `economic_integration` (
 --
 
 CREATE TABLE `merchant_transfer_transactiondata` (
-  `TransactionDataID` int(7) NOT NULL DEFAULT '0',
+  `TransactionDataID` int(7) NOT NULL,
   `action` smallint(1) NOT NULL DEFAULT '2',
-  `transferdate` bigint(12) NOT NULL DEFAULT '0',
-  `accountid` bigint(12) NOT NULL DEFAULT '0',
-  `transfertext` varchar(255) NOT NULL DEFAULT '',
-  `amount` bigint(12) NOT NULL DEFAULT '0',
-  `PaymentID` int(7) NOT NULL DEFAULT '0' COMMENT 'PaymentID of where the transaction is from',
+  `transferdate` bigint(12) NOT NULL,
+  `accountid` bigint(12) NOT NULL,
+  `transfertext` varchar(255) NOT NULL,
+  `amount` bigint(12) NOT NULL,
+  `PaymentID` int(7) NOT NULL COMMENT 'PaymentID of where the transaction is from',
   `account_volume` int(10) NOT NULL DEFAULT '0',
   `zerovalue` smallint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -703,8 +733,8 @@ CREATE TABLE `merchant_transfer_transactiondata` (
 --
 
 CREATE TABLE `methods` (
-  `method_id` int(5) NOT NULL DEFAULT '0',
-  `method_name` varchar(255) NOT NULL DEFAULT ''
+  `method_id` int(5) NOT NULL,
+  `method_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -714,14 +744,14 @@ CREATE TABLE `methods` (
 --
 
 CREATE TABLE `mobile_urlshorten` (
-  `shortcode` varchar(25) NOT NULL DEFAULT '',
-  `merchantnumber` int(10) NOT NULL DEFAULT '0',
-  `accepturl` varchar(75) NOT NULL DEFAULT '',
-  `callbackurl` varchar(75) NOT NULL DEFAULT '',
-  `amount` int(8) NOT NULL DEFAULT '0',
-  `orderid` varchar(25) NOT NULL DEFAULT '',
-  `currency` int(3) NOT NULL DEFAULT '0',
-  `language` varchar(5) NOT NULL DEFAULT ''
+  `shortcode` varchar(25) NOT NULL,
+  `merchantnumber` int(10) NOT NULL,
+  `accepturl` varchar(75) NOT NULL,
+  `callbackurl` varchar(75) NOT NULL,
+  `amount` int(8) NOT NULL,
+  `orderid` varchar(25) NOT NULL,
+  `currency` int(3) NOT NULL,
+  `language` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -731,10 +761,10 @@ CREATE TABLE `mobile_urlshorten` (
 --
 
 CREATE TABLE `payments_datasets` (
-  `uuid` varchar(36) NOT NULL DEFAULT '',
-  `merchant_token` varchar(90) NOT NULL DEFAULT '',
-  `sms_request_id` int(10) NOT NULL DEFAULT '0',
-  `mail_request_id` int(10) NOT NULL DEFAULT '0',
+  `uuid` varchar(36) NOT NULL,
+  `merchant_token` varchar(90) NOT NULL,
+  `sms_request_id` int(10) NOT NULL,
+  `mail_request_id` int(10) NOT NULL,
   `ended` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If Payment have been ended'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -745,11 +775,11 @@ CREATE TABLE `payments_datasets` (
 --
 
 CREATE TABLE `payments_datasets_container` (
-  `uuid` varchar(36) NOT NULL DEFAULT '',
-  `dataset_uuid` varchar(36) NOT NULL DEFAULT '',
-  `container_key` varchar(255) NOT NULL DEFAULT '',
-  `container_value` longtext NOT NULL DEFAULT '',
-  `timestamp` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Unique Timestamp'
+  `uuid` varchar(36) NOT NULL,
+  `dataset_uuid` varchar(36) NOT NULL,
+  `container_key` varchar(255) NOT NULL,
+  `container_value` longtext NOT NULL,
+  `timestamp` bigint(12) NOT NULL COMMENT 'Unique Timestamp'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -759,20 +789,20 @@ CREATE TABLE `payments_datasets_container` (
 --
 
 CREATE TABLE `payments_failed` (
-  `error_id` int(7) NOT NULL DEFAULT '0',
-  `transid` int(255) NOT NULL DEFAULT '0',
-  `merchantnumber` bigint(10) NOT NULL DEFAULT '0',
+  `error_id` int(7) NOT NULL,
+  `transid` int(255) NOT NULL,
+  `merchantnumber` bigint(10) NOT NULL,
   `timestamp` bigint(12) NOT NULL DEFAULT '0',
-  `token` varchar(255) NOT NULL DEFAULT '',
-  `shortID` varchar(255) NOT NULL DEFAULT '',
-  `uniqueid` varchar(255) NOT NULL DEFAULT '',
-  `result` varchar(5) NOT NULL DEFAULT '',
-  `statuscode` varchar(50) NOT NULL DEFAULT '',
-  `statustext` varchar(255) NOT NULL DEFAULT '',
-  `reasoncode` int(5) NOT NULL DEFAULT '0',
-  `reasontext` varchar(255) NOT NULL DEFAULT '',
-  `returncode` varchar(15) NOT NULL DEFAULT '',
-  `returntext` varchar(255) NOT NULL DEFAULT ''
+  `token` varchar(255) NOT NULL,
+  `shortID` varchar(255) NOT NULL,
+  `uniqueid` varchar(255) NOT NULL,
+  `result` varchar(5) NOT NULL,
+  `statuscode` varchar(50) NOT NULL,
+  `statustext` varchar(255) NOT NULL,
+  `reasoncode` int(5) NOT NULL,
+  `reasontext` varchar(255) NOT NULL,
+  `returncode` varchar(15) NOT NULL,
+  `returntext` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -782,18 +812,18 @@ CREATE TABLE `payments_failed` (
 --
 
 CREATE TABLE `payments_persondata` (
-  `tokenid` varchar(64) NOT NULL DEFAULT '',
+  `tokenid` varchar(64) NOT NULL,
   `completed_trans` smallint(1) NOT NULL DEFAULT '0',
-  `merchantid` int(8) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL DEFAULT '',
+  `merchantid` int(8) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `sex` enum('Male','Female') NOT NULL,
-  `age` smallint(2) NOT NULL DEFAULT '0',
+  `age` smallint(2) NOT NULL,
   `ctype` enum('VISA','MASTER') NOT NULL,
-  `amount` int(8) NOT NULL DEFAULT '0',
-  `isp` varchar(255) NOT NULL DEFAULT '',
-  `state` varchar(255) NOT NULL DEFAULT '',
-  `city` varchar(255) NOT NULL DEFAULT '',
-  `ip` varchar(255) NOT NULL DEFAULT ''
+  `amount` int(8) NOT NULL,
+  `isp` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `ip` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -803,8 +833,8 @@ CREATE TABLE `payments_persondata` (
 --
 
 CREATE TABLE `payment_errorcodes` (
-  `errorcode` int(6) NOT NULL DEFAULT '0',
-  `errorresponse` longtext NOT NULL DEFAULT ''
+  `errorcode` int(6) NOT NULL,
+  `errorresponse` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -814,7 +844,7 @@ CREATE TABLE `payment_errorcodes` (
 --
 
 CREATE TABLE `payment_requests` (
-  `payment_token` varchar(255) NOT NULL DEFAULT '',
+  `payment_token` varchar(255) NOT NULL,
   `process_time` bigint(12) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -825,8 +855,8 @@ CREATE TABLE `payment_requests` (
 --
 
 CREATE TABLE `payment_transactions` (
-  `PaymentID` int(7) NOT NULL DEFAULT '0',
-  `action` varchar(25) NOT NULL DEFAULT '',
+  `PaymentID` int(7) NOT NULL,
+  `action` varchar(25) NOT NULL,
   `ended` smallint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -837,9 +867,9 @@ CREATE TABLE `payment_transactions` (
 --
 
 CREATE TABLE `payon_data` (
-  `ShortId` varchar(50) NOT NULL DEFAULT '',
-  `UniqueId` varchar(50) NOT NULL DEFAULT '',
-  `Result` varchar(20) NOT NULL DEFAULT ''
+  `ShortId` varchar(50) NOT NULL,
+  `UniqueId` varchar(50) NOT NULL,
+  `Result` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -849,11 +879,11 @@ CREATE TABLE `payon_data` (
 --
 
 CREATE TABLE `payon_old_tokens` (
-  `token` varchar(64) NOT NULL DEFAULT '',
-  `unixtime` bigint(12) NOT NULL DEFAULT '0',
+  `token` varchar(64) NOT NULL,
+  `unixtime` bigint(12) NOT NULL,
   `state` smallint(1) NOT NULL DEFAULT '0' COMMENT '0 = Not complete, 1 = accepted, 2 = declined',
-  `UniqueID` varchar(255) NOT NULL DEFAULT '',
-  `ShortID` varchar(255) NOT NULL DEFAULT ''
+  `UniqueID` varchar(255) NOT NULL,
+  `ShortID` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -863,9 +893,9 @@ CREATE TABLE `payon_old_tokens` (
 --
 
 CREATE TABLE `payon_old_transactions` (
-  `token` varchar(64) NOT NULL DEFAULT '',
-  `keydata` varchar(128) NOT NULL DEFAULT '',
-  `value` varchar(255) NOT NULL DEFAULT ''
+  `token` varchar(64) NOT NULL,
+  `keydata` varchar(128) NOT NULL,
+  `value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -876,7 +906,7 @@ CREATE TABLE `payon_old_transactions` (
 
 CREATE TABLE `payon_tokens` (
   `token` varchar(64) NOT NULL DEFAULT '',
-  `unixtime` bigint(12) NOT NULL DEFAULT '0',
+  `unixtime` bigint(12) NOT NULL,
   `state` smallint(1) NOT NULL DEFAULT '0' COMMENT '0 = Not complete, 1 = accepted, 2 = declined, 3 = pending completion',
   `UniqueID` varchar(255) NOT NULL DEFAULT '',
   `UniqueIDrg` varchar(50) NOT NULL DEFAULT '',
@@ -891,11 +921,11 @@ CREATE TABLE `payon_tokens` (
 --
 
 CREATE TABLE `payon_token_responses` (
-  `token` varchar(90) NOT NULL DEFAULT '',
-  `request_reference` varchar(40) NOT NULL DEFAULT '',
-  `timestamp` bigint(12) NOT NULL DEFAULT '0',
-  `responsetext` longtext NOT NULL DEFAULT '',
-  `status` varchar(10) NOT NULL DEFAULT ''
+  `token` varchar(90) NOT NULL,
+  `request_reference` varchar(40) NOT NULL,
+  `timestamp` bigint(12) NOT NULL,
+  `responsetext` longtext NOT NULL,
+  `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -905,12 +935,12 @@ CREATE TABLE `payon_token_responses` (
 --
 
 CREATE TABLE `payon_token_sca_request` (
-  `token` varchar(90) NOT NULL DEFAULT '',
-  `merchant_token` varchar(90) NOT NULL DEFAULT '',
-  `timestamp` bigint(12) NOT NULL DEFAULT '0',
-  `responsetext` longtext NOT NULL DEFAULT '',
-  `returntext` longtext NOT NULL DEFAULT '',
-  `status` varchar(10) NOT NULL DEFAULT ''
+  `token` varchar(90) NOT NULL,
+  `merchant_token` varchar(90) NOT NULL,
+  `timestamp` bigint(12) NOT NULL,
+  `responsetext` longtext NOT NULL,
+  `returntext` longtext NOT NULL,
+  `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -920,9 +950,9 @@ CREATE TABLE `payon_token_sca_request` (
 --
 
 CREATE TABLE `payon_transactions` (
-  `token` varchar(64) NOT NULL DEFAULT '',
-  `keydata` varchar(128) NOT NULL DEFAULT '',
-  `value` varchar(3000) NOT NULL DEFAULT ''
+  `token` varchar(64) NOT NULL,
+  `keydata` varchar(128) NOT NULL,
+  `value` varchar(3000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -932,9 +962,9 @@ CREATE TABLE `payon_transactions` (
 --
 
 CREATE TABLE `payon_transactions2` (
-  `token` varchar(64) NOT NULL DEFAULT '',
-  `keydata` varchar(128) NOT NULL DEFAULT '',
-  `value` mediumtext NOT NULL DEFAULT ''
+  `token` varchar(64) NOT NULL,
+  `keydata` varchar(128) NOT NULL,
+  `value` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -944,8 +974,8 @@ CREATE TABLE `payon_transactions2` (
 --
 
 CREATE TABLE `payon_transid` (
-  `token` varchar(92) NOT NULL DEFAULT '',
-  `transid` int(11) NOT NULL DEFAULT '0'
+  `token` varchar(92) NOT NULL,
+  `transid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -956,12 +986,12 @@ CREATE TABLE `payon_transid` (
 
 CREATE TABLE `payon_transid_operationid` (
   `creationtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `token` varchar(255) NOT NULL DEFAULT '',
-  `transid` bigint(12) NOT NULL DEFAULT '0',
-  `operation_id` varchar(255) NOT NULL DEFAULT '',
-  `operation_type` varchar(255) NOT NULL DEFAULT '',
-  `request` longtext NOT NULL DEFAULT '',
-  `response` longtext NOT NULL DEFAULT ''
+  `token` varchar(255) NOT NULL,
+  `transid` bigint(12) NOT NULL,
+  `operation_id` varchar(255) NOT NULL,
+  `operation_type` varchar(255) NOT NULL,
+  `request` longtext NOT NULL,
+  `response` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -971,17 +1001,17 @@ CREATE TABLE `payon_transid_operationid` (
 --
 
 CREATE TABLE `payout_invoice` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL,
   `psper` int(3) NOT NULL DEFAULT '0' COMMENT 'PSPer',
-  `date_id` int(11) NOT NULL DEFAULT '0',
-  `merchant_token` varchar(128) NOT NULL DEFAULT '',
-  `currency` varchar(3) NOT NULL DEFAULT '',
-  `amount` int(11) NOT NULL DEFAULT '0',
-  `fee` int(11) NOT NULL DEFAULT '0',
-  `time_created` int(11) NOT NULL DEFAULT '0',
-  `time_lasttried` bigint(12) NOT NULL DEFAULT '0',
-  `flag_status` int(11) NOT NULL DEFAULT '0' COMMENT '1 = PAID BY BANK',
-  `file` text NOT NULL DEFAULT ''
+  `date_id` int(11) NOT NULL,
+  `merchant_token` varchar(128) NOT NULL,
+  `currency` varchar(3) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `fee` int(11) NOT NULL,
+  `time_created` int(11) NOT NULL,
+  `time_lasttried` bigint(12) NOT NULL,
+  `flag_status` int(11) NOT NULL COMMENT '1 = PAID BY BANK',
+  `file` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -991,12 +1021,12 @@ CREATE TABLE `payout_invoice` (
 --
 
 CREATE TABLE `payout_invoice_renewals` (
-  `renewal_id` int(6) NOT NULL DEFAULT '0',
-  `merchant_token` varchar(32) NOT NULL DEFAULT '',
-  `psper` bigint(12) NOT NULL DEFAULT '0',
-  `amount` int(10) NOT NULL DEFAULT '0',
+  `renewal_id` int(6) NOT NULL,
+  `merchant_token` varchar(32) NOT NULL,
+  `psper` bigint(12) NOT NULL,
+  `amount` int(10) NOT NULL,
   `currency` int(3) NOT NULL DEFAULT '208',
-  `next_renewal` int(3) NOT NULL DEFAULT '0'
+  `next_renewal` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1006,8 +1036,8 @@ CREATE TABLE `payout_invoice_renewals` (
 --
 
 CREATE TABLE `payworks_sync` (
-  `payworks_id` bigint(10) NOT NULL DEFAULT '0',
-  `paymentid` int(10) NOT NULL DEFAULT '0',
+  `payworks_id` bigint(10) NOT NULL,
+  `paymentid` int(10) NOT NULL,
   `status` smallint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1018,8 +1048,8 @@ CREATE TABLE `payworks_sync` (
 --
 
 CREATE TABLE `process_payment_throttling` (
-  `cardno` bigint(16) NOT NULL DEFAULT '0',
-  `restime` bigint(12) NOT NULL DEFAULT '0'
+  `cardno` bigint(16) NOT NULL,
+  `restime` bigint(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1029,9 +1059,9 @@ CREATE TABLE `process_payment_throttling` (
 --
 
 CREATE TABLE `slow_commands_running_async` (
-  `async_id` bigint(12) NOT NULL DEFAULT '0',
-  `done_from_file` varchar(255) NOT NULL DEFAULT '',
-  `query_to_run` longtext NOT NULL DEFAULT ''
+  `async_id` bigint(12) NOT NULL,
+  `done_from_file` varchar(255) NOT NULL,
+  `query_to_run` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1041,12 +1071,12 @@ CREATE TABLE `slow_commands_running_async` (
 --
 
 CREATE TABLE `store_transactions` (
-  `token` varchar(255) NOT NULL DEFAULT '',
-  `cardno` varchar(255) NOT NULL DEFAULT '',
-  `endmonth` varchar(255) NOT NULL DEFAULT '',
-  `endyear` varchar(255) NOT NULL DEFAULT '',
-  `cvc` varchar(255) NOT NULL DEFAULT '',
-  `cardholder` varchar(255) NOT NULL DEFAULT ''
+  `token` varchar(255) NOT NULL,
+  `cardno` varchar(255) NOT NULL,
+  `endmonth` varchar(255) NOT NULL,
+  `endyear` varchar(255) NOT NULL,
+  `cvc` varchar(255) NOT NULL,
+  `cardholder` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1068,7 +1098,7 @@ CREATE TABLE `TABLE 37` (
 --
 
 CREATE TABLE `test2` (
-  `test2` int(11) NOT NULL DEFAULT '0'
+  `test2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1078,9 +1108,9 @@ CREATE TABLE `test2` (
 --
 
 CREATE TABLE `transaction_movement_v5` (
-  `merchantid` bigint(12) NOT NULL DEFAULT '0',
-  `PaymentID` bigint(12) NOT NULL DEFAULT '0',
-  `latest_transaction` int(11) NOT NULL DEFAULT '0'
+  `merchantid` bigint(12) NOT NULL,
+  `PaymentID` bigint(12) NOT NULL,
+  `latest_transaction` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1090,14 +1120,30 @@ CREATE TABLE `transaction_movement_v5` (
 --
 
 CREATE TABLE `velocity_check` (
-  `vel_id` int(7) NOT NULL DEFAULT '0',
-  `merchant_token` varchar(64) NOT NULL DEFAULT '',
-  `vel_binid` int(8) NOT NULL DEFAULT '0',
-  `cardtoken` varchar(255) NOT NULL DEFAULT '',
-  `vel_timestamp` bigint(12) NOT NULL DEFAULT '0',
-  `vel_response` bigint(12) NOT NULL DEFAULT '0',
-  `vel_result` int(7) NOT NULL DEFAULT '0'
+  `vel_id` int(7) NOT NULL,
+  `merchant_token` varchar(64) NOT NULL,
+  `vel_binid` int(8) NOT NULL,
+  `cardtoken` varchar(255) NOT NULL,
+  `vel_timestamp` bigint(12) NOT NULL,
+  `vel_response` bigint(12) NOT NULL,
+  `vel_result` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in-struktur for visning `view_payoutdata`
+-- (Se nedenfor for det aktuelle view)
+--
+CREATE TABLE `view_payoutdata` (
+`ActionID` int(12)
+,`PaymentID` bigint(12)
+,`handlingtype` varchar(15)
+,`amount` int(8)
+,`req_timestamp` bigint(12)
+,`captured` int(1)
+,`cardno` varchar(16)
+);
 
 -- --------------------------------------------------------
 
@@ -1106,18 +1152,18 @@ CREATE TABLE `velocity_check` (
 --
 
 CREATE TABLE `yourpay_cards` (
-  `card_id` int(10) NOT NULL DEFAULT '0',
-  `card_validator` varchar(12) NOT NULL DEFAULT '',
+  `card_id` int(10) NOT NULL,
+  `card_validator` varchar(12) NOT NULL,
   `card_status` smallint(1) NOT NULL DEFAULT '0' COMMENT '0 = Pending activation, 1 = Card details received, 2 = Activated, 3 = Deactivated',
-  `card_details` varchar(100) NOT NULL DEFAULT '',
-  `card_trunked` varchar(16) NOT NULL DEFAULT '',
+  `card_details` varchar(100) NOT NULL,
+  `card_trunked` varchar(16) NOT NULL,
   `card_type` enum('debit','credit') NOT NULL DEFAULT 'debit',
   `card_scheme` enum('MASTER','VISA') NOT NULL DEFAULT 'MASTER',
   `card_funding` smallint(1) NOT NULL DEFAULT '1' COMMENT '1 = Only funds on card, 2 = Group funds',
-  `merchant_token` varchar(64) NOT NULL DEFAULT '',
-  `card_activation` bigint(12) NOT NULL DEFAULT '0',
-  `card_deactivation` bigint(12) NOT NULL DEFAULT '0',
-  `card_funds` int(10) NOT NULL DEFAULT '0',
+  `merchant_token` varchar(64) NOT NULL,
+  `card_activation` bigint(12) NOT NULL,
+  `card_deactivation` bigint(12) NOT NULL,
+  `card_funds` int(10) NOT NULL,
   `card_currency` int(3) NOT NULL DEFAULT '208'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1128,12 +1174,12 @@ CREATE TABLE `yourpay_cards` (
 --
 
 CREATE TABLE `yourpay_cards_funding_group` (
-  `funding_group_id` int(7) NOT NULL DEFAULT '0',
-  `funding_validator` varchar(10) NOT NULL DEFAULT '',
-  `merchant_token` varchar(64) NOT NULL DEFAULT '',
-  `last_update` int(11) NOT NULL DEFAULT '0',
-  `funding_state` int(10) NOT NULL DEFAULT '0',
-  `funding_amount` int(8) NOT NULL DEFAULT '0',
+  `funding_group_id` int(7) NOT NULL,
+  `funding_validator` varchar(10) NOT NULL,
+  `merchant_token` varchar(64) NOT NULL,
+  `last_update` int(11) NOT NULL,
+  `funding_state` int(10) NOT NULL,
+  `funding_amount` int(8) NOT NULL,
   `funding_currency` varchar(3) NOT NULL DEFAULT 'DKK'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1144,32 +1190,25 @@ CREATE TABLE `yourpay_cards_funding_group` (
 --
 
 CREATE TABLE `yourpay_cards_funding_transactions` (
-  `transaction_id` int(7) NOT NULL DEFAULT '0',
-  `funding_group_id` int(7) NOT NULL DEFAULT '0',
+  `transaction_id` int(7) NOT NULL,
+  `funding_group_id` int(7) NOT NULL,
   `card_id` int(6) NOT NULL DEFAULT '0',
-  `date_id` int(12) NOT NULL DEFAULT '0',
-  `merchant_token` varchar(64) NOT NULL DEFAULT '',
-  `action_type` varchar(32) NOT NULL DEFAULT '',
-  `amount` int(12) NOT NULL DEFAULT '0',
+  `date_id` int(12) NOT NULL,
+  `merchant_token` varchar(64) NOT NULL,
+  `action_type` varchar(32) NOT NULL,
+  `amount` int(12) NOT NULL,
   `currency` varchar(3) NOT NULL DEFAULT 'DKK',
-  `transaction_timestamp` bigint(12) NOT NULL DEFAULT '0'
+  `transaction_timestamp` bigint(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
 
+--
+-- Struktur for visning `view_payoutdata`
+--
+DROP TABLE IF EXISTS `view_payoutdata`;
 
-CREATE TABLE `funding_batch` (
-  `batch_seq_id` int(11) NOT NULL,
-  `batch_id` varchar(255) NOT NULL,
-  `batch_start` bigint(12) NOT NULL DEFAULT '0',
-  `batch_state` varchar(10) NOT NULL DEFAULT 'open',
-  `merchant_token` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-ALTER TABLE `funding_batch`
-  ADD PRIMARY KEY (`batch_seq_id`);
-
-ALTER TABLE `funding_batch`
-  MODIFY `batch_seq_id` int(11) NOT NULL AUTO_INCREMENT;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `view_payoutdata`  AS  select `02_paymentcapture`.`ActionID` AS `ActionID`,`02_paymentcapture`.`PaymentID` AS `PaymentID`,`02_paymentcapture`.`handlingtype` AS `handlingtype`,`02_paymentcapture`.`amount` AS `amount`,`02_paymentcapture`.`req_timestamp` AS `req_timestamp`,`02_paymentcapture`.`captured` AS `captured`,`02_payments`.`cardno` AS `cardno` from (`02_paymentcapture` join `02_payments` on((`02_paymentcapture`.`PaymentID` = `02_payments`.`PaymentID`))) ;
 
 --
 -- Begrænsninger for dumpede tabeller
@@ -1262,7 +1301,8 @@ ALTER TABLE `02_paymentcapture_finances`
   ADD KEY `actual_timestamp` (`actual_timestamp`),
   ADD KEY `req_timestamp` (`req_timestamp`),
   ADD KEY `volume_activity` (`volume_activity`),
-  ADD KEY `projected_merchant_settlement` (`projected_merchant_settlement`);
+  ADD KEY `projected_merchant_settlement` (`projected_merchant_settlement`),
+  ADD KEY `TransID` (`TransID`);
 
 --
 -- Indeks for tabel `02_paymentcapture_finances_raw`
@@ -1307,7 +1347,8 @@ ALTER TABLE `02_payments`
   ADD KEY `FindTransactions` (`amount`,`PaymentID`,`Currency`,`merchantnumber`,`req_delete`,`req_refund`,`req_capture`),
   ADD KEY `transfee` (`transfee`),
   ADD KEY `FindTransactionsOnDetails` (`merchantnumber`,`req_capture`,`req_delete`,`req_refund`),
-  ADD KEY `chainedPaymentID` (`chainedPaymentID`);
+  ADD KEY `chainedPaymentID` (`chainedPaymentID`),
+  ADD KEY `cardnoprefix` (`cardnoprefix`);
 ALTER TABLE `02_payments` ADD FULLTEXT KEY `restime` (`restimestamp`);
 ALTER TABLE `02_payments` ADD FULLTEXT KEY `cardno_2` (`cardno`);
 
@@ -1387,10 +1428,23 @@ ALTER TABLE `bring_packages`
   ADD PRIMARY KEY (`package_id`);
 
 --
+-- Indeks for tabel `cash_dropoff`
+--
+ALTER TABLE `cash_dropoff`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `bag_id` (`bag_id`);
+
+--
 -- Indeks for tabel `economic_integration`
 --
 ALTER TABLE `economic_integration`
   ADD UNIQUE KEY `PaymentID` (`PaymentID`);
+
+--
+-- Indeks for tabel `funding_batch`
+--
+ALTER TABLE `funding_batch`
+  ADD PRIMARY KEY (`batch_seq_id`);
 
 --
 -- Indeks for tabel `merchant_transfer_transactiondata`
@@ -1495,7 +1549,9 @@ ALTER TABLE `payon_transid`
 -- Indeks for tabel `payon_transid_operationid`
 --
 ALTER TABLE `payon_transid_operationid`
-  ADD UNIQUE KEY `operation_id` (`operation_id`);
+  ADD UNIQUE KEY `operation_id` (`operation_id`),
+  ADD KEY `transid` (`transid`),
+  ADD KEY `creationtime` (`creationtime`);
 
 --
 -- Indeks for tabel `payout_invoice`
@@ -1674,6 +1730,18 @@ ALTER TABLE `binlist`
 --
 ALTER TABLE `bring_packages`
   MODIFY `package_id` bigint(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- Tilføj AUTO_INCREMENT i tabel `cash_dropoff`
+--
+ALTER TABLE `cash_dropoff`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Tilføj AUTO_INCREMENT i tabel `funding_batch`
+--
+ALTER TABLE `funding_batch`
+  MODIFY `batch_seq_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `merchant_transfer_transactiondata`

@@ -1,46 +1,27 @@
--- phpMyAdmin SQL Dump
--- version 4.9.4
--- https://www.phpmyadmin.net/
---
--- Vært: aurora-1.cluster-czl14h06ail9.eu-west-1.rds.amazonaws.com
--- Genereringstid: 12. 05 2020 kl. 13:32:05
--- Serverversion: 5.6.10
--- PHP-version: 7.0.33
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `di_financials`
 --
-
--- --------------------------------------------------------
 USE di_financials;
+-- --------------------------------------------------------
 
 --
 -- Struktur-dump for tabellen `banking_transactions`
 --
 
 CREATE TABLE `banking_transactions` (
-  `banking_id` int(11) NOT NULL DEFAULT '0',
-  `banking_date` bigint(12) NOT NULL DEFAULT '0',
-  `banking_amount` int(10) NOT NULL DEFAULT '0',
-  `banking_currency` varchar(3) NOT NULL DEFAULT '',
-  `banking_sender` varchar(14) NOT NULL DEFAULT '',
-  `banking_recipient` varchar(14) NOT NULL DEFAULT '',
-  `banking_text` longtext NOT NULL DEFAULT '',
-  `banking_text_recipient` longtext NOT NULL DEFAULT '',
-  `banking_creditorreference` varchar(50) NOT NULL DEFAULT '',
-  `banking_repipient_name` varchar(50) NOT NULL DEFAULT '',
-  `banking_type` varchar(50) NOT NULL DEFAULT '',
+  `banking_id` int(11) NOT NULL,
+  `banking_date` bigint(12) NOT NULL,
+  `banking_statement` bigint(12) NOT NULL,
+  `banking_amount` int(10) NOT NULL,
+  `banking_currency` varchar(3) NOT NULL,
+  `banking_sender` varchar(14) NOT NULL,
+  `banking_recipient` varchar(14) NOT NULL,
+  `banking_text` longtext NOT NULL,
+  `banking_text_recipient` longtext NOT NULL,
+  `banking_creditorreference` varchar(50) NOT NULL,
+  `banking_repipient_name` varchar(50) NOT NULL,
+  `banking_type` varchar(50) NOT NULL,
   `rule_matched` smallint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -51,10 +32,10 @@ CREATE TABLE `banking_transactions` (
 --
 
 CREATE TABLE `import_rules` (
-  `rule_id` int(12) NOT NULL DEFAULT '0',
+  `rule_id` int(12) NOT NULL,
   `rule_sort` int(3) NOT NULL DEFAULT '0',
-  `rules` longtext NOT NULL DEFAULT '',
-  `booking_accountid` bigint(10) NOT NULL DEFAULT '0',
+  `rules` longtext NOT NULL,
+  `booking_accountid` bigint(10) NOT NULL,
   `active` smallint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -65,10 +46,10 @@ CREATE TABLE `import_rules` (
 --
 
 CREATE TABLE `navision_accounts` (
-  `navision_accounts_id` bigint(12) NOT NULL DEFAULT '0',
-  `navision_acccount_type` longtext NOT NULL DEFAULT '',
-  `navision_account_number` varchar(50) NOT NULL DEFAULT '',
-  `banking_account_no` varchar(20) NOT NULL DEFAULT ''
+  `navision_accounts_id` bigint(12) NOT NULL,
+  `navision_acccount_type` longtext NOT NULL,
+  `navision_account_number` varchar(50) NOT NULL,
+  `banking_account_no` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -78,10 +59,10 @@ CREATE TABLE `navision_accounts` (
 --
 
 CREATE TABLE `navision_transactions` (
-  `navision_id` int(11) NOT NULL DEFAULT '0',
-  `banking_id` bigint(12) NOT NULL DEFAULT '0',
-  `navision_account_id` bigint(12) NOT NULL DEFAULT '0',
-  `navision_counter_account_id` bigint(12) NOT NULL DEFAULT '0',
+  `navision_id` int(11) NOT NULL,
+  `banking_id` bigint(12) NOT NULL,
+  `navision_account_id` bigint(12) NOT NULL,
+  `navision_counter_account_id` bigint(12) NOT NULL,
   `navision_imported` smallint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

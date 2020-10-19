@@ -1,40 +1,20 @@
--- phpMyAdmin SQL Dump
--- version 4.9.4
--- https://www.phpmyadmin.net/
---
--- Vært: aurora-1.cluster-czl14h06ail9.eu-west-1.rds.amazonaws.com
--- Genereringstid: 12. 05 2020 kl. 13:31:49
--- Serverversion: 5.6.10
--- PHP-version: 7.0.33
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `dinterminal_documents`
 --
-
--- --------------------------------------------------------
 USE dinterminal_documents;
+-- --------------------------------------------------------
+
 --
 -- Struktur-dump for tabellen `document_access_log`
 --
 
 CREATE TABLE `document_access_log` (
-  `log_id` int(7) NOT NULL DEFAULT '0',
-  `log_timestamp` bigint(12) NOT NULL DEFAULT '0',
+  `log_id` int(7) NOT NULL,
+  `log_timestamp` bigint(12) NOT NULL,
   `log_action` enum('upload','access') NOT NULL,
-  `access_ip` varchar(20) NOT NULL DEFAULT '',
-  `user_id` int(7) NOT NULL DEFAULT '0',
-  `document_id` int(7) NOT NULL DEFAULT '0'
+  `access_ip` varchar(20) NOT NULL,
+  `user_id` int(7) NOT NULL,
+  `document_id` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -44,16 +24,16 @@ CREATE TABLE `document_access_log` (
 --
 
 CREATE TABLE `document_container` (
-  `document_id` int(7) NOT NULL DEFAULT '0',
-  `user_id` int(7) NOT NULL DEFAULT '0',
+  `document_id` int(7) NOT NULL,
+  `user_id` int(7) NOT NULL,
   `document_type` enum('logo','documentation') NOT NULL,
-  `document_token` varchar(120) NOT NULL DEFAULT '',
-  `document_key` varchar(30) NOT NULL DEFAULT '',
-  `document_extension` varchar(20) NOT NULL DEFAULT '',
-  `document_upload` bigint(12) NOT NULL DEFAULT '0',
-  `document_expire` bigint(12) NOT NULL DEFAULT '0',
-  `document_last_reviewed` bigint(12) NOT NULL DEFAULT '0',
-  `document_container` longblob NOT NULL DEFAULT ''
+  `document_token` varchar(120) NOT NULL,
+  `document_key` varchar(30) NOT NULL,
+  `document_extension` varchar(20) NOT NULL,
+  `document_upload` bigint(12) NOT NULL,
+  `document_expire` bigint(12) NOT NULL,
+  `document_last_reviewed` bigint(12) NOT NULL,
+  `document_container` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -63,11 +43,11 @@ CREATE TABLE `document_container` (
 --
 
 CREATE TABLE `document_users` (
-  `user_id` int(7) NOT NULL DEFAULT '0',
-  `user_name` varchar(10) NOT NULL DEFAULT '',
-  `user_token` varchar(32) NOT NULL DEFAULT '',
-  `user_created` bigint(12) NOT NULL DEFAULT '0',
-  `user_last_access` bigint(12) NOT NULL DEFAULT '0'
+  `user_id` int(7) NOT NULL,
+  `user_name` varchar(10) NOT NULL,
+  `user_token` varchar(32) NOT NULL,
+  `user_created` bigint(12) NOT NULL,
+  `user_last_access` bigint(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
