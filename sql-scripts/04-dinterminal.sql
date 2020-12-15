@@ -9,11 +9,11 @@ USE dinterminal;
 --
 
 CREATE TABLE `api_globals` (
-  `api_id` int(7) NOT NULL,
+  `api_id` int NOT NULL,
   `path` varchar(25) NOT NULL,
   `master_name` varchar(255) NOT NULL,
   `master_description` varchar(255) NOT NULL,
-  `enabled` smallint(1) NOT NULL DEFAULT '0'
+  `enabled` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -23,13 +23,13 @@ CREATE TABLE `api_globals` (
 --
 
 CREATE TABLE `api_groups` (
-  `api_id` int(7) NOT NULL,
-  `api_group_id` int(7) NOT NULL DEFAULT '0',
+  `api_id` int NOT NULL,
+  `api_group_id` int NOT NULL DEFAULT '0',
   `api_group_type` varchar(4) NOT NULL,
   `api_method_name` varchar(255) NOT NULL,
   `api_title` varchar(255) NOT NULL,
   `api_description` longtext NOT NULL,
-  `enabled` smallint(1) NOT NULL DEFAULT '0',
+  `enabled` smallint NOT NULL DEFAULT '0',
   `api_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -40,17 +40,17 @@ CREATE TABLE `api_groups` (
 --
 
 CREATE TABLE `api_params` (
-  `api_param` int(7) NOT NULL,
-  `api_method` int(7) NOT NULL,
-  `api_order` int(7) NOT NULL,
+  `api_param` int NOT NULL,
+  `api_method` int NOT NULL,
+  `api_order` int NOT NULL,
   `api_param_path` varchar(50) NOT NULL,
   `api_param_title` varchar(255) NOT NULL,
   `api_param_default` varchar(75) NOT NULL,
   `api_param_descriptor` varchar(255) NOT NULL DEFAULT '',
   `api_param_location` varchar(10) NOT NULL DEFAULT 'query',
-  `api_param_required` smallint(1) NOT NULL DEFAULT '1',
+  `api_param_required` smallint NOT NULL DEFAULT '1',
   `api_param_type` varchar(25) NOT NULL,
-  `enabled` smallint(1) NOT NULL DEFAULT '0'
+  `enabled` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -60,9 +60,9 @@ CREATE TABLE `api_params` (
 --
 
 CREATE TABLE `api_requests` (
-  `request_id` bigint(10) NOT NULL,
+  `request_id` bigint NOT NULL,
   `request_function` varchar(20) NOT NULL,
-  `request_time` bigint(10) NOT NULL,
+  `request_time` bigint NOT NULL,
   `request_content` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -86,12 +86,12 @@ CREATE TABLE `app_data` (
 --
 
 CREATE TABLE `app_dk_economic_sync` (
-  `sync_id` int(12) NOT NULL,
+  `sync_id` int NOT NULL,
   `merchant_token` varchar(64) NOT NULL,
-  `payment_id` int(12) NOT NULL,
-  `action_id` int(10) NOT NULL,
-  `dateid` int(12) NOT NULL,
-  `synced` smallint(1) NOT NULL DEFAULT '0',
+  `payment_id` int NOT NULL,
+  `action_id` int NOT NULL,
+  `dateid` int NOT NULL,
+  `synced` smallint NOT NULL DEFAULT '0',
   `errorCode` varchar(20) NOT NULL,
   `message` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -103,10 +103,10 @@ CREATE TABLE `app_dk_economic_sync` (
 --
 
 CREATE TABLE `app_economic_sync` (
-  `sync_id` int(7) NOT NULL COMMENT 'Auto ID',
+  `sync_id` int NOT NULL COMMENT 'Auto ID',
   `service` varchar(50) NOT NULL,
-  `economic_id` int(5) NOT NULL DEFAULT '25',
-  `should_not_sync` smallint(1) NOT NULL DEFAULT '0'
+  `economic_id` int NOT NULL DEFAULT '25',
+  `should_not_sync` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -116,20 +116,20 @@ CREATE TABLE `app_economic_sync` (
 --
 
 CREATE TABLE `app_user_invoicing` (
-  `invoice_id` int(11) NOT NULL,
-  `pricing_id` int(6) NOT NULL,
+  `invoice_id` int NOT NULL,
+  `pricing_id` int NOT NULL,
   `invoice_token` varchar(32) NOT NULL,
   `merchant_token` varchar(64) NOT NULL,
-  `invoice_period_start` int(12) NOT NULL,
-  `invoice_period_end` int(12) NOT NULL,
-  `invoice_amount` int(10) NOT NULL,
-  `invoice_currency` int(3) NOT NULL,
-  `invoice_paid` smallint(1) NOT NULL DEFAULT '0',
-  `invoice_paid_date` int(8) NOT NULL DEFAULT '0',
-  `invoice_next_retry` bigint(12) NOT NULL,
-  `invoice_added_economic` smallint(4) NOT NULL DEFAULT '0',
-  `invoice_paid_economic` smallint(1) NOT NULL DEFAULT '0',
-  `invoice_settled_internally` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Have funds been deducted from Merchant Transfer Account to Operational Credit Account'
+  `invoice_period_start` int NOT NULL,
+  `invoice_period_end` int NOT NULL,
+  `invoice_amount` int NOT NULL,
+  `invoice_currency` int NOT NULL,
+  `invoice_paid` smallint NOT NULL DEFAULT '0',
+  `invoice_paid_date` int NOT NULL DEFAULT '0',
+  `invoice_next_retry` bigint NOT NULL,
+  `invoice_added_economic` smallint NOT NULL DEFAULT '0',
+  `invoice_paid_economic` smallint NOT NULL DEFAULT '0',
+  `invoice_settled_internally` smallint NOT NULL DEFAULT '0' COMMENT 'Have funds been deducted from Merchant Transfer Account to Operational Credit Account'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -139,17 +139,17 @@ CREATE TABLE `app_user_invoicing` (
 --
 
 CREATE TABLE `app_user_pricing` (
-  `user_pricing_id` int(8) NOT NULL,
+  `user_pricing_id` int NOT NULL,
   `merchant_token` varchar(64) NOT NULL,
   `service` varchar(255) NOT NULL,
   `service_text` varchar(255) NOT NULL,
-  `single_service` smallint(1) NOT NULL DEFAULT '0' COMMENT 'One time service fee',
-  `billing_period` int(2) NOT NULL DEFAULT '1' COMMENT 'Number of months in renewal',
-  `billing_vat` int(2) NOT NULL DEFAULT '25',
-  `next_billing` bigint(12) NOT NULL,
+  `single_service` smallint NOT NULL DEFAULT '0' COMMENT 'One time service fee',
+  `billing_period` int NOT NULL DEFAULT '1' COMMENT 'Number of months in renewal',
+  `billing_vat` int NOT NULL DEFAULT '25',
+  `next_billing` bigint NOT NULL,
   `next_amount` varchar(10) NOT NULL,
-  `next_currency` int(3) NOT NULL DEFAULT '208',
-  `next_stopped` int(12) NOT NULL DEFAULT '0'
+  `next_currency` int NOT NULL DEFAULT '208',
+  `next_stopped` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -159,15 +159,15 @@ CREATE TABLE `app_user_pricing` (
 --
 
 CREATE TABLE `bambora_merchants` (
-  `bambora_id` int(11) NOT NULL,
+  `bambora_id` int NOT NULL,
   `merchant_token` varchar(255) NOT NULL,
-  `merchant_id` int(10) NOT NULL,
-  `proxy_mid` int(8) NOT NULL,
-  `timestamp` bigint(12) NOT NULL,
-  `status` smallint(1) NOT NULL,
+  `merchant_id` int NOT NULL,
+  `proxy_mid` int NOT NULL,
+  `timestamp` bigint NOT NULL,
+  `status` smallint NOT NULL,
   `file_confirm_name` varchar(50) NOT NULL,
-  `rejection_reason_code` smallint(2) NOT NULL,
-  `last_updated` bigint(12) NOT NULL DEFAULT '0'
+  `rejection_reason_code` smallint NOT NULL,
+  `last_updated` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -177,8 +177,8 @@ CREATE TABLE `bambora_merchants` (
 --
 
 CREATE TABLE `bambora_mids` (
-  `mcc` int(7) NOT NULL,
-  `bambora_mid` int(10) NOT NULL,
+  `mcc` int NOT NULL,
+  `bambora_mid` int NOT NULL,
   `method` enum('pos','ecom') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -189,12 +189,12 @@ CREATE TABLE `bambora_mids` (
 --
 
 CREATE TABLE `beta_codes` (
-  `betaid` int(7) NOT NULL COMMENT 'BetaID',
+  `betaid` int NOT NULL COMMENT 'BetaID',
   `beta_promotion_id` varchar(20) NOT NULL,
-  `issued_time` int(12) NOT NULL DEFAULT '0',
-  `used_time` int(12) NOT NULL DEFAULT '0',
-  `used` smallint(1) NOT NULL DEFAULT '0',
-  `merchantid` int(8) NOT NULL
+  `issued_time` int NOT NULL DEFAULT '0',
+  `used_time` int NOT NULL DEFAULT '0',
+  `used` smallint NOT NULL DEFAULT '0',
+  `merchantid` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -204,9 +204,9 @@ CREATE TABLE `beta_codes` (
 --
 
 CREATE TABLE `blacklist_merchant_tokens` (
-  `blacklist_id` int(12) NOT NULL,
+  `blacklist_id` int NOT NULL,
   `merchant_token` varchar(70) NOT NULL,
-  `blacklist_time` bigint(12) NOT NULL,
+  `blacklist_time` bigint NOT NULL,
   `blacklist_reason` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -217,14 +217,14 @@ CREATE TABLE `blacklist_merchant_tokens` (
 --
 
 CREATE TABLE `blog` (
-  `blog_id` int(7) NOT NULL COMMENT 'Auto ID',
+  `blog_id` int NOT NULL COMMENT 'Auto ID',
   `category` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'Blog title',
   `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'Blog Image',
   `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'Blog Content',
-  `date` bigint(12) NOT NULL COMMENT 'Blog date as Unixtimestamp',
-  `read` int(5) NOT NULL DEFAULT '0' COMMENT 'Times article has been read',
-  `active` smallint(1) NOT NULL DEFAULT '0' COMMENT 'IF 1 then active blogpost'
+  `date` bigint NOT NULL COMMENT 'Blog date as Unixtimestamp',
+  `read` int NOT NULL DEFAULT '0' COMMENT 'Times article has been read',
+  `active` smallint NOT NULL DEFAULT '0' COMMENT 'IF 1 then active blogpost'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -234,10 +234,10 @@ CREATE TABLE `blog` (
 --
 
 CREATE TABLE `campaign_codes` (
-  `campaignid` int(7) NOT NULL,
-  `campaign_package` int(7) NOT NULL,
-  `package_months` int(3) NOT NULL,
-  `free_transactions` int(4) NOT NULL DEFAULT '0' COMMENT 'If we are giving free transactions',
+  `campaignid` int NOT NULL,
+  `campaign_package` int NOT NULL,
+  `package_months` int NOT NULL,
+  `free_transactions` int NOT NULL DEFAULT '0' COMMENT 'If we are giving free transactions',
   `campaign_code` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -249,7 +249,7 @@ CREATE TABLE `campaign_codes` (
 
 CREATE TABLE `chatbot` (
   `communication_string` varchar(20) NOT NULL,
-  `timestamp` bigint(12) NOT NULL,
+  `timestamp` bigint NOT NULL,
   `answer` varchar(255) NOT NULL,
   `tag` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -261,9 +261,9 @@ CREATE TABLE `chatbot` (
 --
 
 CREATE TABLE `company_review` (
-  `ReviewID` int(5) NOT NULL,
+  `ReviewID` int NOT NULL,
   `name` varchar(255) NOT NULL,
-  `phone` int(8) NOT NULL,
+  `phone` int NOT NULL,
   `email` varchar(255) NOT NULL,
   `website` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -275,13 +275,13 @@ CREATE TABLE `company_review` (
 --
 
 CREATE TABLE `consumer_data` (
-  `consumer_id` bigint(12) NOT NULL,
-  `consumer_merchantid` int(10) NOT NULL,
-  `creationtime` bigint(12) NOT NULL,
+  `consumer_id` bigint NOT NULL,
+  `consumer_merchantid` int NOT NULL,
+  `creationtime` bigint NOT NULL,
   `consumer_cardno` varchar(255) NOT NULL,
   `consumer_name` varchar(255) NOT NULL,
-  `consumer_orders` int(5) NOT NULL COMMENT 'Amount of orders through Yourpay',
-  `consumer_ip` bigint(12) NOT NULL COMMENT 'ip2long encoded',
+  `consumer_orders` int NOT NULL COMMENT 'Amount of orders through Yourpay',
+  `consumer_ip` bigint NOT NULL COMMENT 'ip2long encoded',
   `consumer_invoice_address` varchar(255) NOT NULL,
   `consumer_invoice_postal` varchar(255) NOT NULL,
   `consumer_invoice_city` varchar(255) NOT NULL,
@@ -290,7 +290,7 @@ CREATE TABLE `consumer_data` (
   `consumer_shipping_postal` varchar(255) NOT NULL,
   `consumer_shipping_city` varchar(255) NOT NULL,
   `consumer_shipping_country` varchar(255) NOT NULL,
-  `partly_match_other_consumerid` int(6) NOT NULL DEFAULT '0' COMMENT 'If set then ID on other consumer that we have a match towards',
+  `partly_match_other_consumerid` int NOT NULL DEFAULT '0' COMMENT 'If set then ID on other consumer that we have a match towards',
   `partly_match_type` varchar(255) NOT NULL COMMENT 'Description on what value that partly matched other customerid'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -301,9 +301,9 @@ CREATE TABLE `consumer_data` (
 --
 
 CREATE TABLE `consumer_login_sessions_mobile` (
-  `merchantid` int(8) NOT NULL,
+  `merchantid` int NOT NULL,
   `session_id` varchar(32) NOT NULL,
-  `timestp` bigint(12) NOT NULL
+  `timestp` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -313,9 +313,9 @@ CREATE TABLE `consumer_login_sessions_mobile` (
 --
 
 CREATE TABLE `consumer_names` (
-  `nameid` int(50) NOT NULL,
+  `nameid` int NOT NULL,
   `consumer_name` varchar(255) NOT NULL,
-  `general_age` int(3) NOT NULL,
+  `general_age` int NOT NULL,
   `sex` enum('Male','Female','Unknown') NOT NULL DEFAULT 'Unknown'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -326,12 +326,12 @@ CREATE TABLE `consumer_names` (
 --
 
 CREATE TABLE `country` (
-  `country_code` int(3) NOT NULL,
+  `country_code` int NOT NULL,
   `country_name` varchar(255) NOT NULL,
   `phone_code` varchar(6) NOT NULL,
   `code2` varchar(2) NOT NULL,
   `code3` varchar(3) NOT NULL,
-  `country_active` smallint(1) NOT NULL DEFAULT '0',
+  `country_active` smallint NOT NULL DEFAULT '0',
   `country_flag` varchar(255) NOT NULL,
   `country_lang` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -343,7 +343,7 @@ CREATE TABLE `country` (
 --
 
 CREATE TABLE `crawler` (
-  `CrawlerID` int(7) NOT NULL,
+  `CrawlerID` int NOT NULL,
   `shaencrypt` char(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -354,15 +354,15 @@ CREATE TABLE `crawler` (
 --
 
 CREATE TABLE `crawler_trustpilot` (
-  `CrawlerID` int(7) NOT NULL,
+  `CrawlerID` int NOT NULL,
   `shaencrypt` char(40) NOT NULL,
   `url` varchar(255) NOT NULL,
-  `lastview` bigint(12) NOT NULL,
-  `lastcatview` bigint(12) NOT NULL DEFAULT '0',
-  `reviewpage` smallint(1) NOT NULL DEFAULT '0',
-  `users` smallint(1) NOT NULL DEFAULT '0',
-  `reviewpagesub` smallint(1) NOT NULL DEFAULT '0',
-  `reviews` int(5) NOT NULL DEFAULT '0'
+  `lastview` bigint NOT NULL,
+  `lastcatview` bigint NOT NULL DEFAULT '0',
+  `reviewpage` smallint NOT NULL DEFAULT '0',
+  `users` smallint NOT NULL DEFAULT '0',
+  `reviewpagesub` smallint NOT NULL DEFAULT '0',
+  `reviews` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -372,19 +372,19 @@ CREATE TABLE `crawler_trustpilot` (
 --
 
 CREATE TABLE `crm_customers` (
-  `crmID` int(7) NOT NULL COMMENT 'Unique ID',
+  `crmID` int NOT NULL COMMENT 'Unique ID',
   `crmwebsite` varchar(100) NOT NULL COMMENT 'Website',
-  `alreadycustomer` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 1 then already customer',
+  `alreadycustomer` smallint NOT NULL DEFAULT '0' COMMENT 'If 1 then already customer',
   `vat` varchar(30) NOT NULL,
   `shopplatform` varchar(20) NOT NULL,
   `dns` varchar(30) NOT NULL,
-  `leadowner` int(3) NOT NULL COMMENT 'Lead owner',
+  `leadowner` int NOT NULL COMMENT 'Lead owner',
   `comments` longtext NOT NULL,
-  `callback` bigint(12) NOT NULL COMMENT 'Unix timestamp',
-  `state` int(2) NOT NULL DEFAULT '0',
+  `callback` bigint NOT NULL COMMENT 'Unix timestamp',
+  `state` int NOT NULL DEFAULT '0',
   `contactname` varchar(255) NOT NULL,
   `contactmail` varchar(255) NOT NULL,
-  `customer_cvr_state` int(1) NOT NULL DEFAULT '-1'
+  `customer_cvr_state` int NOT NULL DEFAULT '-1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -394,10 +394,10 @@ CREATE TABLE `crm_customers` (
 --
 
 CREATE TABLE `crm_dashboard` (
-  `crm_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `crm_id` int NOT NULL,
+  `user_id` int NOT NULL,
   `crm_element` longtext NOT NULL,
-  `crm_active` smallint(6) NOT NULL DEFAULT '1'
+  `crm_active` smallint NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -407,23 +407,23 @@ CREATE TABLE `crm_dashboard` (
 --
 
 CREATE TABLE `crm_login` (
-  `user_id` int(6) NOT NULL COMMENT 'UserID',
+  `user_id` int NOT NULL COMMENT 'UserID',
   `username` varchar(255) NOT NULL COMMENT 'Username',
   `fullname` varchar(255) NOT NULL,
-  `mobileno` bigint(10) NOT NULL,
-  `localno` int(4) NOT NULL DEFAULT '1',
+  `mobileno` bigint NOT NULL,
+  `localno` int NOT NULL DEFAULT '1',
   `useremail` varchar(255) NOT NULL,
   `pwd` blob NOT NULL COMMENT 'password',
   `pwd2` varchar(60) NOT NULL,
   `pincode` varchar(90) NOT NULL,
   `heystack` varchar(32) NOT NULL COMMENT 'password heystack',
   `sha256` enum('0','1') NOT NULL DEFAULT '0',
-  `active` int(1) NOT NULL DEFAULT '1' COMMENT 'If 1 then active',
-  `accesslevel` int(1) NOT NULL DEFAULT '1' COMMENT 'Access level 1 = standard, 10 is Directors',
+  `active` int NOT NULL DEFAULT '1' COMMENT 'If 1 then active',
+  `accesslevel` int NOT NULL DEFAULT '1' COMMENT 'Access level 1 = standard, 10 is Directors',
   `session_id` varchar(64) NOT NULL,
-  `psp` smallint(1) NOT NULL DEFAULT '0',
+  `psp` smallint NOT NULL DEFAULT '0',
   `mobilesec` varchar(30) NOT NULL,
-  `added_mailchimp` smallint(1) NOT NULL DEFAULT '0',
+  `added_mailchimp` smallint NOT NULL DEFAULT '0',
   `group_member` varchar(10) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -435,7 +435,7 @@ CREATE TABLE `crm_login` (
 
 CREATE TABLE `crm_login_ip` (
   `userid` varchar(255) NOT NULL,
-  `merchantid` int(12) NOT NULL,
+  `merchantid` int NOT NULL,
   `ip` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -446,31 +446,31 @@ CREATE TABLE `crm_login_ip` (
 --
 
 CREATE TABLE `crm_login_psp` (
-  `pspid` int(2) NOT NULL,
+  `pspid` int NOT NULL,
   `name` varchar(255) NOT NULL,
   `short_description` longtext NOT NULL,
-  `pipedrive_id` int(10) NOT NULL DEFAULT '0',
-  `amount_of_merchants` int(3) NOT NULL DEFAULT '0',
+  `pipedrive_id` int NOT NULL DEFAULT '0',
+  `amount_of_merchants` int NOT NULL DEFAULT '0',
   `response` varchar(255) NOT NULL,
-  `settlement_days` int(3) NOT NULL DEFAULT '14',
-  `merchant_percentage` int(4) NOT NULL DEFAULT '225' COMMENT 'Percentage merchant is paying to Yourpay',
-  `partner_kickback` int(3) NOT NULL DEFAULT '0',
-  `finders_fee` int(3) NOT NULL DEFAULT '0',
-  `finders_fee_currency` int(3) NOT NULL DEFAULT '208',
-  `percentage` int(2) NOT NULL DEFAULT '5' COMMENT 'Percentage in Kickback / 100',
-  `volume_total` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Total volume on PSP',
-  `kickback_total` bigint(12) NOT NULL COMMENT 'Total kickback',
-  `kickback_released` bigint(12) NOT NULL COMMENT 'Kickback release',
-  `last_kickbackrelease` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Timestamp for last release of kickback',
-  `last_updated` bigint(12) NOT NULL DEFAULT '0',
-  `deactivated` smallint(1) NOT NULL DEFAULT '0',
-  `last_update` int(11) NOT NULL,
-  `merchants` int(8) NOT NULL,
-  `total_volume` bigint(12) NOT NULL,
-  `total_kickback` bigint(12) NOT NULL,
-  `total_release` bigint(12) NOT NULL,
-  `bank_reg` int(4) NOT NULL,
-  `bank_acc` int(12) NOT NULL
+  `settlement_days` int NOT NULL DEFAULT '14',
+  `merchant_percentage` int NOT NULL DEFAULT '225' COMMENT 'Percentage merchant is paying to Yourpay',
+  `partner_kickback` int NOT NULL DEFAULT '0',
+  `finders_fee` int NOT NULL DEFAULT '0',
+  `finders_fee_currency` int NOT NULL DEFAULT '208',
+  `percentage` int NOT NULL DEFAULT '5' COMMENT 'Percentage in Kickback / 100',
+  `volume_total` bigint NOT NULL DEFAULT '0' COMMENT 'Total volume on PSP',
+  `kickback_total` bigint NOT NULL COMMENT 'Total kickback',
+  `kickback_released` bigint NOT NULL COMMENT 'Kickback release',
+  `last_kickbackrelease` bigint NOT NULL DEFAULT '0' COMMENT 'Timestamp for last release of kickback',
+  `last_updated` bigint NOT NULL DEFAULT '0',
+  `deactivated` smallint NOT NULL DEFAULT '0',
+  `last_update` int NOT NULL,
+  `merchants` int NOT NULL,
+  `total_volume` bigint NOT NULL,
+  `total_kickback` bigint NOT NULL,
+  `total_release` bigint NOT NULL,
+  `bank_reg` int NOT NULL,
+  `bank_acc` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -480,15 +480,15 @@ CREATE TABLE `crm_login_psp` (
 --
 
 CREATE TABLE `crm_login_psp_monthly_data` (
-  `month_start` bigint(12) NOT NULL,
-  `pspid` int(7) NOT NULL,
-  `transactions` bigint(12) NOT NULL,
-  `volume` bigint(12) NOT NULL,
-  `volume_estimated` bigint(10) NOT NULL DEFAULT '0',
-  `paid` smallint(1) NOT NULL DEFAULT '0',
-  `kickback` bigint(12) NOT NULL,
-  `customers` bigint(12) NOT NULL,
-  `month_id` int(11) NOT NULL
+  `month_start` bigint NOT NULL,
+  `pspid` int NOT NULL,
+  `transactions` bigint NOT NULL,
+  `volume` bigint NOT NULL,
+  `volume_estimated` bigint NOT NULL DEFAULT '0',
+  `paid` smallint NOT NULL DEFAULT '0',
+  `kickback` bigint NOT NULL,
+  `customers` bigint NOT NULL,
+  `month_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -498,8 +498,8 @@ CREATE TABLE `crm_login_psp_monthly_data` (
 --
 
 CREATE TABLE `crm_login_psp_monthly_data_months` (
-  `month_id` int(7) NOT NULL,
-  `month_start` bigint(10) NOT NULL
+  `month_id` int NOT NULL,
+  `month_start` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -509,11 +509,11 @@ CREATE TABLE `crm_login_psp_monthly_data_months` (
 --
 
 CREATE TABLE `crm_login_psp_volume` (
-  `pspid` int(6) NOT NULL,
-  `date_start` bigint(12) NOT NULL,
-  `volume_day` bigint(12) NOT NULL,
-  `merchants_day` bigint(12) NOT NULL,
-  `merchants_total` bigint(12) NOT NULL
+  `pspid` int NOT NULL,
+  `date_start` bigint NOT NULL,
+  `volume_day` bigint NOT NULL,
+  `merchants_day` bigint NOT NULL,
+  `merchants_total` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -523,17 +523,17 @@ CREATE TABLE `crm_login_psp_volume` (
 --
 
 CREATE TABLE `crm_queries` (
-  `query_id` int(11) NOT NULL,
-  `query_owner` int(11) NOT NULL,
-  `query_active` smallint(6) NOT NULL DEFAULT '0',
+  `query_id` int NOT NULL,
+  `query_owner` int NOT NULL,
+  `query_active` smallint NOT NULL DEFAULT '0',
   `query_name` varchar(255) NOT NULL,
   `query_type` varchar(30) NOT NULL,
   `query_database` varchar(60) NOT NULL,
   `query_content` longtext NOT NULL,
   `query_uid` varchar(80) NOT NULL,
   `query_groups` varchar(80) NOT NULL,
-  `query_used` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `query_used` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -542,7 +542,7 @@ CREATE TABLE `crm_queries` (
 --
 
 CREATE TABLE `curl_ignore_domains` (
-  `ignore_id` int(7) NOT NULL,
+  `ignore_id` int NOT NULL,
   `ignore_domain` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -553,11 +553,11 @@ CREATE TABLE `curl_ignore_domains` (
 --
 
 CREATE TABLE `customer_acquirer` (
-  `cacquirer_id` int(6) NOT NULL,
+  `cacquirer_id` int NOT NULL,
   `acquirer` varchar(20) NOT NULL,
   `merchant_token` varchar(64) NOT NULL,
-  `activation_time` bigint(12) NOT NULL,
-  `active` smallint(1) NOT NULL DEFAULT '0'
+  `activation_time` bigint NOT NULL,
+  `active` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -568,17 +568,17 @@ CREATE TABLE `customer_acquirer` (
 
 CREATE TABLE `customer_activities` (
   `merchant_token` varchar(96) NOT NULL,
-  `activity_id` int(10) NOT NULL,
-  `activity_group` int(2) NOT NULL DEFAULT '0' COMMENT 'Activity Group, 1 = Onboarding, 2 = Finance, 3 = Support, 4 = Sales, 10 = Admin',
+  `activity_id` int NOT NULL,
+  `activity_group` int NOT NULL DEFAULT '0' COMMENT 'Activity Group, 1 = Onboarding, 2 = Finance, 3 = Support, 4 = Sales, 10 = Admin',
   `activity_title` varchar(32) NOT NULL,
   `activity_content` longtext CHARACTER SET utf8 COLLATE utf8_danish_ci NOT NULL,
-  `activity_type` int(1) NOT NULL,
-  `activity_owner` int(11) NOT NULL,
-  `activity_attached_id` int(10) NOT NULL,
-  `activity_created` bigint(12) NOT NULL,
-  `activity_updated` bigint(12) NOT NULL,
-  `activity_done` smallint(1) NOT NULL DEFAULT '0',
-  `activity_done_stamp` bigint(12) NOT NULL DEFAULT '0'
+  `activity_type` int NOT NULL,
+  `activity_owner` int NOT NULL,
+  `activity_attached_id` int NOT NULL,
+  `activity_created` bigint NOT NULL,
+  `activity_updated` bigint NOT NULL,
+  `activity_done` smallint NOT NULL DEFAULT '0',
+  `activity_done_stamp` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -588,17 +588,17 @@ CREATE TABLE `customer_activities` (
 --
 
 CREATE TABLE `customer_agreement` (
-  `agreement` int(5) NOT NULL COMMENT 'AutoID',
+  `agreement` int NOT NULL COMMENT 'AutoID',
   `customer_cvr` varchar(10) NOT NULL COMMENT 'CVR number',
-  `merchantid` int(12) NOT NULL,
+  `merchantid` int NOT NULL,
   `notification_email` varchar(255) NOT NULL COMMENT 'Email where we should sent notifications to',
-  `terminal` int(2) NOT NULL,
+  `terminal` int NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  `regnr` int(4) NOT NULL,
-  `bankreg` bigint(10) NOT NULL,
-  `deposit` int(8) NOT NULL COMMENT 'Deposit in lowest currency',
-  `paiddeposit` int(8) NOT NULL COMMENT 'Paid deposit in lowest currency'
+  `regnr` int NOT NULL,
+  `bankreg` bigint NOT NULL,
+  `deposit` int NOT NULL COMMENT 'Deposit in lowest currency',
+  `paiddeposit` int NOT NULL COMMENT 'Paid deposit in lowest currency'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -608,11 +608,11 @@ CREATE TABLE `customer_agreement` (
 --
 
 CREATE TABLE `customer_agreement_mails` (
-  `MailID` int(7) NOT NULL COMMENT 'Unique Identifier',
-  `agreement` int(7) NOT NULL COMMENT 'AgreementID',
+  `MailID` int NOT NULL COMMENT 'Unique Identifier',
+  `agreement` int NOT NULL COMMENT 'AgreementID',
   `notification_email` varchar(255) NOT NULL COMMENT 'Notification Email',
-  `sent` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 1 then sent',
-  `sent_timestamp` bigint(12) NOT NULL COMMENT 'Unix Timestamp for sent'
+  `sent` smallint NOT NULL DEFAULT '0' COMMENT 'If 1 then sent',
+  `sent_timestamp` bigint NOT NULL COMMENT 'Unix Timestamp for sent'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -622,13 +622,13 @@ CREATE TABLE `customer_agreement_mails` (
 --
 
 CREATE TABLE `customer_agreement_reviews` (
-  `review_id` int(7) NOT NULL,
-  `review_date` bigint(12) NOT NULL DEFAULT '0',
-  `merchantid` int(8) NOT NULL COMMENT 'Test Merchant ID',
-  `reviewed_by` smallint(4) NOT NULL COMMENT 'Reviewed by',
+  `review_id` int NOT NULL,
+  `review_date` bigint NOT NULL DEFAULT '0',
+  `merchantid` int NOT NULL COMMENT 'Test Merchant ID',
+  `reviewed_by` smallint NOT NULL COMMENT 'Reviewed by',
   `review_comments` longtext NOT NULL COMMENT 'Comments in regards of performed merchant review',
   `review_actions` longtext NOT NULL,
-  `next_review` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Next review in Unixtime'
+  `next_review` bigint NOT NULL DEFAULT '0' COMMENT 'Next review in Unixtime'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -638,7 +638,7 @@ CREATE TABLE `customer_agreement_reviews` (
 --
 
 CREATE TABLE `customer_app_settings` (
-  `setting_id` bigint(12) NOT NULL,
+  `setting_id` bigint NOT NULL,
   `setting_country` varchar(5) NOT NULL DEFAULT 'da-dk',
   `setting_app` varchar(255) NOT NULL,
   `setting_key` varchar(255) NOT NULL,
@@ -652,13 +652,13 @@ CREATE TABLE `customer_app_settings` (
 --
 
 CREATE TABLE `customer_bankdetails` (
-  `merchantid` int(12) NOT NULL COMMENT 'MerchantID',
-  `creationdate` bigint(12) NOT NULL COMMENT 'Unixtimestamp for MerchantDetails',
+  `merchantid` int NOT NULL COMMENT 'MerchantID',
+  `creationdate` bigint NOT NULL COMMENT 'Unixtimestamp for MerchantDetails',
   `bankname` varchar(255) NOT NULL,
-  `bankreg` int(4) NOT NULL COMMENT 'BankReg',
-  `bankacc` bigint(12) NOT NULL COMMENT 'Bank Account',
-  `active` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If this is the active informations',
-  `approved` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Approved by YourPay',
+  `bankreg` int NOT NULL COMMENT 'BankReg',
+  `bankacc` bigint NOT NULL COMMENT 'Bank Account',
+  `active` smallint NOT NULL DEFAULT '0' COMMENT 'If this is the active informations',
+  `approved` smallint NOT NULL DEFAULT '0' COMMENT 'Approved by YourPay',
   `approvedfile` varchar(75) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -685,22 +685,22 @@ CREATE TABLE `customer_billy` (
 --
 
 CREATE TABLE `customer_complaints` (
-  `complaintid` int(12) NOT NULL COMMENT 'AutoID',
+  `complaintid` int NOT NULL COMMENT 'AutoID',
   `complainttag` varchar(12) NOT NULL COMMENT 'Complaint Tagging',
   `complaint_name` varchar(255) NOT NULL,
   `complaint_email` varchar(255) NOT NULL,
   `complaint_phone` varchar(255) NOT NULL,
   `complaint_yourpay_message` longtext NOT NULL,
   `complaint_reason` varchar(255) NOT NULL,
-  `complaint_transid` int(11) NOT NULL,
-  `complaint_orderid` int(11) NOT NULL,
+  `complaint_transid` int NOT NULL,
+  `complaint_orderid` int NOT NULL,
   `complaint_company_message` longtext NOT NULL,
-  `complaint_received` bigint(12) NOT NULL,
-  `company_response_time` bigint(12) NOT NULL,
-  `company_response_txt` int(5) NOT NULL,
-  `yourpay_response` int(5) NOT NULL,
-  `yourpay_complaint_response` bigint(12) NOT NULL,
-  `closed` smallint(1) NOT NULL DEFAULT '0'
+  `complaint_received` bigint NOT NULL,
+  `company_response_time` bigint NOT NULL,
+  `company_response_txt` int NOT NULL,
+  `yourpay_response` int NOT NULL,
+  `yourpay_complaint_response` bigint NOT NULL,
+  `closed` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -710,12 +710,12 @@ CREATE TABLE `customer_complaints` (
 --
 
 CREATE TABLE `customer_csv` (
-  `id` int(11) NOT NULL,
-  `merchant_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `merchant_id` int NOT NULL,
   `url` text NOT NULL,
-  `start_period` int(11) NOT NULL,
-  `end_period` int(11) NOT NULL,
-  `downloads` int(11) NOT NULL
+  `start_period` int NOT NULL,
+  `end_period` int NOT NULL,
+  `downloads` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -725,8 +725,8 @@ CREATE TABLE `customer_csv` (
 --
 
 CREATE TABLE `customer_currency` (
-  `merchantid` int(7) NOT NULL COMMENT 'MerchantID',
-  `currency` int(3) NOT NULL DEFAULT '208' COMMENT '208 = DKK'
+  `merchantid` int NOT NULL COMMENT 'MerchantID',
+  `currency` int NOT NULL DEFAULT '208' COMMENT '208 = DKK'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -736,7 +736,7 @@ CREATE TABLE `customer_currency` (
 --
 
 CREATE TABLE `customer_currency_conversions` (
-  `currencyid` int(3) NOT NULL,
+  `currencyid` int NOT NULL,
   `currency_code` varchar(3) NOT NULL,
   `currency_name` varchar(255) NOT NULL,
   `currency_rate` varchar(10) NOT NULL
@@ -749,28 +749,28 @@ CREATE TABLE `customer_currency_conversions` (
 --
 
 CREATE TABLE `customer_cvr` (
-  `Customer_type` smallint(1) NOT NULL DEFAULT '1' COMMENT 'If 0 then Terminals, if 1 then Internet',
-  `customer_pos` smallint(1) NOT NULL DEFAULT '0',
-  `approved` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 0 then isn''t CVR approved yet, if 2 then shadow',
-  `declined_by` int(3) NOT NULL,
-  `declined_time` bigint(12) NOT NULL,
-  `testaccount` smallint(1) NOT NULL DEFAULT '0',
-  `final_approval` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 2 then finally approved',
-  `final_approval_by` int(3) NOT NULL DEFAULT '0' COMMENT 'Who have finally activated customer',
-  `final_approval_time` bigint(12) NOT NULL,
-  `documentation_split` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 1 then documentation needs to be uploaded on Yourpays website',
-  `salesperson` int(7) NOT NULL DEFAULT '0',
-  `percentage` int(3) NOT NULL DEFAULT '20' COMMENT 'Percentage as promille, note that 15 is 1,5%',
-  `alternate_dashboard` int(1) NOT NULL DEFAULT '0',
+  `Customer_type` smallint NOT NULL DEFAULT '1' COMMENT 'If 0 then Terminals, if 1 then Internet',
+  `customer_pos` smallint NOT NULL DEFAULT '0',
+  `approved` smallint NOT NULL DEFAULT '0' COMMENT 'If 0 then isn''t CVR approved yet, if 2 then shadow',
+  `declined_by` int NOT NULL,
+  `declined_time` bigint NOT NULL,
+  `testaccount` smallint NOT NULL DEFAULT '0',
+  `final_approval` smallint NOT NULL DEFAULT '0' COMMENT 'If 2 then finally approved',
+  `final_approval_by` int NOT NULL DEFAULT '0' COMMENT 'Who have finally activated customer',
+  `final_approval_time` bigint NOT NULL,
+  `documentation_split` smallint NOT NULL DEFAULT '0' COMMENT 'If 1 then documentation needs to be uploaded on Yourpays website',
+  `salesperson` int NOT NULL DEFAULT '0',
+  `percentage` int NOT NULL DEFAULT '20' COMMENT 'Percentage as promille, note that 15 is 1,5%',
+  `alternate_dashboard` int NOT NULL DEFAULT '0',
   `cvr` varchar(64) NOT NULL COMMENT 'Unique Identifier',
-  `overall_merchantid` bigint(12) NOT NULL DEFAULT '0',
-  `merchantid` bigint(12) NOT NULL,
-  `merchantid_prod` bigint(12) NOT NULL COMMENT 'Test merchant ID',
-  `payon_merchantid` bigint(20) NOT NULL,
+  `overall_merchantid` bigint NOT NULL DEFAULT '0',
+  `merchantid` bigint NOT NULL,
+  `merchantid_prod` bigint NOT NULL COMMENT 'Test merchant ID',
+  `payon_merchantid` bigint NOT NULL,
   `cvr_name` varchar(100) NOT NULL COMMENT 'Name of company',
   `dba_name` varchar(50) NOT NULL COMMENT 'Doing Business as name',
   `WDSLcaptureCode` varchar(255) NOT NULL,
-  `cvr_created` bigint(12) NOT NULL COMMENT 'Timestamp of creation',
+  `cvr_created` bigint NOT NULL COMMENT 'Timestamp of creation',
   `cvr_notes` longtext NOT NULL COMMENT 'Notes related to CVR',
   `bankdoc` varchar(255) NOT NULL,
   `moneydoc` varchar(255) NOT NULL COMMENT 'Document for ''Hvidvaskningsloven''',
@@ -783,48 +783,48 @@ CREATE TABLE `customer_cvr` (
   `country` varchar(255) NOT NULL DEFAULT 'DK',
   `phone` varchar(25) NOT NULL,
   `email` varchar(255) NOT NULL COMMENT 'Standard email',
-  `startdate` bigint(12) NOT NULL,
+  `startdate` bigint NOT NULL,
   `branche` varchar(75) NOT NULL,
   `employees` varchar(35) NOT NULL,
-  `employees_year` int(4) NOT NULL,
+  `employees_year` int NOT NULL,
   `employees_owners` varchar(10) NOT NULL,
   `state` varchar(35) NOT NULL,
-  `shoptype` bigint(3) NOT NULL DEFAULT '0' COMMENT '0 = Undefined',
+  `shoptype` bigint NOT NULL DEFAULT '0' COMMENT '0 = Undefined',
   `website` varchar(255) NOT NULL,
   `logo` varchar(255) NOT NULL DEFAULT '',
-  `freetransactions` int(3) NOT NULL DEFAULT '25' COMMENT 'Free transactions',
+  `freetransactions` int NOT NULL DEFAULT '25' COMMENT 'Free transactions',
   `risk` varchar(255) NOT NULL,
   `risk_level` varchar(255) NOT NULL,
   `comments_applying` longtext NOT NULL,
   `controlled_address` longtext NOT NULL,
-  `valid_address` smallint(1) NOT NULL DEFAULT '0',
-  `valid_aml` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 1 then valid AML',
+  `valid_address` smallint NOT NULL DEFAULT '0',
+  `valid_aml` smallint NOT NULL DEFAULT '0' COMMENT 'If 1 then valid AML',
   `latest_yearreport` varchar(255) NOT NULL,
-  `yearly_revenue` bigint(12) NOT NULL,
+  `yearly_revenue` bigint NOT NULL,
   `yearly_transactions` varchar(255) NOT NULL,
-  `estimated_transactions` bigint(12) NOT NULL,
+  `estimated_transactions` bigint NOT NULL,
   `purpose_of_business` longtext NOT NULL,
-  `compliance_nature_of_business` smallint(1) NOT NULL DEFAULT '0',
-  `compliance_cvr_details` smallint(1) NOT NULL DEFAULT '0',
-  `compliance_contactdata` smallint(1) NOT NULL DEFAULT '0',
+  `compliance_nature_of_business` smallint NOT NULL DEFAULT '0',
+  `compliance_cvr_details` smallint NOT NULL DEFAULT '0',
+  `compliance_contactdata` smallint NOT NULL DEFAULT '0',
   `special_risks_of_business` longtext NOT NULL,
   `Politically_exposed_owners` varchar(255) NOT NULL,
-  `rolling_reserve` smallint(1) NOT NULL DEFAULT '0',
-  `rolling_reserve_amount` int(3) NOT NULL DEFAULT '10',
-  `rolling_reserve_period` int(11) NOT NULL DEFAULT '0',
+  `rolling_reserve` smallint NOT NULL DEFAULT '0',
+  `rolling_reserve_amount` int NOT NULL DEFAULT '10',
+  `rolling_reserve_period` int NOT NULL DEFAULT '0',
   `further_comments` longtext NOT NULL,
   `subscriptions` enum('0','1') NOT NULL DEFAULT '0' COMMENT 'Subscription transactions',
   `subscriptionscode` varchar(24) NOT NULL,
   `subscriptionscallback` longtext NOT NULL,
   `subscriptions_fee` varchar(5) NOT NULL DEFAULT '0,5',
-  `terminal_type` smallint(1) NOT NULL DEFAULT '1' COMMENT '1 = CVC, 2 = 3D, 3 = NO CVC',
-  `review_evaluation` bigint(12) NOT NULL,
-  `missing_data_last_request` bigint(12) NOT NULL COMMENT 'Used by robot/requestdata.php',
-  `send_for_approval_borgun` smallint(1) NOT NULL DEFAULT '0',
-  `approved_borgun` smallint(1) NOT NULL DEFAULT '0',
-  `send_for_approval_trustpay` smallint(1) NOT NULL DEFAULT '0',
-  `send_for_approval_secure_trading` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Sent for Approval - Secure Trading',
-  `mcc` int(5) NOT NULL DEFAULT '5999' COMMENT 'MCC code',
+  `terminal_type` smallint NOT NULL DEFAULT '1' COMMENT '1 = CVC, 2 = 3D, 3 = NO CVC',
+  `review_evaluation` bigint NOT NULL,
+  `missing_data_last_request` bigint NOT NULL COMMENT 'Used by robot/requestdata.php',
+  `send_for_approval_borgun` smallint NOT NULL DEFAULT '0',
+  `approved_borgun` smallint NOT NULL DEFAULT '0',
+  `send_for_approval_trustpay` smallint NOT NULL DEFAULT '0',
+  `send_for_approval_secure_trading` smallint NOT NULL DEFAULT '0' COMMENT 'Sent for Approval - Secure Trading',
+  `mcc` int NOT NULL DEFAULT '5999' COMMENT 'MCC code',
   `payon_sender` varchar(92) NOT NULL,
   `payon_merchant` varchar(32) NOT NULL,
   `payon_channel` varchar(92) NOT NULL,
@@ -841,36 +841,36 @@ CREATE TABLE `customer_cvr` (
   `3ds_payon_pwd` varchar(92) NOT NULL,
   `3ds_payon_secret` varchar(92) NOT NULL,
   `3ds_payon_type` varchar(2) NOT NULL,
-  `institute_status` smallint(1) NOT NULL DEFAULT '0',
+  `institute_status` smallint NOT NULL DEFAULT '0',
   `institute_merchant_number` varchar(15) NOT NULL COMMENT 'ALWAYS 15 CHARS!',
-  `institute_id` int(1) NOT NULL DEFAULT '1' COMMENT 'Institute ID from payon_clearing_institutes',
+  `institute_id` int NOT NULL DEFAULT '1' COMMENT 'Institute ID from payon_clearing_institutes',
   `institute_acceptor_name` varchar(25) NOT NULL COMMENT 'Often same name as cvr_name',
   `payon_channel_merchantAccountId` varchar(50) NOT NULL,
-  `psper` smallint(1) NOT NULL DEFAULT '0',
-  `remove_dankart` smallint(1) NOT NULL DEFAULT '0',
-  `transaction_review` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Time for next review of transactions',
-  `pipedrive_deal_id` int(8) NOT NULL,
-  `pipedrive_org_id` int(7) NOT NULL DEFAULT '0',
-  `pipedrive_sales_deal_id` bigint(7) NOT NULL DEFAULT '0',
+  `psper` smallint NOT NULL DEFAULT '0',
+  `remove_dankart` smallint NOT NULL DEFAULT '0',
+  `transaction_review` bigint NOT NULL DEFAULT '0' COMMENT 'Time for next review of transactions',
+  `pipedrive_deal_id` int NOT NULL,
+  `pipedrive_org_id` int NOT NULL DEFAULT '0',
+  `pipedrive_sales_deal_id` bigint NOT NULL DEFAULT '0',
   `pipedrive_bcc_email` varchar(255) NOT NULL,
-  `pipedrive_person_id` int(7) NOT NULL DEFAULT '0',
+  `pipedrive_person_id` int NOT NULL DEFAULT '0',
   `pipedrive_deal_reminder` tinyint(1) NOT NULL COMMENT '0 = no reminder sent, 1 = 35 reminder sent, 2 = 75 reminder sent, 3 = 200 reminder sent',
-  `pipedrive_deal_reminder_last` bigint(12) NOT NULL DEFAULT '0',
-  `pipedrive_deal_update` bigint(12) NOT NULL DEFAULT '0',
-  `pricing_plan` int(7) NOT NULL DEFAULT '1',
-  `pricing_next_period` bigint(12) NOT NULL DEFAULT '0',
-  `pricing_last_payment` bigint(12) NOT NULL DEFAULT '0',
-  `pricing_amount` int(11) NOT NULL,
-  `payon_threedsecure` smallint(1) NOT NULL DEFAULT '0',
-  `all_owners_added` smallint(1) NOT NULL DEFAULT '0' COMMENT '1 = All owners Added',
-  `free_volume` bigint(12) NOT NULL DEFAULT '0',
-  `free_volume_used` bigint(12) NOT NULL DEFAULT '0',
-  `daily_settlement_period` int(3) NOT NULL DEFAULT '7',
+  `pipedrive_deal_reminder_last` bigint NOT NULL DEFAULT '0',
+  `pipedrive_deal_update` bigint NOT NULL DEFAULT '0',
+  `pricing_plan` int NOT NULL DEFAULT '1',
+  `pricing_next_period` bigint NOT NULL DEFAULT '0',
+  `pricing_last_payment` bigint NOT NULL DEFAULT '0',
+  `pricing_amount` int NOT NULL,
+  `payon_threedsecure` smallint NOT NULL DEFAULT '0',
+  `all_owners_added` smallint NOT NULL DEFAULT '0' COMMENT '1 = All owners Added',
+  `free_volume` bigint NOT NULL DEFAULT '0',
+  `free_volume_used` bigint NOT NULL DEFAULT '0',
+  `daily_settlement_period` int NOT NULL DEFAULT '7',
   `daily_settlement_type` enum('0','1') NOT NULL DEFAULT '0' COMMENT 'If 1 then Multiple settlements per day - one per order',
-  `settlement_method` int(3) NOT NULL DEFAULT '103' COMMENT '103 = Daily, 104 = Weekly, 105 = Monthly, 106 = Yearly (Check Pipedrive for updates on this)',
-  `settlement_priority` smallint(1) NOT NULL DEFAULT '0',
-  `settlements_on_hold` smallint(1) NOT NULL DEFAULT '0',
-  `settlements_on_reason` smallint(2) NOT NULL DEFAULT '99' COMMENT 'Reason why the settlements have been blocked',
+  `settlement_method` int NOT NULL DEFAULT '103' COMMENT '103 = Daily, 104 = Weekly, 105 = Monthly, 106 = Yearly (Check Pipedrive for updates on this)',
+  `settlement_priority` smallint NOT NULL DEFAULT '0',
+  `settlements_on_hold` smallint NOT NULL DEFAULT '0',
+  `settlements_on_reason` smallint NOT NULL DEFAULT '99' COMMENT 'Reason why the settlements have been blocked',
   `billy_lev_id` varchar(32) NOT NULL,
   `billy_acc_id` varchar(32) NOT NULL,
   `billy_api_key` varchar(40) NOT NULL,
@@ -881,38 +881,39 @@ CREATE TABLE `customer_cvr` (
   `payment_lang` varchar(5) NOT NULL,
   `signature_key` varchar(255) NOT NULL,
   `MerchantComments` longtext NOT NULL,
-  `setup_call_support` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 1 - task needs to be created for setting up this merchant, 2 - task is resolved and sales have been informed',
-  `setup_call_pipedrive_id` bigint(10) NOT NULL DEFAULT '0' COMMENT 'Pipedrive Activity ID for setup',
-  `setup_call_pipedrive_id_sales` int(8) NOT NULL DEFAULT '0' COMMENT 'ActivityID from Sales Pipedrive - used for mirroring',
+  `setup_call_support` smallint NOT NULL DEFAULT '0' COMMENT 'If 1 - task needs to be created for setting up this merchant, 2 - task is resolved and sales have been informed',
+  `setup_call_pipedrive_id` bigint NOT NULL DEFAULT '0' COMMENT 'Pipedrive Activity ID for setup',
+  `setup_call_pipedrive_id_sales` int NOT NULL DEFAULT '0' COMMENT 'ActivityID from Sales Pipedrive - used for mirroring',
   `credorax_connected_merchantid` varchar(155) NOT NULL,
-  `lyoness_merchantid` int(8) NOT NULL,
+  `lyoness_merchantid` int NOT NULL,
   `merchant_token` varchar(70) NOT NULL,
   `payworks_merchantIdentifier` varchar(255) NOT NULL,
   `payworks_merchantSecretKey` varchar(255) NOT NULL,
   `test_payworks_merchantIdentifier` varchar(255) NOT NULL,
   `test_payworks_merchantSecretKey` varchar(255) NOT NULL,
-  `merchant_debt_state` bigint(15) NOT NULL COMMENT 'This field defines if the merchant have any debt towards Yourpay',
-  `merchant_debt_review` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Last time Merchant was reviewed if had any debt',
+  `merchant_debt_state` bigint NOT NULL COMMENT 'This field defines if the merchant have any debt towards Yourpay',
+  `merchant_debt_review` bigint NOT NULL DEFAULT '0' COMMENT 'Last time Merchant was reviewed if had any debt',
   `resursbank_userid` varchar(255) NOT NULL,
   `resursbank_pwd` varchar(255) NOT NULL,
-  `resursbank_active` smallint(1) NOT NULL DEFAULT '0',
-  `viabill_active` smallint(1) NOT NULL DEFAULT '0',
+  `resursbank_active` smallint NOT NULL DEFAULT '0',
+  `viabill_active` smallint NOT NULL DEFAULT '0',
   `viabill_api` longtext NOT NULL,
   `economic_user_id` varchar(255) NOT NULL,
   `economic_secret` varchar(255) NOT NULL,
-  `customer_approved_terms` bigint(12) NOT NULL,
-  `trustpilot_reviews` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Stop trustpilot reviews from being sent out',
-  `termsandconditions` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If terms and conditions is available on site',
-  `mail_with_merchantdetails` smallint(1) NOT NULL DEFAULT '0' COMMENT 'CAN BE DEPRECATED AT 1st of January 2018',
-  `subscriptions_activated` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Is set to 1 when the merchant have visited our Subscription section',
-  `enhanced_security` smallint(1) NOT NULL DEFAULT '0',
+  `customer_approved_terms` bigint NOT NULL,
+  `trustpilot_reviews` smallint NOT NULL DEFAULT '0' COMMENT 'Stop trustpilot reviews from being sent out',
+  `termsandconditions` smallint NOT NULL DEFAULT '0' COMMENT 'If terms and conditions is available on site',
+  `mail_with_merchantdetails` smallint NOT NULL DEFAULT '0' COMMENT 'CAN BE DEPRECATED AT 1st of January 2018',
+  `subscriptions_activated` smallint NOT NULL DEFAULT '0' COMMENT 'Is set to 1 when the merchant have visited our Subscription section',
+  `enhanced_security` smallint NOT NULL DEFAULT '0',
   `flag_bank` tinyint(1) NOT NULL DEFAULT '0',
   `flag_info` tinyint(1) NOT NULL DEFAULT '0',
   `flag_personal` tinyint(1) NOT NULL DEFAULT '0',
   `flag_verified` tinyint(1) NOT NULL DEFAULT '0',
   `audittrail` longtext NOT NULL,
   `document_key` varchar(12) NOT NULL,
-  `document_token` varchar(120) NOT NULL
+  `document_token` varchar(120) NOT NULL,
+  `marketplace_instant_approval` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -922,19 +923,19 @@ CREATE TABLE `customer_cvr` (
 --
 
 CREATE TABLE `customer_cvr_audit` (
-  `audit_id` int(8) NOT NULL,
-  `audit_completed` smallint(1) NOT NULL,
-  `merchantid` int(255) NOT NULL,
-  `audit_companyname` smallint(1) NOT NULL,
-  `audit_owners` smallint(1) NOT NULL,
-  `audit_website_active` smallint(1) NOT NULL,
-  `audit_website_terms` smallint(1) NOT NULL,
-  `audit_website_products` smallint(1) NOT NULL,
-  `audit_website_purchase` smallint(1) NOT NULL,
-  `audit_website_yourpay_paymentmethod` smallint(1) NOT NULL,
-  `audit_website_vat` smallint(1) NOT NULL,
-  `audit_first_timestamp` bigint(12) NOT NULL,
-  `audit_second_timestamp` bigint(12) NOT NULL
+  `audit_id` int NOT NULL,
+  `audit_completed` smallint NOT NULL,
+  `merchantid` int NOT NULL,
+  `audit_companyname` smallint NOT NULL,
+  `audit_owners` smallint NOT NULL,
+  `audit_website_active` smallint NOT NULL,
+  `audit_website_terms` smallint NOT NULL,
+  `audit_website_products` smallint NOT NULL,
+  `audit_website_purchase` smallint NOT NULL,
+  `audit_website_yourpay_paymentmethod` smallint NOT NULL,
+  `audit_website_vat` smallint NOT NULL,
+  `audit_first_timestamp` bigint NOT NULL,
+  `audit_second_timestamp` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -944,7 +945,7 @@ CREATE TABLE `customer_cvr_audit` (
 --
 
 CREATE TABLE `customer_data_collection` (
-  `collection_id` bigint(12) NOT NULL,
+  `collection_id` bigint NOT NULL,
   `merchant_token` varchar(64) NOT NULL,
   `collection` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -956,16 +957,16 @@ CREATE TABLE `customer_data_collection` (
 --
 
 CREATE TABLE `customer_domains` (
-  `DomainID` bigint(9) NOT NULL,
-  `merchantid` bigint(12) NOT NULL,
+  `DomainID` bigint NOT NULL,
+  `merchantid` bigint NOT NULL,
   `website` varchar(255) NOT NULL,
-  `terms` smallint(1) NOT NULL DEFAULT '0',
+  `terms` smallint NOT NULL DEFAULT '0',
   `terms_url` varchar(255) NOT NULL,
-  `privacy` smallint(1) NOT NULL DEFAULT '0',
+  `privacy` smallint NOT NULL DEFAULT '0',
   `privacy_url` varchar(255) NOT NULL,
-  `company` smallint(1) NOT NULL DEFAULT '0',
+  `company` smallint NOT NULL DEFAULT '0',
   `company_url` varchar(255) NOT NULL,
-  `contact` smallint(1) NOT NULL DEFAULT '0',
+  `contact` smallint NOT NULL DEFAULT '0',
   `contact_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -976,10 +977,10 @@ CREATE TABLE `customer_domains` (
 --
 
 CREATE TABLE `customer_expected_revenue` (
-  `recenueID` int(8) NOT NULL COMMENT 'AutoID',
+  `recenueID` int NOT NULL COMMENT 'AutoID',
   `customer_cvr` varchar(10) NOT NULL COMMENT 'Customer CVR',
-  `customer_date` bigint(12) NOT NULL COMMENT 'Date for expected Revenue',
-  `customer_revenue` int(8) NOT NULL COMMENT 'revenue in Øre'
+  `customer_date` bigint NOT NULL COMMENT 'Date for expected Revenue',
+  `customer_revenue` int NOT NULL COMMENT 'revenue in Ã˜re'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -989,11 +990,11 @@ CREATE TABLE `customer_expected_revenue` (
 --
 
 CREATE TABLE `customer_external_epay` (
-  `merchantid` int(10) NOT NULL COMMENT 'MerchantID',
+  `merchantid` int NOT NULL COMMENT 'MerchantID',
   `pbs_forretningsid` varchar(10) NOT NULL,
   `webservice_password` longtext NOT NULL,
-  `percentage` int(11) NOT NULL DEFAULT '10',
-  `amount` int(8) NOT NULL DEFAULT '50000'
+  `percentage` int NOT NULL DEFAULT '10',
+  `amount` int NOT NULL DEFAULT '50000'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1003,10 +1004,10 @@ CREATE TABLE `customer_external_epay` (
 --
 
 CREATE TABLE `customer_fee` (
-  `merchantid` int(9) NOT NULL COMMENT 'MerchantID',
-  `cardtype` int(2) NOT NULL COMMENT 'CardID',
-  `cardfee` int(3) NOT NULL COMMENT 'Cardfee in lowest possible',
-  `transactiondays` int(3) NOT NULL DEFAULT '14'
+  `merchantid` int NOT NULL COMMENT 'MerchantID',
+  `cardtype` int NOT NULL COMMENT 'CardID',
+  `cardfee` int NOT NULL COMMENT 'Cardfee in lowest possible',
+  `transactiondays` int NOT NULL DEFAULT '14'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1016,12 +1017,12 @@ CREATE TABLE `customer_fee` (
 --
 
 CREATE TABLE `customer_files` (
-  `merchantid` int(7) NOT NULL COMMENT 'merchantid',
-  `registered` bigint(12) NOT NULL COMMENT 'Timestamp of file',
-  `type` int(1) NOT NULL DEFAULT '0' COMMENT 'File Type',
+  `merchantid` int NOT NULL COMMENT 'merchantid',
+  `registered` bigint NOT NULL COMMENT 'Timestamp of file',
+  `type` int NOT NULL DEFAULT '0' COMMENT 'File Type',
   `filename` varchar(255) NOT NULL COMMENT 'File name',
-  `approved` bigint(12) NOT NULL DEFAULT '0',
-  `approved_by` smallint(1) NOT NULL DEFAULT '0',
+  `approved` bigint NOT NULL DEFAULT '0',
+  `approved_by` smallint NOT NULL DEFAULT '0',
   `handled_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1032,7 +1033,7 @@ CREATE TABLE `customer_files` (
 --
 
 CREATE TABLE `customer_files_type` (
-  `type_id` int(2) NOT NULL,
+  `type_id` int NOT NULL,
   `type_name` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1054,11 +1055,11 @@ CREATE TABLE `customer_fx_seal` (
 --
 
 CREATE TABLE `customer_important_notifications` (
-  `notification_id` int(11) NOT NULL,
-  `merchantid` bigint(12) NOT NULL,
+  `notification_id` int NOT NULL,
+  `merchantid` bigint NOT NULL,
   `notification_title` varchar(50) NOT NULL,
   `notification_content` longtext NOT NULL,
-  `notification_read` smallint(1) NOT NULL DEFAULT '0'
+  `notification_read` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1068,11 +1069,11 @@ CREATE TABLE `customer_important_notifications` (
 --
 
 CREATE TABLE `customer_invoices` (
-  `invoiceID` bigint(12) NOT NULL COMMENT 'AutoID',
-  `merchantid` int(10) NOT NULL COMMENT 'merchantid',
-  `amount` int(8) NOT NULL COMMENT 'Amount in DKK',
-  `creationtime` bigint(12) NOT NULL COMMENT 'Unix Timestamp',
-  `paid` bigint(12) NOT NULL COMMENT 'Timestamp for payment',
+  `invoiceID` bigint NOT NULL COMMENT 'AutoID',
+  `merchantid` int NOT NULL COMMENT 'merchantid',
+  `amount` int NOT NULL COMMENT 'Amount in DKK',
+  `creationtime` bigint NOT NULL COMMENT 'Unix Timestamp',
+  `paid` bigint NOT NULL COMMENT 'Timestamp for payment',
   `invoicetype` enum('0','1') NOT NULL DEFAULT '1' COMMENT '0 = Credit, 1 = Invoice',
   `invoicetext` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1084,13 +1085,13 @@ CREATE TABLE `customer_invoices` (
 --
 
 CREATE TABLE `customer_lead` (
-  `leadid` int(7) NOT NULL,
-  `shadow` smallint(1) NOT NULL DEFAULT '1' COMMENT 'if 1 then haven''t the website been reviewed by the automated platform',
-  `touches_by_robot` smallint(1) NOT NULL DEFAULT '0',
-  `shop_shadow` smallint(1) NOT NULL DEFAULT '1' COMMENT 'If 1 then is it a shadow which shopsystem that have been used. We have not yet tested it, and have not yet put any result in shoptype',
-  `converted` smallint(1) NOT NULL DEFAULT '0' COMMENT '0 if not converted, 1 if converted',
-  `merchantid` bigint(12) NOT NULL DEFAULT '0' COMMENT 'If this lead already is registered at Yourpay, then give it the MerchantID',
-  `salesperson` int(7) NOT NULL DEFAULT '0',
+  `leadid` int NOT NULL,
+  `shadow` smallint NOT NULL DEFAULT '1' COMMENT 'if 1 then haven''t the website been reviewed by the automated platform',
+  `touches_by_robot` smallint NOT NULL DEFAULT '0',
+  `shop_shadow` smallint NOT NULL DEFAULT '1' COMMENT 'If 1 then is it a shadow which shopsystem that have been used. We have not yet tested it, and have not yet put any result in shoptype',
+  `converted` smallint NOT NULL DEFAULT '0' COMMENT '0 if not converted, 1 if converted',
+  `merchantid` bigint NOT NULL DEFAULT '0' COMMENT 'If this lead already is registered at Yourpay, then give it the MerchantID',
+  `salesperson` int NOT NULL DEFAULT '0',
   `cvr` varchar(10) NOT NULL COMMENT 'Unique Identifier',
   `cvr_name` varchar(50) NOT NULL COMMENT 'Name of company',
   `contactname` varchar(255) NOT NULL,
@@ -1103,11 +1104,11 @@ CREATE TABLE `customer_lead` (
   `employees` varchar(35) NOT NULL,
   `shoptype` varchar(255) NOT NULL DEFAULT '' COMMENT '0 = Undefined, 1 = magento, 2 = prestashop',
   `website` varchar(255) NOT NULL,
-  `followup` bigint(12) NOT NULL DEFAULT '0',
+  `followup` bigint NOT NULL DEFAULT '0',
   `notes` longtext NOT NULL,
-  `tp_reviews` bigint(12) NOT NULL,
-  `tp_rating` bigint(12) NOT NULL,
-  `followup_status` smallint(1) NOT NULL DEFAULT '1' COMMENT 'if 1 then active, if 0 then inactive',
+  `tp_reviews` bigint NOT NULL,
+  `tp_rating` bigint NOT NULL,
+  `followup_status` smallint NOT NULL DEFAULT '1' COMMENT 'if 1 then active, if 0 then inactive',
   `in_pipedrive` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1118,9 +1119,9 @@ CREATE TABLE `customer_lead` (
 --
 
 CREATE TABLE `customer_lev` (
-  `merchantid` int(11) NOT NULL,
+  `merchantid` int NOT NULL,
   `kreditor_id` varchar(32) NOT NULL,
-  `group_id` int(11) NOT NULL,
+  `group_id` int NOT NULL,
   `active` tinyint(1) NOT NULL,
   `address` varchar(64) NOT NULL,
   `phone` varchar(12) NOT NULL
@@ -1133,32 +1134,36 @@ CREATE TABLE `customer_lev` (
 --
 
 CREATE TABLE `customer_logins` (
-  `LoginID` int(7) NOT NULL COMMENT 'AutoID',
-  `customer_cvr` int(7) NOT NULL COMMENT 'Customer CVR',
-  `merchantid` int(12) NOT NULL,
-  `active` smallint(1) NOT NULL DEFAULT '1' COMMENT 'If 1 then Login Active',
+  `LoginID` int NOT NULL COMMENT 'AutoID',
+  `customer_cvr` int NOT NULL COMMENT 'Customer CVR',
+  `merchantid` int NOT NULL,
+  `active` smallint NOT NULL DEFAULT '1' COMMENT 'If 1 then Login Active',
   `username` varchar(255) NOT NULL COMMENT 'Email as Login',
   `upassword` varchar(255) NOT NULL COMMENT 'SHA1 encoded password',
   `secret` varchar(10) NOT NULL,
   `pincode` varchar(90) NOT NULL,
   `uemail` varchar(45) NOT NULL,
+  `phoneno` varchar(50) NOT NULL,
+  `first_name` varchar(40) NOT NULL DEFAULT '',
+  `last_name` varchar(40) NOT NULL DEFAULT '',
   `name` varchar(255) NOT NULL,
   `logo` varchar(30) NOT NULL,
   `mobile` varchar(255) NOT NULL,
-  `twofactor` smallint(1) NOT NULL DEFAULT '1' COMMENT 'Two factor login',
+  `twofactor` smallint NOT NULL DEFAULT '1' COMMENT 'Two factor login',
   `session_id` varchar(30) NOT NULL,
-  `session_lastused` bigint(12) NOT NULL,
+  `session_lastused` bigint NOT NULL,
   `user_img` varchar(10) NOT NULL COMMENT 'User Image',
-  `latestlogin` bigint(12) NOT NULL COMMENT 'Latest Login Timestamp',
+  `latestlogin` bigint NOT NULL COMMENT 'Latest Login Timestamp',
   `access_rights` varchar(255) NOT NULL,
   `logintype` enum('0','1') NOT NULL COMMENT '0 for Manually, 1 for 1-click-login',
   `clicklink` varchar(60) NOT NULL,
   `terminal_pwd` varchar(10) NOT NULL,
-  `stdpwd` smallint(1) NOT NULL DEFAULT '1',
-  `verified` smallint(1) NOT NULL DEFAULT '0',
-  `added_to_mailchimp` smallint(1) NOT NULL DEFAULT '0',
-  `email_optout` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Optout of our marketing mails',
-  `updated_mailchimp` bigint(12) NOT NULL DEFAULT '0',
+  `stdpwd` smallint NOT NULL DEFAULT '1',
+  `verified` smallint NOT NULL DEFAULT '0',
+  `added_to_mailchimp` smallint NOT NULL DEFAULT '0',
+  `email_optout` smallint NOT NULL DEFAULT '0' COMMENT 'Optout of our marketing mails',
+  `updated_mailchimp` bigint NOT NULL DEFAULT '0',
+  `country_code` varchar(5) NOT NULL DEFAULT 'da-dk',
   `language_code` varchar(5) NOT NULL,
   `reset_token` text NOT NULL COMMENT 'Token used to validate password resetting',
   `row_last_updated` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP
@@ -1171,8 +1176,8 @@ CREATE TABLE `customer_logins` (
 --
 
 CREATE TABLE `customer_logins_activity` (
-  `activityid` int(7) NOT NULL COMMENT 'Unique Identifier',
-  `LoginID` int(7) NOT NULL COMMENT 'Login ID',
+  `activityid` int NOT NULL COMMENT 'Unique Identifier',
+  `LoginID` int NOT NULL COMMENT 'Login ID',
   `page` varchar(35) NOT NULL,
   `actiondone` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1184,10 +1189,10 @@ CREATE TABLE `customer_logins_activity` (
 --
 
 CREATE TABLE `customer_logins_apppassword` (
-  `password_id` int(6) NOT NULL,
-  `LoginID` int(6) NOT NULL,
+  `password_id` int NOT NULL,
+  `LoginID` int NOT NULL,
   `password` varchar(255) NOT NULL,
-  `expiry_timestamp` bigint(12) NOT NULL
+  `expiry_timestamp` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1197,9 +1202,9 @@ CREATE TABLE `customer_logins_apppassword` (
 --
 
 CREATE TABLE `customer_login_sessions` (
-  `uid` int(10) NOT NULL,
+  `uid` int NOT NULL,
   `session_id` varchar(255) NOT NULL,
-  `timestp` bigint(12) NOT NULL COMMENT 'Unix timestamp'
+  `timestp` bigint NOT NULL COMMENT 'Unix timestamp'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1209,8 +1214,8 @@ CREATE TABLE `customer_login_sessions` (
 --
 
 CREATE TABLE `customer_login_session_details` (
-  `details_id` int(7) NOT NULL,
-  `login_id` int(7) NOT NULL,
+  `details_id` int NOT NULL,
+  `login_id` int NOT NULL,
   `detail_key` varchar(50) NOT NULL,
   `detail_value` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1222,10 +1227,10 @@ CREATE TABLE `customer_login_session_details` (
 --
 
 CREATE TABLE `customer_overview` (
-  `merchantid` int(11) NOT NULL,
+  `merchantid` int NOT NULL,
   `debitor_id` varchar(32) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `group_id` int(11) NOT NULL,
+  `group_id` int NOT NULL,
   `address` varchar(64) NOT NULL,
   `phone` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1237,12 +1242,13 @@ CREATE TABLE `customer_overview` (
 --
 
 CREATE TABLE `customer_owners` (
-  `OwnerFileID` int(7) NOT NULL,
-  `merchantid` int(7) NOT NULL,
-  `creationdate` bigint(12) NOT NULL,
-  `uploaded` bigint(12) NOT NULL,
-  `handled` bigint(12) NOT NULL,
-  `datatype` int(2) NOT NULL,
+  `OwnerFileID` int NOT NULL,
+  `merchantid` int NOT NULL,
+  `creationdate` bigint NOT NULL,
+  `uploaded` bigint NOT NULL,
+  `handled` bigint NOT NULL,
+  `datatype` int NOT NULL,
+  `pep` smallint NOT NULL DEFAULT '0' COMMENT 'Political Exposed Person',
   `company_role` varchar(255) NOT NULL,
   `owner_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_danish_ci NOT NULL,
   `owner_address` varchar(255) NOT NULL,
@@ -1251,10 +1257,10 @@ CREATE TABLE `customer_owners` (
   `owner_country` varchar(255) NOT NULL DEFAULT 'Danmark',
   `owner_date_of_birth` varchar(255) NOT NULL,
   `file` varchar(255) NOT NULL,
-  `verified` smallint(1) NOT NULL DEFAULT '0',
+  `verified` smallint NOT NULL DEFAULT '0',
   `owner_share` varchar(5) NOT NULL DEFAULT '0',
-  `approved_by` int(5) NOT NULL,
-  `requested_by` int(7) NOT NULL,
+  `approved_by` int NOT NULL,
+  `requested_by` int NOT NULL,
   `document_key` varchar(32) NOT NULL,
   `document_token` varchar(121) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1266,7 +1272,7 @@ CREATE TABLE `customer_owners` (
 --
 
 CREATE TABLE `customer_owner_types` (
-  `type_id` int(2) NOT NULL,
+  `type_id` int NOT NULL,
   `type_name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1277,12 +1283,12 @@ CREATE TABLE `customer_owner_types` (
 --
 
 CREATE TABLE `customer_payment_download` (
-  `id` int(11) NOT NULL,
-  `merchantid` int(11) NOT NULL,
-  `begin` int(11) NOT NULL,
-  `end` int(11) NOT NULL,
-  `price` smallint(6) NOT NULL,
-  `downloads` smallint(6) NOT NULL
+  `id` int NOT NULL,
+  `merchantid` int NOT NULL,
+  `begin` int NOT NULL,
+  `end` int NOT NULL,
+  `price` smallint NOT NULL,
+  `downloads` smallint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1292,14 +1298,14 @@ CREATE TABLE `customer_payment_download` (
 --
 
 CREATE TABLE `customer_payon` (
-  `channelID` int(8) NOT NULL,
-  `production` smallint(1) NOT NULL DEFAULT '1' COMMENT '1 if production MerchantID',
-  `merchantid` bigint(12) NOT NULL,
-  `minimum_amount` int(11) NOT NULL DEFAULT '0',
-  `maximum_amount` bigint(12) NOT NULL DEFAULT '9999999',
-  `currency` int(3) NOT NULL DEFAULT '208',
-  `max_per_month` bigint(12) NOT NULL DEFAULT '999999900',
-  `current_month` bigint(12) NOT NULL DEFAULT '0',
+  `channelID` int NOT NULL,
+  `production` smallint NOT NULL DEFAULT '1' COMMENT '1 if production MerchantID',
+  `merchantid` bigint NOT NULL,
+  `minimum_amount` int NOT NULL DEFAULT '0',
+  `maximum_amount` bigint NOT NULL DEFAULT '9999999',
+  `currency` int NOT NULL DEFAULT '208',
+  `max_per_month` bigint NOT NULL DEFAULT '999999900',
+  `current_month` bigint NOT NULL DEFAULT '0',
   `payon_sender` varchar(64) NOT NULL,
   `payon_channel` varchar(64) NOT NULL,
   `payon_login` varchar(64) NOT NULL,
@@ -1308,7 +1314,7 @@ CREATE TABLE `customer_payon` (
   `payon_type` varchar(64) NOT NULL DEFAULT 'CC.PA',
   `clearingInstitute` varchar(64) NOT NULL,
   `payon_mcc` varchar(4) NOT NULL DEFAULT '0',
-  `payon_threedsecure` smallint(1) NOT NULL DEFAULT '1'
+  `payon_threedsecure` smallint NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1318,8 +1324,8 @@ CREATE TABLE `customer_payon` (
 --
 
 CREATE TABLE `customer_payon_psp` (
-  `pspid` int(7) NOT NULL COMMENT 'Auto ID',
-  `demo` smallint(1) NOT NULL DEFAULT '0',
+  `pspid` int NOT NULL COMMENT 'Auto ID',
+  `demo` smallint NOT NULL DEFAULT '0',
   `pspname` varchar(25) NOT NULL,
   `payonid` varchar(64) NOT NULL,
   `clearingInstitute` varchar(64) NOT NULL
@@ -1344,16 +1350,16 @@ CREATE TABLE `customer_productionunits` (
 --
 
 CREATE TABLE `customer_products` (
-  `product_id` int(7) NOT NULL COMMENT 'AutoID',
-  `group_id` int(7) NOT NULL COMMENT 'Product Group ID',
-  `merchantid` int(8) NOT NULL COMMENT 'MerchantID',
+  `product_id` int NOT NULL COMMENT 'AutoID',
+  `group_id` int NOT NULL COMMENT 'Product Group ID',
+  `merchantid` int NOT NULL COMMENT 'MerchantID',
   `product_title` varchar(255) NOT NULL,
   `product_image` varchar(255) NOT NULL,
-  `product_price` int(6) NOT NULL,
-  `product_active` smallint(1) NOT NULL,
+  `product_price` int NOT NULL,
+  `product_active` smallint NOT NULL,
   `product_barcode` varchar(255) NOT NULL,
   `product_no` varchar(35) NOT NULL,
-  `product_buyprice` int(11) NOT NULL,
+  `product_buyprice` int NOT NULL,
   `product_unit` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1364,10 +1370,10 @@ CREATE TABLE `customer_products` (
 --
 
 CREATE TABLE `customer_products_groups` (
-  `group_id` int(7) NOT NULL COMMENT 'Group ID',
+  `group_id` int NOT NULL COMMENT 'Group ID',
   `group_name` varchar(255) NOT NULL,
-  `group_active` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 1 then active group',
-  `merchantid` int(10) NOT NULL
+  `group_active` smallint NOT NULL DEFAULT '0' COMMENT 'If 1 then active group',
+  `merchantid` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1377,13 +1383,13 @@ CREATE TABLE `customer_products_groups` (
 --
 
 CREATE TABLE `customer_product_stock_decrease` (
-  `decrease_id` int(7) NOT NULL,
-  `completed` smallint(1) NOT NULL DEFAULT '0',
-  `merchantid` int(7) NOT NULL,
+  `decrease_id` int NOT NULL,
+  `completed` smallint NOT NULL DEFAULT '0',
+  `merchantid` int NOT NULL,
   `product_name` longtext NOT NULL,
   `product_price` longtext NOT NULL,
-  `product_amount` int(3) NOT NULL DEFAULT '0',
-  `timestamp` bigint(12) NOT NULL DEFAULT '0'
+  `product_amount` int NOT NULL DEFAULT '0',
+  `timestamp` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1393,9 +1399,9 @@ CREATE TABLE `customer_product_stock_decrease` (
 --
 
 CREATE TABLE `customer_special_design` (
-  `merchantid` int(9) NOT NULL,
-  `merchantid_prod` int(9) NOT NULL,
-  `design_type` int(2) NOT NULL DEFAULT '1',
+  `merchantid` int NOT NULL,
+  `merchantid_prod` int NOT NULL,
+  `design_type` int NOT NULL DEFAULT '1',
   `custom_css` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1406,10 +1412,10 @@ CREATE TABLE `customer_special_design` (
 --
 
 CREATE TABLE `customer_subscriptions` (
-  `subscription_id` int(7) NOT NULL,
-  `merchant_id` int(12) NOT NULL,
+  `subscription_id` int NOT NULL,
+  `merchant_id` int NOT NULL,
   `ccrg_id` varchar(14) NOT NULL,
-  `time_created` int(10) NOT NULL
+  `time_created` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1419,7 +1425,7 @@ CREATE TABLE `customer_subscriptions` (
 --
 
 CREATE TABLE `customer_supportemails` (
-  `merchantid` int(7) NOT NULL COMMENT 'MerchantID',
+  `merchantid` int NOT NULL COMMENT 'MerchantID',
   `customer_email` varchar(255) NOT NULL COMMENT 'Unique customer email for support of merchant'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1432,7 +1438,7 @@ CREATE TABLE `customer_supportemails` (
 CREATE TABLE `customer_touched` (
   `customer_cvr` varchar(10) NOT NULL COMMENT 'Customer CVR/CPR',
   `touchedby` varchar(100) NOT NULL COMMENT 'Touched by',
-  `timestamp` bigint(12) NOT NULL COMMENT 'Unix Timestamp',
+  `timestamp` bigint NOT NULL COMMENT 'Unix Timestamp',
   `touchnote` longtext NOT NULL COMMENT 'Touch Note'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1443,8 +1449,8 @@ CREATE TABLE `customer_touched` (
 --
 
 CREATE TABLE `customer_touches` (
-  `merchantid` int(8) NOT NULL COMMENT 'MerchantID',
-  `timestamp` bigint(12) NOT NULL COMMENT 'Unix Timestamp',
+  `merchantid` int NOT NULL COMMENT 'MerchantID',
+  `timestamp` bigint NOT NULL COMMENT 'Unix Timestamp',
   `Action` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1455,37 +1461,41 @@ CREATE TABLE `customer_touches` (
 --
 
 CREATE TABLE `customer_transfer_accounts` (
-  `accountid` bigint(12) NOT NULL,
-  `creationtime` bigint(12) NOT NULL,
-  `merchantid` bigint(12) NOT NULL,
-  `currency` int(3) NOT NULL DEFAULT '208',
-  `settlement_currency` int(3) NOT NULL DEFAULT '208',
-  `account_state` bigint(12) NOT NULL,
-  `account_activated` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 1 then updated with production merchantid',
-  `account_invoices` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 1 = Payout account is used for Invoice Payments from Partners (Visma, Billy etc.)',
-  `account_amount` bigint(12) NOT NULL DEFAULT '0',
-  `account_adjustment_status` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Volume merchant owe to Yourpay in refunds and chargebacks',
-  `account_amount_last_updated` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Used by register_correct_account_volume',
-  `account_total_capture` bigint(12) NOT NULL DEFAULT '0',
-  `account_total_settlement` bigint(12) NOT NULL DEFAULT '0',
-  `account_total_tax` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Total fee paid through accountid',
-  `account_adjustments` int(11) NOT NULL COMMENT 'Chargebacks, fee etc.',
-  `refund_amount_calculated` int(7) NOT NULL DEFAULT '0',
-  `refund_amount_total` bigint(20) NOT NULL DEFAULT '0',
-  `merchant_total_debt` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Merchants total debt towards Yourpay',
-  `account_reserve` bigint(12) NOT NULL,
+  `accountid` bigint NOT NULL,
+  `creationtime` bigint NOT NULL,
+  `merchantid` bigint NOT NULL,
+  `currency` int NOT NULL DEFAULT '208',
+  `settlement_currency` int NOT NULL DEFAULT '208',
+  `account_state` bigint NOT NULL,
+  `account_activated` smallint NOT NULL DEFAULT '0' COMMENT 'If 1 then updated with production merchantid',
+  `account_invoices` smallint NOT NULL DEFAULT '0' COMMENT 'If 1 = Payout account is used for Invoice Payments from Partners (Visma, Billy etc.)',
+  `account_amount` bigint NOT NULL DEFAULT '0',
+  `account_adjustment_status` bigint NOT NULL DEFAULT '0' COMMENT 'Volume merchant owe to Yourpay in refunds and chargebacks',
+  `account_amount_last_updated` bigint NOT NULL DEFAULT '0' COMMENT 'Used by register_correct_account_volume',
+  `account_total_capture` bigint NOT NULL DEFAULT '0',
+  `account_total_settlement` bigint NOT NULL DEFAULT '0',
+  `account_total_tax` bigint NOT NULL DEFAULT '0' COMMENT 'Total fee paid through accountid',
+  `account_adjustments` int NOT NULL COMMENT 'Chargebacks, fee etc.',
+  `refund_amount_calculated` int NOT NULL DEFAULT '0',
+  `refund_amount_total` bigint NOT NULL DEFAULT '0',
+  `merchant_total_debt` bigint NOT NULL DEFAULT '0' COMMENT 'Merchants total debt towards Yourpay',
+  `account_reserve` bigint NOT NULL,
   `country` varchar(255) NOT NULL,
   `IBAN` varchar(255) NOT NULL,
   `biccode` varchar(12) NOT NULL,
   `bankname` varchar(255) NOT NULL,
-  `bankreg` bigint(6) NOT NULL,
-  `bankacc` bigint(12) NOT NULL,
-  `recalculate_period` bigint(12) NOT NULL COMMENT 'Recalculate account volume after specific timestamp',
-  `recalculate_status` int(1) NOT NULL DEFAULT '0' COMMENT 'If recalculate process is ongoing',
-  `last_releasedate` bigint(12) NOT NULL DEFAULT '0',
-  `last_updated` bigint(12) NOT NULL DEFAULT '0',
-  `reviewed_date` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Is being used by temp.correct.payment.import',
-  `verified_ctpe` smallint(1) NOT NULL DEFAULT '0'
+  `bankreg` bigint NOT NULL,
+  `bankacc` bigint NOT NULL,
+  `recalculate_period` bigint NOT NULL COMMENT 'Recalculate account volume after specific timestamp',
+  `recalculate_status` int NOT NULL DEFAULT '0' COMMENT 'If recalculate process is ongoing',
+  `last_releasedate` bigint NOT NULL DEFAULT '0',
+  `last_updated` bigint NOT NULL DEFAULT '0',
+  `reviewed_date` smallint NOT NULL DEFAULT '0' COMMENT 'Is being used by temp.correct.payment.import',
+  `verified_ctpe` smallint NOT NULL DEFAULT '0',
+  `activation_code` varchar(8) NOT NULL,
+  `activation_amount` int NOT NULL DEFAULT '19',
+  `document_key` varchar(255) NOT NULL,
+  `document_token` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1495,9 +1505,9 @@ CREATE TABLE `customer_transfer_accounts` (
 --
 
 CREATE TABLE `deals_registered_won` (
-  `deal_id` int(11) NOT NULL,
+  `deal_id` int NOT NULL,
   `deal_value` longtext NOT NULL,
-  `deal_timestamp` bigint(12) NOT NULL
+  `deal_timestamp` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1507,9 +1517,9 @@ CREATE TABLE `deals_registered_won` (
 --
 
 CREATE TABLE `deployments_performed` (
-  `deployment_id` int(11) NOT NULL,
+  `deployment_id` int NOT NULL,
   `deployment_file` varchar(255) NOT NULL,
-  `deployment_timestamp` bigint(12) NOT NULL
+  `deployment_timestamp` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1519,8 +1529,8 @@ CREATE TABLE `deployments_performed` (
 --
 
 CREATE TABLE `documentation_code_example` (
-  `example_id` int(7) NOT NULL,
-  `entities_id` int(7) NOT NULL,
+  `example_id` int NOT NULL,
+  `entities_id` int NOT NULL,
   `language` varchar(255) NOT NULL,
   `codeexample` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1532,9 +1542,9 @@ CREATE TABLE `documentation_code_example` (
 --
 
 CREATE TABLE `documentation_entities` (
-  `entities_id` int(7) NOT NULL,
-  `documentation_id` int(7) NOT NULL,
-  `order_id` int(7) NOT NULL,
+  `entities_id` int NOT NULL,
+  `documentation_id` int NOT NULL,
+  `order_id` int NOT NULL,
   `type` varchar(255) NOT NULL,
   `content` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1546,7 +1556,7 @@ CREATE TABLE `documentation_entities` (
 --
 
 CREATE TABLE `documentation_titles` (
-  `documentation_id` int(7) NOT NULL,
+  `documentation_id` int NOT NULL,
   `documentation_title` varchar(255) NOT NULL,
   `teaser` varchar(255) NOT NULL,
   `url` varchar(75) NOT NULL
@@ -1559,13 +1569,13 @@ CREATE TABLE `documentation_titles` (
 --
 
 CREATE TABLE `documents` (
-  `document_id` int(7) NOT NULL,
+  `document_id` int NOT NULL,
   `document_title` varchar(255) NOT NULL,
   `document_file` varchar(255) NOT NULL,
-  `document_owner` int(7) NOT NULL,
-  `document_uploaded` bigint(12) NOT NULL,
-  `document_approved` bigint(12) NOT NULL,
-  `document_group` int(7) NOT NULL
+  `document_owner` int NOT NULL,
+  `document_uploaded` bigint NOT NULL,
+  `document_approved` bigint NOT NULL,
+  `document_group` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1575,7 +1585,7 @@ CREATE TABLE `documents` (
 --
 
 CREATE TABLE `documents_groups` (
-  `doc_group_id` int(7) NOT NULL,
+  `doc_group_id` int NOT NULL,
   `doc_group_title` varchar(255) NOT NULL,
   `group_users` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1587,13 +1597,13 @@ CREATE TABLE `documents_groups` (
 --
 
 CREATE TABLE `jobs` (
-  `jobid` int(5) NOT NULL,
+  `jobid` int NOT NULL,
   `title` varchar(255) NOT NULL,
   `teaser` longtext NOT NULL,
   `text` longtext NOT NULL,
-  `active` smallint(1) NOT NULL DEFAULT '1',
-  `fulltime` smallint(1) NOT NULL DEFAULT '0',
-  `orderBy` smallint(2) NOT NULL DEFAULT '0'
+  `active` smallint NOT NULL DEFAULT '1',
+  `fulltime` smallint NOT NULL DEFAULT '0',
+  `orderBy` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1605,10 +1615,10 @@ CREATE TABLE `jobs` (
 CREATE TABLE `lead_database` (
   `domain` varchar(255) NOT NULL,
   `shop_platform` varchar(255) NOT NULL,
-  `added` bigint(12) NOT NULL,
-  `imported_into_pipedrive` smallint(1) NOT NULL DEFAULT '0',
-  `updated_with_info_in_pipedrive` smallint(1) NOT NULL DEFAULT '0',
-  `pipedrive_deal_id` int(10) NOT NULL DEFAULT '0',
+  `added` bigint NOT NULL,
+  `imported_into_pipedrive` smallint NOT NULL DEFAULT '0',
+  `updated_with_info_in_pipedrive` smallint NOT NULL DEFAULT '0',
+  `pipedrive_deal_id` int NOT NULL DEFAULT '0',
   `country` varchar(255) NOT NULL,
   `company` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL
@@ -1621,24 +1631,24 @@ CREATE TABLE `lead_database` (
 --
 
 CREATE TABLE `MailQueue` (
-  `MailID` int(5) NOT NULL COMMENT 'Auto ID',
+  `MailID` int NOT NULL COMMENT 'Auto ID',
   `MailSender` varchar(255) NOT NULL DEFAULT 'robot@yourpay.io' COMMENT 'If we doesn''t know who the Sender is, then just insert robot',
   `MailReceiver` varchar(255) NOT NULL DEFAULT 'support@yourpay.dk' COMMENT 'If we doesn''t know who the Receiver is, then just insert support',
   `MailSubject` varchar(255) NOT NULL DEFAULT '' COMMENT 'Mail Subject',
   `MailBody` longtext NOT NULL COMMENT 'Mail Body',
   `MailCategory` varchar(45) NOT NULL,
   `registered` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `sendaftertime` bigint(12) NOT NULL DEFAULT '0',
-  `sent` int(12) NOT NULL DEFAULT '0' COMMENT 'If not 0 then sent, if 2 then sent through PHP Mail',
+  `sendaftertime` bigint NOT NULL DEFAULT '0',
+  `sent` int NOT NULL DEFAULT '0' COMMENT 'If not 0 then sent, if 2 then sent through PHP Mail',
   `ready_to_send` enum('0','1') NOT NULL COMMENT 'If ready to send is zero then don''t send the email',
   `MailFile` varchar(255) NOT NULL,
   `MailFile2` varchar(255) NOT NULL,
   `plain` enum('0','1') NOT NULL COMMENT 'If 0 then send as HTML',
-  `merchantnumber` int(7) NOT NULL,
+  `merchantnumber` int NOT NULL,
   `mail_bcc` varchar(50) NOT NULL,
-  `verify_activated` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Only send mail if merchant is activated',
-  `imported_pipedrive` smallint(1) NOT NULL DEFAULT '0',
-  `template` smallint(1) NOT NULL DEFAULT '0',
+  `verify_activated` smallint NOT NULL DEFAULT '0' COMMENT 'Only send mail if merchant is activated',
+  `imported_pipedrive` smallint NOT NULL DEFAULT '0',
+  `template` smallint NOT NULL DEFAULT '0',
   `template_id` varchar(255) NOT NULL,
   `placeholders` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1650,14 +1660,14 @@ CREATE TABLE `MailQueue` (
 --
 
 CREATE TABLE `MailSMSQueue` (
-  `sms_id` int(7) NOT NULL,
-  `billable` smallint(1) NOT NULL DEFAULT '0',
-  `billed` smallint(1) NOT NULL DEFAULT '0',
+  `sms_id` int NOT NULL,
+  `billable` smallint NOT NULL DEFAULT '0',
+  `billed` smallint NOT NULL DEFAULT '0',
   `merchant_token` varchar(64) NOT NULL,
-  `sms_receiver` int(8) NOT NULL,
+  `sms_receiver` int NOT NULL,
   `sms_text` longtext NOT NULL,
   `sms_replacer` longtext NOT NULL,
-  `senttime` bigint(12) NOT NULL
+  `senttime` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1667,16 +1677,16 @@ CREATE TABLE `MailSMSQueue` (
 --
 
 CREATE TABLE `mail_template` (
-  `id` int(11) NOT NULL,
-  `preferred_wrapper` int(7) NOT NULL,
+  `id` int NOT NULL,
+  `preferred_wrapper` varchar(255) NOT NULL,
   `country_code` varchar(5) NOT NULL DEFAULT 'da-dk',
   `template_title` varchar(255) NOT NULL,
   `template_subject` varchar(255) NOT NULL,
   `template` text NOT NULL,
-  `owner` int(11) NOT NULL,
-  `created` int(11) NOT NULL,
-  `updater` int(11) NOT NULL,
-  `last_updated` int(11) NOT NULL
+  `owner` int NOT NULL,
+  `created` int NOT NULL,
+  `updater` int NOT NULL,
+  `last_updated` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1686,8 +1696,8 @@ CREATE TABLE `mail_template` (
 --
 
 CREATE TABLE `mail_trigger_mails` (
-  `mail_id` bigint(20) NOT NULL,
-  `trigger_id` bigint(20) NOT NULL DEFAULT '0',
+  `mail_id` bigint NOT NULL,
+  `trigger_id` bigint NOT NULL DEFAULT '0',
   `template_id` varchar(255) NOT NULL,
   `merchant_token` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1699,12 +1709,14 @@ CREATE TABLE `mail_trigger_mails` (
 --
 
 CREATE TABLE `mail_wrapper` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `title` varchar(255) NOT NULL,
   `wrapper` text NOT NULL,
-  `owner` int(11) NOT NULL,
-  `created` int(11) NOT NULL,
-  `updater` int(11) NOT NULL,
-  `last_updated` int(11) NOT NULL
+  `in_not_in` varchar(6) NOT NULL DEFAULT 'in',
+  `owner` int NOT NULL,
+  `created` int NOT NULL,
+  `updater` int NOT NULL,
+  `last_updated` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1714,10 +1726,10 @@ CREATE TABLE `mail_wrapper` (
 --
 
 CREATE TABLE `manual_adjustments` (
-  `adjustment_id` int(7) NOT NULL,
-  `accountid` int(7) NOT NULL,
-  `dateid` int(7) NOT NULL,
-  `amount` int(11) NOT NULL,
+  `adjustment_id` int NOT NULL,
+  `accountid` int NOT NULL,
+  `dateid` int NOT NULL,
+  `amount` int NOT NULL,
   `internal_note` longtext NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1729,20 +1741,20 @@ CREATE TABLE `manual_adjustments` (
 --
 
 CREATE TABLE `maxtel` (
-  `phone_reg` bigint(12) NOT NULL,
+  `phone_reg` bigint NOT NULL,
   `container` longtext NOT NULL,
-  `registered` int(11) NOT NULL,
-  `seconds` int(11) NOT NULL,
-  `pipedrive` int(11) NOT NULL,
-  `merchantid` int(11) NOT NULL,
-  `cardno_first` int(6) NOT NULL,
-  `cardno_last` int(4) NOT NULL,
-  `phone_from` bigint(10) NOT NULL,
-  `phone_to` bigint(10) NOT NULL,
-  `external` bigint(10) NOT NULL,
-  `start_time` bigint(12) NOT NULL,
-  `connect_time` bigint(12) NOT NULL,
-  `end_time` bigint(12) NOT NULL,
+  `registered` int NOT NULL,
+  `seconds` int NOT NULL,
+  `pipedrive` int NOT NULL,
+  `merchantid` int NOT NULL,
+  `cardno_first` int NOT NULL,
+  `cardno_last` int NOT NULL,
+  `phone_from` bigint NOT NULL,
+  `phone_to` bigint NOT NULL,
+  `external` bigint NOT NULL,
+  `start_time` bigint NOT NULL,
+  `connect_time` bigint NOT NULL,
+  `end_time` bigint NOT NULL,
   `id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1755,7 +1767,7 @@ CREATE TABLE `maxtel` (
 CREATE TABLE `merchant_logos` (
   `merchant_token` varchar(255) NOT NULL,
   `logo` longtext NOT NULL,
-  `viabill` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Is logo sent to Viabill'
+  `viabill` smallint NOT NULL DEFAULT '0' COMMENT 'Is logo sent to Viabill'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1765,20 +1777,20 @@ CREATE TABLE `merchant_logos` (
 --
 
 CREATE TABLE `merchant_outgoing_transactions` (
-  `ImportID` bigint(12) NOT NULL,
-  `date_of_transaction` bigint(12) NOT NULL,
-  `date_of_payment` bigint(12) NOT NULL,
-  `date_of_release` bigint(12) NOT NULL,
+  `ImportID` bigint NOT NULL,
+  `date_of_transaction` bigint NOT NULL,
+  `date_of_payment` bigint NOT NULL,
+  `date_of_release` bigint NOT NULL,
   `internal_descriptor` varchar(255) NOT NULL,
   `external_descriptor` varchar(255) NOT NULL,
-  `transfered_amount` bigint(10) NOT NULL,
-  `banked_statement` bigint(12) NOT NULL,
-  `transfered_currency` int(3) NOT NULL DEFAULT '208',
-  `import_accepted` smallint(1) NOT NULL DEFAULT '0' COMMENT '-1 = Deleted, 0 = Not handled, 1 = Accepted, 2 = Pending Review',
-  `merchantid` int(12) NOT NULL,
-  `dateid` int(7) NOT NULL,
-  `navision_imported` smallint(1) NOT NULL DEFAULT '0',
-  `finance_id` bigint(7) NOT NULL
+  `transfered_amount` bigint NOT NULL,
+  `banked_statement` bigint NOT NULL,
+  `transfered_currency` int NOT NULL DEFAULT '208',
+  `import_accepted` smallint NOT NULL DEFAULT '0' COMMENT '-1 = Deleted, 0 = Not handled, 1 = Accepted, 2 = Pending Review',
+  `merchantid` int NOT NULL,
+  `dateid` int NOT NULL,
+  `navision_imported` smallint NOT NULL DEFAULT '0',
+  `finance_id` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1802,8 +1814,8 @@ CREATE TABLE `merchant_outgoing_transactions_verification` (
   `modtagerkonto` varchar(255) NOT NULL,
   `supplerendetekst` varchar(255) NOT NULL,
   `test` varchar(255) NOT NULL,
-  `checked` smallint(1) NOT NULL DEFAULT '0',
-  `v_id` int(11) NOT NULL
+  `checked` smallint NOT NULL DEFAULT '0',
+  `v_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1813,15 +1825,15 @@ CREATE TABLE `merchant_outgoing_transactions_verification` (
 --
 
 CREATE TABLE `merchant_refunds_accounts` (
-  `refund_id` int(7) NOT NULL,
-  `payment_id` int(7) NOT NULL,
+  `refund_id` int NOT NULL,
+  `payment_id` int NOT NULL,
   `order_id` varchar(255) NOT NULL,
-  `accountid` bigint(7) NOT NULL,
-  `date_id` int(7) NOT NULL,
-  `amount` bigint(7) NOT NULL,
-  `currency` int(5) NOT NULL,
-  `datetime` bigint(12) NOT NULL,
-  `merchantid` int(12) NOT NULL
+  `accountid` bigint NOT NULL,
+  `date_id` int NOT NULL,
+  `amount` bigint NOT NULL,
+  `currency` int NOT NULL,
+  `datetime` bigint NOT NULL,
+  `merchantid` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1831,26 +1843,26 @@ CREATE TABLE `merchant_refunds_accounts` (
 --
 
 CREATE TABLE `merchant_transfer_accounts_daily_overview` (
-  `dateid` bigint(12) NOT NULL,
-  `accountid` int(6) NOT NULL,
-  `captured_amount` int(8) NOT NULL,
-  `captured_amount_converted` bigint(12) NOT NULL DEFAULT '0',
-  `captured_fee` int(8) NOT NULL,
-  `chargeback_amount` int(20) NOT NULL DEFAULT '0',
-  `released_amount` int(8) NOT NULL,
-  `refund_amount` int(7) NOT NULL DEFAULT '0',
-  `refund_amount_total` bigint(12) NOT NULL DEFAULT '0',
-  `manual_adjustments` int(10) NOT NULL DEFAULT '0',
-  `daily_percentage` int(3) NOT NULL DEFAULT '225',
-  `daily_settlement_period` int(3) NOT NULL DEFAULT '14',
-  `date_start` bigint(12) NOT NULL,
-  `date_end` bigint(12) NOT NULL,
-  `date_expected_release` bigint(12) NOT NULL DEFAULT '0',
-  `manually_corrected` int(1) NOT NULL DEFAULT '0',
-  `daily_percentage_correction` smallint(1) NOT NULL DEFAULT '0',
+  `dateid` bigint NOT NULL,
+  `accountid` int NOT NULL,
+  `captured_amount` int NOT NULL,
+  `captured_amount_converted` bigint NOT NULL DEFAULT '0',
+  `captured_fee` int NOT NULL,
+  `chargeback_amount` int NOT NULL DEFAULT '0',
+  `released_amount` int NOT NULL,
+  `refund_amount` int NOT NULL DEFAULT '0',
+  `refund_amount_total` bigint NOT NULL DEFAULT '0',
+  `manual_adjustments` int NOT NULL DEFAULT '0',
+  `daily_percentage` int NOT NULL DEFAULT '225',
+  `daily_settlement_period` int NOT NULL DEFAULT '14',
+  `date_start` bigint NOT NULL,
+  `date_end` bigint NOT NULL,
+  `date_expected_release` bigint NOT NULL DEFAULT '0',
+  `manually_corrected` int NOT NULL DEFAULT '0',
+  `daily_percentage_correction` smallint NOT NULL DEFAULT '0',
   `conversionrate` varchar(10) NOT NULL DEFAULT '0',
-  `verified_outgoing` smallint(1) NOT NULL DEFAULT '0',
-  `special_settlementflow` smallint(1) NOT NULL DEFAULT '0' COMMENT '1 = Settlement done manually through alternative flow - otherwise standard settlement flow',
+  `verified_outgoing` smallint NOT NULL DEFAULT '0',
+  `special_settlementflow` smallint NOT NULL DEFAULT '0' COMMENT '1 = Settlement done manually through alternative flow - otherwise standard settlement flow',
   `unique_code` varchar(25) NOT NULL DEFAULT '' COMMENT 'Unique Code used for Payouts'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1861,7 +1873,7 @@ CREATE TABLE `merchant_transfer_accounts_daily_overview` (
 --
 
 CREATE TABLE `mysql_check` (
-  `last_time` bigint(12) NOT NULL
+  `last_time` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Slaves checkup table - 60 seconds behind, they shut down.';
 
 -- --------------------------------------------------------
@@ -1871,13 +1883,13 @@ CREATE TABLE `mysql_check` (
 --
 
 CREATE TABLE `navision_exports` (
-  `exports_id` bigint(12) NOT NULL,
-  `export_time` bigint(12) NOT NULL,
+  `exports_id` bigint NOT NULL,
+  `export_time` bigint NOT NULL,
   `export_file` varchar(255) NOT NULL,
-  `export_started` smallint(1) NOT NULL DEFAULT '0',
-  `export_done` smallint(1) NOT NULL DEFAULT '0',
-  `export_startdate` bigint(12) NOT NULL DEFAULT '0',
-  `export_enddate` bigint(12) NOT NULL DEFAULT '0',
+  `export_started` smallint NOT NULL DEFAULT '0',
+  `export_done` smallint NOT NULL DEFAULT '0',
+  `export_startdate` bigint NOT NULL DEFAULT '0',
+  `export_enddate` bigint NOT NULL DEFAULT '0',
   `only_fees` varchar(3) NOT NULL,
   `only_settlements` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1894,9 +1906,9 @@ CREATE TABLE `navision_review` (
   `beskrivelse` varchar(255) NOT NULL,
   `belob` varchar(255) NOT NULL,
   `modkontotype` varchar(255) NOT NULL,
-  `modkonto` int(10) NOT NULL,
-  `dateid` int(10) NOT NULL,
-  `AutoID` int(11) NOT NULL
+  `modkonto` int NOT NULL,
+  `dateid` int NOT NULL,
+  `AutoID` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1906,10 +1918,10 @@ CREATE TABLE `navision_review` (
 --
 
 CREATE TABLE `newsletter` (
-  `id` int(5) NOT NULL COMMENT 'Unique Identifier',
+  `id` int NOT NULL COMMENT 'Unique Identifier',
   `email` varchar(255) NOT NULL,
-  `registered` bigint(12) NOT NULL COMMENT 'Time for registration',
-  `reg_ip` bigint(12) NOT NULL COMMENT 'IP for registration'
+  `registered` bigint NOT NULL COMMENT 'Time for registration',
+  `reg_ip` bigint NOT NULL COMMENT 'IP for registration'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1919,9 +1931,9 @@ CREATE TABLE `newsletter` (
 --
 
 CREATE TABLE `new_website_blog` (
-  `blog_id` int(7) NOT NULL,
+  `blog_id` int NOT NULL,
   `blog_title` varchar(255) NOT NULL,
-  `blog_written` bigint(12) NOT NULL,
+  `blog_written` bigint NOT NULL,
   `author` varchar(255) NOT NULL,
   `author_email` varchar(255) NOT NULL,
   `blog_content` longtext NOT NULL
@@ -1934,11 +1946,11 @@ CREATE TABLE `new_website_blog` (
 --
 
 CREATE TABLE `onboarding_data_searcher` (
-  `searcher_id` int(12) NOT NULL,
+  `searcher_id` int NOT NULL,
   `merchant_token` varchar(128) NOT NULL,
-  `search_type` int(1) NOT NULL COMMENT 'What data are we actually searching for',
-  `search_completed` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Set for 1 if data was identified',
-  `searcher_url_id` int(12) NOT NULL COMMENT 'ID for URL upon where the data we needed was found'
+  `search_type` int NOT NULL COMMENT 'What data are we actually searching for',
+  `search_completed` smallint NOT NULL DEFAULT '0' COMMENT 'Set for 1 if data was identified',
+  `searcher_url_id` int NOT NULL COMMENT 'ID for URL upon where the data we needed was found'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1948,12 +1960,12 @@ CREATE TABLE `onboarding_data_searcher` (
 --
 
 CREATE TABLE `onboarding_data_searcher_url` (
-  `searcher_url_id` int(12) NOT NULL,
-  `searcher_id` int(12) NOT NULL COMMENT 'Connected Searcher ID',
-  `searcher_url_reviewed` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Set for 1 if URL have been reviewed for the data we needed',
-  `searcher_url_request_time` int(12) NOT NULL COMMENT 'Unixtimestamp for when the url was requested searched through',
+  `searcher_url_id` int NOT NULL,
+  `searcher_id` int NOT NULL COMMENT 'Connected Searcher ID',
+  `searcher_url_reviewed` smallint NOT NULL DEFAULT '0' COMMENT 'Set for 1 if URL have been reviewed for the data we needed',
+  `searcher_url_request_time` int NOT NULL COMMENT 'Unixtimestamp for when the url was requested searched through',
   `searcher_url_url` varchar(255) NOT NULL,
-  `searcher_url_identified_data` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If the data we looked for was found on this URL'
+  `searcher_url_identified_data` smallint NOT NULL DEFAULT '0' COMMENT 'If the data we looked for was found on this URL'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1963,9 +1975,9 @@ CREATE TABLE `onboarding_data_searcher_url` (
 --
 
 CREATE TABLE `onboarding_pipedrive_activities` (
-  `act_id` int(11) NOT NULL,
-  `activity_id` bigint(8) NOT NULL,
-  `sales_activity_id` bigint(8) NOT NULL
+  `act_id` int NOT NULL,
+  `activity_id` bigint NOT NULL,
+  `sales_activity_id` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1975,8 +1987,8 @@ CREATE TABLE `onboarding_pipedrive_activities` (
 --
 
 CREATE TABLE `onboarding_pipedrive_notes` (
-  `note_id` bigint(8) NOT NULL,
-  `sales_note_id` bigint(8) NOT NULL
+  `note_id` bigint NOT NULL,
+  `sales_note_id` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1986,19 +1998,19 @@ CREATE TABLE `onboarding_pipedrive_notes` (
 --
 
 CREATE TABLE `payment_download` (
-  `id` int(11) NOT NULL,
-  `merchant_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `merchant_id` int NOT NULL,
   `type` varchar(24) NOT NULL,
   `fields` text NOT NULL,
   `emails` text NOT NULL,
   `file_type` varchar(12) NOT NULL,
-  `time_start` int(11) NOT NULL,
-  `time_end` int(11) NOT NULL,
+  `time_start` int NOT NULL,
+  `time_end` int NOT NULL,
   `email_sent` tinyint(1) NOT NULL,
-  `rows` int(11) NOT NULL,
-  `rows_processed` int(11) NOT NULL,
-  `time_started` int(11) NOT NULL,
-  `time_finished` int(11) NOT NULL
+  `rows` int NOT NULL,
+  `rows_processed` int NOT NULL,
+  `time_started` int NOT NULL,
+  `time_finished` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2008,27 +2020,27 @@ CREATE TABLE `payment_download` (
 --
 
 CREATE TABLE `payment_link` (
-  `id` int(11) NOT NULL,
-  `merchant_id` int(11) NOT NULL,
-  `type` int(1) NOT NULL DEFAULT '1' COMMENT '1 = email, 2 = sms',
-  `disabled_link` smallint(1) NOT NULL DEFAULT '0',
-  `ccrg` smallint(1) NOT NULL DEFAULT '0',
+  `id` int NOT NULL,
+  `merchant_id` int NOT NULL,
+  `type` int NOT NULL DEFAULT '1' COMMENT '1 = email, 2 = sms',
+  `disabled_link` smallint NOT NULL DEFAULT '0',
+  `ccrg` smallint NOT NULL DEFAULT '0',
   `order_id` text NOT NULL,
   `alternate_orderid` varchar(64) NOT NULL,
-  `currency_id` smallint(3) NOT NULL,
-  `amount` int(11) NOT NULL,
+  `currency_id` smallint NOT NULL,
+  `amount` int NOT NULL,
   `flag_fee` tinyint(1) NOT NULL COMMENT '0 = merchant pays the fee, 1 = customer pays the fee',
-  `flag_subscription` smallint(1) NOT NULL DEFAULT '0',
-  `subscription_amount` int(10) NOT NULL,
-  `subscription_total` int(10) NOT NULL,
+  `flag_subscription` smallint NOT NULL DEFAULT '0',
+  `subscription_amount` int NOT NULL,
+  `subscription_total` int NOT NULL,
   `subscription_interest` varchar(11) NOT NULL COMMENT 'Daily interest',
   `mail_sender` text NOT NULL,
   `mail_receiver` text NOT NULL,
   `mail_subject` text NOT NULL,
   `mail_body` text NOT NULL,
-  `time_registered` int(11) NOT NULL,
-  `time_sent` int(11) NOT NULL,
-  `time_paid` int(11) NOT NULL,
+  `time_registered` int NOT NULL,
+  `time_sent` int NOT NULL,
+  `time_paid` int NOT NULL,
   `hashed_link` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2040,11 +2052,11 @@ CREATE TABLE `payment_link` (
 
 CREATE TABLE `payment_links_templates` (
   `merchant_token` varchar(100) NOT NULL,
-  `template_id` int(4) NOT NULL,
-  `template_active` smallint(1) NOT NULL DEFAULT '1',
+  `template_id` int NOT NULL,
+  `template_active` smallint NOT NULL DEFAULT '1',
   `template_language` varchar(5) NOT NULL DEFAULT 'da-dk',
   `template_title` varchar(50) NOT NULL,
-  `template_consumer_fee` smallint(1) NOT NULL DEFAULT '0',
+  `template_consumer_fee` smallint NOT NULL DEFAULT '0',
   `message_title` varchar(255) NOT NULL,
   `message_content` longtext NOT NULL,
   `template_sms_sender` varchar(50) NOT NULL,
@@ -2059,11 +2071,11 @@ CREATE TABLE `payment_links_templates` (
 --
 
 CREATE TABLE `payon_clearing_institutes` (
-  `institute_id` int(7) NOT NULL,
+  `institute_id` int NOT NULL,
   `payon_institute_id` varchar(255) NOT NULL,
   `institute_name` varchar(255) NOT NULL,
   `acquiring_insitution_code` varchar(10) NOT NULL DEFAULT '0',
-  `acquirer_country_code` int(2) NOT NULL,
+  `acquirer_country_code` int NOT NULL,
   `acceptor_data` text NOT NULL COMMENT 'Card acceptor city|Merchant Post Code|Merchant State Code|Sub-merchant City|Sub-merchant Post Code|Sub-merchant State Code',
   `transaction_category` varchar(9) NOT NULL DEFAULT 'ANY',
   `credit_sender_address` varchar(75) NOT NULL,
@@ -2079,10 +2091,10 @@ CREATE TABLE `payon_clearing_institutes` (
 --
 
 CREATE TABLE `pdf_customers` (
-  `pdf_id` bigint(12) NOT NULL,
-  `merchantid` bigint(9) NOT NULL COMMENT 'MerchantID',
-  `request_time` bigint(12) NOT NULL,
-  `printed_time` bigint(12) NOT NULL,
+  `pdf_id` bigint NOT NULL,
+  `merchantid` bigint NOT NULL COMMENT 'MerchantID',
+  `request_time` bigint NOT NULL,
+  `printed_time` bigint NOT NULL,
   `file_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2093,11 +2105,11 @@ CREATE TABLE `pdf_customers` (
 --
 
 CREATE TABLE `pipedrive_activities` (
-  `pipedrive_dealid` bigint(12) NOT NULL,
-  `pipedrive_mcc` smallint(1) NOT NULL DEFAULT '0',
-  `pipedrive_fa` smallint(1) NOT NULL DEFAULT '0',
-  `pipedrive_pending_mid` bigint(12) NOT NULL DEFAULT '0',
-  `pipedrive_payworks` smallint(1) NOT NULL DEFAULT '0'
+  `pipedrive_dealid` bigint NOT NULL,
+  `pipedrive_mcc` smallint NOT NULL DEFAULT '0',
+  `pipedrive_fa` smallint NOT NULL DEFAULT '0',
+  `pipedrive_pending_mid` bigint NOT NULL DEFAULT '0',
+  `pipedrive_payworks` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2107,11 +2119,11 @@ CREATE TABLE `pipedrive_activities` (
 --
 
 CREATE TABLE `pipedrive_deals` (
-  `pipedrive_dealid` int(7) NOT NULL,
-  `merchantid` int(10) NOT NULL,
-  `pipedrive_last_update` bigint(12) NOT NULL,
-  `yourpay_next_update` bigint(12) NOT NULL,
-  `pipedrive_owner` int(7) NOT NULL DEFAULT '792251'
+  `pipedrive_dealid` int NOT NULL,
+  `merchantid` int NOT NULL,
+  `pipedrive_last_update` bigint NOT NULL,
+  `yourpay_next_update` bigint NOT NULL,
+  `pipedrive_owner` int NOT NULL DEFAULT '792251'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2121,16 +2133,16 @@ CREATE TABLE `pipedrive_deals` (
 --
 
 CREATE TABLE `pipedrive_organisations` (
-  `pipedrive_orgid` int(11) NOT NULL,
-  `pipedrive_company_id` int(20) NOT NULL,
+  `pipedrive_orgid` int NOT NULL,
+  `pipedrive_company_id` int NOT NULL,
   `organisations_name` varchar(100) NOT NULL,
-  `country` int(3) NOT NULL DEFAULT '208',
+  `country` int NOT NULL DEFAULT '208',
   `address` varchar(50) NOT NULL,
-  `vat` bigint(10) NOT NULL,
+  `vat` bigint NOT NULL,
   `phoneno` varchar(30) NOT NULL,
   `contact_email` varchar(75) NOT NULL,
-  `update_time_pipedrive` bigint(12) NOT NULL,
-  `yourpay_next_update` bigint(12) NOT NULL
+  `update_time_pipedrive` bigint NOT NULL,
+  `yourpay_next_update` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2140,12 +2152,12 @@ CREATE TABLE `pipedrive_organisations` (
 --
 
 CREATE TABLE `plugins` (
-  `plugin_id` int(3) NOT NULL,
+  `plugin_id` int NOT NULL,
   `plugin_identifier` varchar(16) NOT NULL,
   `plugin_name` varchar(255) NOT NULL,
   `plugin_description` longtext NOT NULL,
-  `plugin_added` bigint(12) NOT NULL,
-  `plugin_use` bigint(12) NOT NULL DEFAULT '0'
+  `plugin_added` bigint NOT NULL,
+  `plugin_use` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2155,7 +2167,7 @@ CREATE TABLE `plugins` (
 --
 
 CREATE TABLE `plugins_containers` (
-  `plugin_id` int(10) NOT NULL,
+  `plugin_id` int NOT NULL,
   `plugin_container_key` varchar(255) NOT NULL,
   `plugin_container_content` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2167,7 +2179,7 @@ CREATE TABLE `plugins_containers` (
 --
 
 CREATE TABLE `plugins_containers_merchants` (
-  `plugin_id` int(10) NOT NULL,
+  `plugin_id` int NOT NULL,
   `merchant_token` varchar(255) NOT NULL,
   `plugin_container_key` varchar(255) NOT NULL,
   `plugin_container_content` longtext NOT NULL,
@@ -2182,7 +2194,7 @@ CREATE TABLE `plugins_containers_merchants` (
 --
 
 CREATE TABLE `plugin_installed` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `shop_name` varchar(255) NOT NULL,
   `module` varchar(255) NOT NULL,
   `module_version` varchar(255) NOT NULL,
@@ -2200,22 +2212,22 @@ CREATE TABLE `plugin_installed` (
 --
 
 CREATE TABLE `pricing_plans` (
-  `pricing_id` int(7) NOT NULL,
-  `pipedrive_stage_id` int(7) NOT NULL DEFAULT '35',
-  `price_currency` int(3) NOT NULL DEFAULT '208',
+  `pricing_id` int NOT NULL,
+  `pipedrive_stage_id` int NOT NULL DEFAULT '35',
+  `price_currency` int NOT NULL DEFAULT '208',
   `price_title` varchar(255) NOT NULL,
   `price_descriptor` varchar(255) NOT NULL,
-  `setup_fee` int(5) NOT NULL,
-  `monthly_fee` int(6) NOT NULL,
-  `monthly_free_transactions` int(7) NOT NULL,
-  `transaction_fee` int(3) NOT NULL,
+  `setup_fee` int NOT NULL,
+  `monthly_fee` int NOT NULL,
+  `monthly_free_transactions` int NOT NULL,
+  `transaction_fee` int NOT NULL,
   `fraud_detector` enum('3D Secure','3D Secure + Fraud Fighter','Fraud Detector') NOT NULL DEFAULT '3D Secure',
-  `acquiring_fee` int(5) NOT NULL,
-  `support` int(5) NOT NULL,
-  `show_model` smallint(1) NOT NULL DEFAULT '0',
-  `important` smallint(1) NOT NULL DEFAULT '0',
+  `acquiring_fee` int NOT NULL,
+  `support` int NOT NULL,
+  `show_model` smallint NOT NULL DEFAULT '0',
+  `important` smallint NOT NULL DEFAULT '0',
   `country` varchar(5) NOT NULL DEFAULT 'da-dk',
-  `psper` smallint(1) NOT NULL DEFAULT '0'
+  `psper` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2225,11 +2237,11 @@ CREATE TABLE `pricing_plans` (
 --
 
 CREATE TABLE `products` (
-  `product_id` int(5) NOT NULL COMMENT 'Product ID',
+  `product_id` int NOT NULL COMMENT 'Product ID',
   `product_code` varchar(25) NOT NULL COMMENT 'Product Code',
   `product_name` varchar(35) NOT NULL COMMENT 'Product Name',
   `product_description` longtext NOT NULL,
-  `product_price` int(7) NOT NULL
+  `product_price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2239,8 +2251,8 @@ CREATE TABLE `products` (
 --
 
 CREATE TABLE `products_features` (
-  `features_id` int(7) NOT NULL COMMENT 'Auto ID',
-  `product_id` int(7) NOT NULL COMMENT 'Product ID',
+  `features_id` int NOT NULL COMMENT 'Auto ID',
+  `product_id` int NOT NULL COMMENT 'Product ID',
   `feature_code` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2251,8 +2263,8 @@ CREATE TABLE `products_features` (
 --
 
 CREATE TABLE `products_sync_attributes` (
-  `attribute_id` bigint(12) NOT NULL,
-  `unique_id` int(10) NOT NULL,
+  `attribute_id` bigint NOT NULL,
+  `unique_id` int NOT NULL,
   `attribute_name` varchar(255) NOT NULL,
   `attribute_content` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2264,16 +2276,16 @@ CREATE TABLE `products_sync_attributes` (
 --
 
 CREATE TABLE `products_sync_product` (
-  `unique_id` int(11) NOT NULL,
+  `unique_id` int NOT NULL,
   `merchant_token` varchar(64) NOT NULL,
   `product_id` varchar(255) NOT NULL,
   `sku` varchar(255) NOT NULL,
   `product_type` enum('simple','variant','subscription') NOT NULL DEFAULT 'simple',
   `product_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `product_pricing` int(10) NOT NULL,
-  `product_currency` int(3) NOT NULL DEFAULT '208',
-  `last_syncronized` bigint(12) NOT NULL,
-  `status` smallint(1) NOT NULL
+  `product_pricing` int NOT NULL,
+  `product_currency` int NOT NULL DEFAULT '208',
+  `last_syncronized` bigint NOT NULL,
+  `status` smallint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2283,7 +2295,7 @@ CREATE TABLE `products_sync_product` (
 --
 
 CREATE TABLE `questions` (
-  `qid` int(7) NOT NULL COMMENT 'Auto ID',
+  `qid` int NOT NULL COMMENT 'Auto ID',
   `title` varchar(255) NOT NULL,
   `question` longtext NOT NULL,
   `answer` longtext NOT NULL
@@ -2296,7 +2308,7 @@ CREATE TABLE `questions` (
 --
 
 CREATE TABLE `questions_groups` (
-  `id` int(7) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2307,16 +2319,16 @@ CREATE TABLE `questions_groups` (
 --
 
 CREATE TABLE `rebilling_customer_products` (
-  `rebilling_products_id` int(8) NOT NULL,
-  `merchantid` int(8) NOT NULL,
+  `rebilling_products_id` int NOT NULL,
+  `merchantid` int NOT NULL,
   `subscriptioncode` varchar(14) NOT NULL,
-  `amount` int(8) NOT NULL,
-  `amount_year` int(10) NOT NULL DEFAULT '0',
-  `perioddate` int(10) NOT NULL,
+  `amount` int NOT NULL,
+  `amount_year` int NOT NULL DEFAULT '0',
+  `perioddate` int NOT NULL,
   `perioddate_yearly` varchar(3) NOT NULL DEFAULT '0',
   `callbackurl` longtext NOT NULL,
   `descriptor` varchar(255) NOT NULL,
-  `active` smallint(1) NOT NULL DEFAULT '0'
+  `active` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2327,13 +2339,13 @@ CREATE TABLE `rebilling_customer_products` (
 
 CREATE TABLE `resursbank_getpaymentmethods` (
   `merchant_token` varchar(255) NOT NULL,
-  `months` int(3) NOT NULL DEFAULT '12',
-  `aop` smallint(1) NOT NULL DEFAULT '1',
+  `months` int NOT NULL DEFAULT '12',
+  `aop` smallint NOT NULL DEFAULT '1',
   `lang` varchar(3) NOT NULL DEFAULT 'da',
   `id` varchar(50) NOT NULL,
   `descriptor` varchar(255) NOT NULL,
-  `min_limit` int(10) NOT NULL,
-  `max_limit` int(10) NOT NULL,
+  `min_limit` int NOT NULL,
+  `max_limit` int NOT NULL,
   `type` varchar(255) NOT NULL,
   `customerType` varchar(255) NOT NULL,
   `specificType` varchar(255) NOT NULL
@@ -2349,7 +2361,7 @@ CREATE TABLE `resursbank_getpaymentmethods_legal_links` (
   `merchant_token` varchar(255) NOT NULL,
   `lang` varchar(2) NOT NULL DEFAULT 'da',
   `id` varchar(255) NOT NULL,
-  `legal_id` int(3) NOT NULL,
+  `legal_id` int NOT NULL,
   `endUserDescription` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2361,12 +2373,12 @@ CREATE TABLE `resursbank_getpaymentmethods_legal_links` (
 --
 
 CREATE TABLE `reviewlist` (
-  `reviewid` int(7) NOT NULL COMMENT 'Review ID',
-  `merchantid` int(8) NOT NULL,
+  `reviewid` int NOT NULL COMMENT 'Review ID',
+  `merchantid` int NOT NULL,
   `total_score` varchar(6) NOT NULL,
-  `total_reviews` int(6) NOT NULL,
-  `unixtime` bigint(12) NOT NULL,
-  `unixtime_ofday` bigint(12) NOT NULL,
+  `total_reviews` int NOT NULL,
+  `unixtime` bigint NOT NULL,
+  `unixtime_ofday` bigint NOT NULL,
   `source` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2377,15 +2389,15 @@ CREATE TABLE `reviewlist` (
 --
 
 CREATE TABLE `robots` (
-  `robot_id` int(11) NOT NULL,
+  `robot_id` int NOT NULL,
   `robot_name` varchar(255) NOT NULL DEFAULT '',
-  `robot_response` bigint(20) NOT NULL DEFAULT '0' COMMENT 'last response from robot',
-  `robot_group` smallint(6) NOT NULL DEFAULT '0' COMMENT 'is robot part of a group of robots',
+  `robot_response` bigint NOT NULL DEFAULT '0' COMMENT 'last response from robot',
+  `robot_group` smallint NOT NULL DEFAULT '0' COMMENT 'is robot part of a group of robots',
   `robot_response_text` longtext NOT NULL,
   `robot_url` varchar(255) NOT NULL DEFAULT '',
-  `orderby` int(11) NOT NULL DEFAULT '0',
-  `timebetween` int(11) NOT NULL DEFAULT '600',
-  `in_use` smallint(6) NOT NULL DEFAULT '0',
+  `orderby` int NOT NULL DEFAULT '0',
+  `timebetween` int NOT NULL DEFAULT '600',
+  `in_use` smallint NOT NULL DEFAULT '0',
   `last_used` varchar(60) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2396,7 +2408,7 @@ CREATE TABLE `robots` (
 --
 
 CREATE TABLE `robots_group` (
-  `robot_group_id` int(11) NOT NULL DEFAULT '0',
+  `robot_group_id` int NOT NULL DEFAULT '0',
   `robot_group_name` varchar(255) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2407,11 +2419,11 @@ CREATE TABLE `robots_group` (
 --
 
 CREATE TABLE `robot_actions` (
-  `actionid` int(7) NOT NULL,
+  `actionid` int NOT NULL,
   `robot_name` varchar(255) NOT NULL,
-  `robot_status` smallint(1) NOT NULL DEFAULT '0' COMMENT '1  = Positive',
+  `robot_status` smallint NOT NULL DEFAULT '0' COMMENT '1  = Positive',
   `robot_text_status` varchar(255) NOT NULL,
-  `robot_timestamp` bigint(12) NOT NULL DEFAULT '0' COMMENT 'Unix timestamp'
+  `robot_timestamp` bigint NOT NULL DEFAULT '0' COMMENT 'Unix timestamp'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2421,9 +2433,9 @@ CREATE TABLE `robot_actions` (
 --
 
 CREATE TABLE `robot_verify_data_on_website` (
-  `merchantid` bigint(8) NOT NULL,
+  `merchantid` bigint NOT NULL,
   `identifer` varchar(12) NOT NULL,
-  `identified_time` bigint(12) NOT NULL,
+  `identified_time` bigint NOT NULL,
   `identified_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2434,9 +2446,9 @@ CREATE TABLE `robot_verify_data_on_website` (
 --
 
 CREATE TABLE `robot_verify_data_on_website_url_identificators` (
-  `identificator_id` int(12) NOT NULL,
-  `merchantid` int(8) NOT NULL,
-  `attached_identificator_id` int(12) NOT NULL,
+  `identificator_id` int NOT NULL,
+  `merchantid` int NOT NULL,
+  `attached_identificator_id` int NOT NULL,
   `identificator_url` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2447,7 +2459,7 @@ CREATE TABLE `robot_verify_data_on_website_url_identificators` (
 --
 
 CREATE TABLE `secure_trading_merchants` (
-  `secure_id` bigint(12) NOT NULL,
+  `secure_id` bigint NOT NULL,
   `merchant_token` varchar(64) NOT NULL,
   `sitereference` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2459,11 +2471,11 @@ CREATE TABLE `secure_trading_merchants` (
 --
 
 CREATE TABLE `server_usage` (
-  `usage_id` int(11) NOT NULL,
+  `usage_id` int NOT NULL,
   `server_name` varchar(20) NOT NULL,
   `file_uri` varchar(255) NOT NULL,
-  `lastused` bigint(12) NOT NULL DEFAULT '0',
-  `removed_database_access` int(11) NOT NULL
+  `lastused` bigint NOT NULL DEFAULT '0',
+  `removed_database_access` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table used while re-factoring to ensure non-sql server access accross different servers. Can be deleted in Summer 2020';
 
 -- --------------------------------------------------------
@@ -2473,8 +2485,8 @@ CREATE TABLE `server_usage` (
 --
 
 CREATE TABLE `settlement_holidays` (
-  `holiday_id` int(3) NOT NULL,
-  `unixtimestamp` bigint(12) NOT NULL
+  `holiday_id` int NOT NULL,
+  `unixtimestamp` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2484,7 +2496,7 @@ CREATE TABLE `settlement_holidays` (
 --
 
 CREATE TABLE `shortly_logger` (
-  `logger_id` int(11) NOT NULL,
+  `logger_id` int NOT NULL,
   `container` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2495,10 +2507,10 @@ CREATE TABLE `shortly_logger` (
 --
 
 CREATE TABLE `sql_debug_log` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `query_or_error` text NOT NULL,
-  `time_created` int(11) NOT NULL,
-  `query_time` int(11) NOT NULL
+  `time_created` int NOT NULL,
+  `query_time` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2510,8 +2522,20 @@ CREATE TABLE `sql_debug_log` (
 CREATE TABLE `sql_error_logger` (
   `uri` varchar(255) NOT NULL,
   `sqlquery` longtext NOT NULL,
-  `timeoferror` bigint(12) NOT NULL,
-  `resolved` smallint(1) NOT NULL DEFAULT '0'
+  `timeoferror` bigint NOT NULL,
+  `resolved` smallint NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur-dump for tabellen `stl_mids`
+--
+
+CREATE TABLE `stl_mids` (
+  `stl_id` int NOT NULL,
+  `stl_reference` varchar(16) NOT NULL,
+  `stl_mcc` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2521,7 +2545,7 @@ CREATE TABLE `sql_error_logger` (
 --
 
 CREATE TABLE `subscriptions_contacts` (
-  `subscriber_id` int(8) NOT NULL,
+  `subscriber_id` int NOT NULL,
   `merchant_token` varchar(255) NOT NULL,
   `customer_name` varchar(255) NOT NULL,
   `customer_email` varchar(255) NOT NULL,
@@ -2540,13 +2564,13 @@ CREATE TABLE `subscriptions_contacts` (
 --
 
 CREATE TABLE `subscriptions_dunning` (
-  `dunning_id` int(11) NOT NULL,
-  `type` smallint(1) NOT NULL COMMENT '0 = Check availablility, 1 = check reservation, 2 = full transaction',
-  `global_header_footer` smallint(1) NOT NULL DEFAULT '0',
-  `action` smallint(1) NOT NULL COMMENT '0 = Nothing, 1 = email, 2 = sms, 3 = both',
+  `dunning_id` int NOT NULL,
+  `type` smallint NOT NULL COMMENT '0 = Check availablility, 1 = check reservation, 2 = full transaction',
+  `global_header_footer` smallint NOT NULL DEFAULT '0',
+  `action` smallint NOT NULL COMMENT '0 = Nothing, 1 = email, 2 = sms, 3 = both',
   `merchant_token` varchar(255) NOT NULL,
-  `dunning_day` int(5) NOT NULL,
-  `dunning_timeofday` int(5) NOT NULL,
+  `dunning_day` int NOT NULL,
+  `dunning_timeofday` int NOT NULL,
   `dunning_email_title` longtext NOT NULL,
   `dunning_email_text` longtext CHARACTER SET utf8 COLLATE utf8_danish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2558,10 +2582,10 @@ CREATE TABLE `subscriptions_dunning` (
 --
 
 CREATE TABLE `subscriptions_interest` (
-  `interest_id` int(6) NOT NULL,
-  `subscription_id` int(6) NOT NULL,
+  `interest_id` int NOT NULL,
+  `subscription_id` int NOT NULL,
   `daily_interest` varchar(8) NOT NULL,
-  `total_amount` int(12) NOT NULL
+  `total_amount` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2571,13 +2595,13 @@ CREATE TABLE `subscriptions_interest` (
 --
 
 CREATE TABLE `subscriptions_invoices` (
-  `invoice_id` int(8) NOT NULL,
-  `subscription_id` int(8) NOT NULL,
+  `invoice_id` int NOT NULL,
+  `subscription_id` int NOT NULL,
   `merchant_token` varchar(100) NOT NULL,
-  `invoice_state` int(5) NOT NULL,
-  `invoice_amount` int(8) NOT NULL,
-  `invoice_last_retry` bigint(12) NOT NULL,
-  `invoice_capture_time` bigint(12) NOT NULL DEFAULT '0'
+  `invoice_state` int NOT NULL,
+  `invoice_amount` int NOT NULL,
+  `invoice_last_retry` bigint NOT NULL,
+  `invoice_capture_time` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2587,26 +2611,26 @@ CREATE TABLE `subscriptions_invoices` (
 --
 
 CREATE TABLE `subscriptions_plan` (
-  `id` int(12) NOT NULL,
+  `id` int NOT NULL,
   `merchant_token` varchar(255) NOT NULL,
-  `plan_state` int(5) NOT NULL,
+  `plan_state` int NOT NULL,
   `plan_name` varchar(12) NOT NULL,
-  `plan_currency` int(3) NOT NULL DEFAULT '208',
-  `plan_price` int(8) NOT NULL,
-  `plan_price_signup` int(8) NOT NULL,
-  `plan_trial` int(3) NOT NULL,
-  `plan_trial_type` int(3) NOT NULL DEFAULT '1',
-  `plan_period` int(3) NOT NULL,
-  `plan_period_type` int(3) NOT NULL,
-  `billing_cycles` int(3) NOT NULL,
-  `billing_period` int(3) NOT NULL,
-  `billing_period_type` int(3) NOT NULL DEFAULT '1',
-  `termination_notice_time` int(3) NOT NULL DEFAULT '7',
-  `termination_notice_time_type` int(3) NOT NULL DEFAULT '1',
-  `subscribe_period_start` int(12) NOT NULL DEFAULT '0',
-  `subscribe_period_end` int(12) NOT NULL,
-  `period_running_initial` int(12) NOT NULL,
-  `period_running_eol` int(12) NOT NULL
+  `plan_currency` int NOT NULL DEFAULT '208',
+  `plan_price` int NOT NULL,
+  `plan_price_signup` int NOT NULL,
+  `plan_trial` int NOT NULL,
+  `plan_trial_type` int NOT NULL DEFAULT '1',
+  `plan_period` int NOT NULL,
+  `plan_period_type` int NOT NULL,
+  `billing_cycles` int NOT NULL,
+  `billing_period` int NOT NULL,
+  `billing_period_type` int NOT NULL DEFAULT '1',
+  `termination_notice_time` int NOT NULL DEFAULT '7',
+  `termination_notice_time_type` int NOT NULL DEFAULT '1',
+  `subscribe_period_start` int NOT NULL DEFAULT '0',
+  `subscribe_period_end` int NOT NULL,
+  `period_running_initial` int NOT NULL,
+  `period_running_eol` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2616,15 +2640,15 @@ CREATE TABLE `subscriptions_plan` (
 --
 
 CREATE TABLE `subscriptions_products` (
-  `product_id` int(11) NOT NULL,
+  `product_id` int NOT NULL,
   `merchant_token` varchar(50) NOT NULL,
   `product_title` varchar(50) NOT NULL,
   `product_teaser` varchar(255) NOT NULL,
   `product_description` longtext NOT NULL,
-  `product_currency` int(3) NOT NULL DEFAULT '208',
-  `product_price_signup` int(5) NOT NULL,
-  `product_price` int(10) NOT NULL,
-  `product_period` int(12) NOT NULL,
+  `product_currency` int NOT NULL DEFAULT '208',
+  `product_price_signup` int NOT NULL,
+  `product_price` int NOT NULL,
+  `product_period` int NOT NULL,
   `product_image` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2635,21 +2659,21 @@ CREATE TABLE `subscriptions_products` (
 --
 
 CREATE TABLE `subscriptions_subscriptions` (
-  `subscription_id` int(11) NOT NULL,
+  `subscription_id` int NOT NULL,
   `merchant_token` varchar(100) NOT NULL,
   `subscription_token` varchar(16) NOT NULL,
   `payment_frame` longtext NOT NULL,
   `subscription_callbackurl` longtext NOT NULL,
-  `subscription_state` smallint(1) NOT NULL DEFAULT '1',
-  `subscription_contact` int(11) NOT NULL,
-  `subscription_product` int(11) NOT NULL,
+  `subscription_state` smallint NOT NULL DEFAULT '1',
+  `subscription_contact` int NOT NULL,
+  `subscription_product` int NOT NULL,
   `subscription_orderid` varchar(255) NOT NULL,
   `subscription_price` varchar(11) NOT NULL,
-  `subscription_price_signup` int(11) NOT NULL,
-  `subscription_period` int(11) NOT NULL,
-  `subscription_creation_time` bigint(12) NOT NULL,
-  `subscription_last_renewal` bigint(12) NOT NULL,
-  `subscription_next_renewal` bigint(12) NOT NULL,
+  `subscription_price_signup` int NOT NULL,
+  `subscription_period` int NOT NULL,
+  `subscription_creation_time` bigint NOT NULL,
+  `subscription_last_renewal` bigint NOT NULL,
+  `subscription_next_renewal` bigint NOT NULL,
   `short_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2660,9 +2684,9 @@ CREATE TABLE `subscriptions_subscriptions` (
 --
 
 CREATE TABLE `system_errors` (
-  `errorid` int(7) NOT NULL COMMENT 'SystemID',
+  `errorid` int NOT NULL COMMENT 'SystemID',
   `errortext` longtext NOT NULL,
-  `solved` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If Solved then 1'
+  `solved` smallint NOT NULL DEFAULT '0' COMMENT 'If Solved then 1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2672,16 +2696,16 @@ CREATE TABLE `system_errors` (
 --
 
 CREATE TABLE `terminals` (
-  `TerminalID` int(5) NOT NULL COMMENT 'AutoID',
-  `psp` int(5) NOT NULL DEFAULT '0' COMMENT 'If terminal is handed out to PSP',
+  `TerminalID` int NOT NULL COMMENT 'AutoID',
+  `psp` int NOT NULL DEFAULT '0' COMMENT 'If terminal is handed out to PSP',
   `terminal_identifier` varchar(50) NOT NULL,
   `terminal_model` varchar(50) NOT NULL,
   `TerminalType` varchar(50) NOT NULL COMMENT 'Terminal Type',
   `PN` varchar(50) NOT NULL COMMENT 'PN for Terminal',
   `Term` varchar(30) NOT NULL COMMENT 'Term ID',
-  `creationdate` bigint(12) NOT NULL,
-  `totaldeposit` int(10) NOT NULL COMMENT 'Deposit Value',
-  `deposittoday` int(10) NOT NULL COMMENT 'Actual Deposit today',
+  `creationdate` bigint NOT NULL,
+  `totaldeposit` int NOT NULL COMMENT 'Deposit Value',
+  `deposittoday` int NOT NULL COMMENT 'Actual Deposit today',
   `merchantIdentifier` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2692,10 +2716,10 @@ CREATE TABLE `terminals` (
 --
 
 CREATE TABLE `terminals_settings` (
-  `terminal_id` int(11) NOT NULL,
+  `terminal_id` int NOT NULL,
   `setting_type` varchar(50) NOT NULL,
   `setting_value` varchar(50) NOT NULL,
-  `settings_timestamp` bigint(12) NOT NULL DEFAULT '0'
+  `settings_timestamp` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2705,10 +2729,10 @@ CREATE TABLE `terminals_settings` (
 --
 
 CREATE TABLE `terrorlist` (
-  `ter_id` int(7) NOT NULL,
+  `ter_id` int NOT NULL,
   `name` blob NOT NULL,
-  `added` bigint(12) NOT NULL,
-  `added_by` bigint(12) NOT NULL
+  `added` bigint NOT NULL,
+  `added_by` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2718,14 +2742,14 @@ CREATE TABLE `terrorlist` (
 --
 
 CREATE TABLE `toturials` (
-  `toturialid` int(3) NOT NULL COMMENT 'AutoID',
+  `toturialid` int NOT NULL COMMENT 'AutoID',
   `name` varchar(35) NOT NULL COMMENT 'Title of Toturial',
   `teaser` longtext NOT NULL,
   `lang` varchar(5) NOT NULL DEFAULT 'da-dk' COMMENT 'Language',
-  `country_code` int(3) NOT NULL DEFAULT '208',
+  `country_code` int NOT NULL DEFAULT '208',
   `content` longtext NOT NULL COMMENT 'Longtext',
-  `active` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 1 then active',
-  `lastmodified` bigint(12) NOT NULL COMMENT 'Last modified in Unix'
+  `active` smallint NOT NULL DEFAULT '0' COMMENT 'If 1 then active',
+  `lastmodified` bigint NOT NULL COMMENT 'Last modified in Unix'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2737,9 +2761,9 @@ CREATE TABLE `toturials` (
 CREATE TABLE `tracking` (
   `session_id` varchar(255) NOT NULL,
   `pageurl` longtext NOT NULL,
-  `ip2long` bigint(12) NOT NULL,
-  `unixtime` bigint(12) NOT NULL,
-  `trackingtype` smallint(1) NOT NULL DEFAULT '0'
+  `ip2long` bigint NOT NULL,
+  `unixtime` bigint NOT NULL,
+  `trackingtype` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2749,23 +2773,23 @@ CREATE TABLE `tracking` (
 --
 
 CREATE TABLE `transactions` (
-  `TransID` bigint(12) NOT NULL COMMENT 'AutoID',
-  `AgreementID` bigint(12) NOT NULL COMMENT 'Connected to AgreementID',
-  `TerminalID` int(2) NOT NULL COMMENT 'TerminalID',
-  `TransferDate` bigint(12) NOT NULL COMMENT 'Unix Timestamp for TransferDate',
+  `TransID` bigint NOT NULL COMMENT 'AutoID',
+  `AgreementID` bigint NOT NULL COMMENT 'Connected to AgreementID',
+  `TerminalID` int NOT NULL COMMENT 'TerminalID',
+  `TransferDate` bigint NOT NULL COMMENT 'Unix Timestamp for TransferDate',
   `ReceiveDate` varchar(11) NOT NULL COMMENT 'Bank Receive Date',
   `BankDate` varchar(11) NOT NULL COMMENT 'Bank Content Date',
   `TransferText` varchar(255) NOT NULL COMMENT 'Full TransferText',
   `TerminalType` varchar(6) NOT NULL COMMENT 'DKFLX',
   `TerminalDate` date NOT NULL COMMENT 'Date of Transaction',
-  `fullamount` bigint(12) NOT NULL COMMENT 'Full TransactionAmount',
-  `feeamount` int(10) NOT NULL COMMENT 'FeeForDinTerminal',
-  `depositfee` int(10) NOT NULL COMMENT 'DepositFee',
-  `onaccount` bigint(12) NOT NULL COMMENT 'On Bank Account when Transaction was received',
+  `fullamount` bigint NOT NULL COMMENT 'Full TransactionAmount',
+  `feeamount` int NOT NULL COMMENT 'FeeForDinTerminal',
+  `depositfee` int NOT NULL COMMENT 'DepositFee',
+  `onaccount` bigint NOT NULL COMMENT 'On Bank Account when Transaction was received',
   `handeled` enum('0','1') NOT NULL DEFAULT '0' COMMENT 'If 1 then is the transaction sent to Payout',
-  `approved` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 1 Then is the payment approved and ready to be paid out',
-  `deleted` smallint(1) NOT NULL DEFAULT '0' COMMENT 'If 1 then error happend in row',
-  `mailid` bigint(12) NOT NULL COMMENT 'Exported to MailID'
+  `approved` smallint NOT NULL DEFAULT '0' COMMENT 'If 1 Then is the payment approved and ready to be paid out',
+  `deleted` smallint NOT NULL DEFAULT '0' COMMENT 'If 1 then error happend in row',
+  `mailid` bigint NOT NULL COMMENT 'Exported to MailID'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2775,10 +2799,10 @@ CREATE TABLE `transactions` (
 --
 
 CREATE TABLE `transaction_touches` (
-  `TouchID` bigint(12) NOT NULL COMMENT 'AutoID',
-  `time` bigint(12) NOT NULL COMMENT 'Timestamp',
-  `TransID` bigint(12) NOT NULL COMMENT 'TransactionID',
-  `admin_id` int(5) NOT NULL COMMENT 'Administrator ID',
+  `TouchID` bigint NOT NULL COMMENT 'AutoID',
+  `time` bigint NOT NULL COMMENT 'Timestamp',
+  `TransID` bigint NOT NULL COMMENT 'TransactionID',
+  `admin_id` int NOT NULL COMMENT 'Administrator ID',
   `action` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2789,24 +2813,24 @@ CREATE TABLE `transaction_touches` (
 --
 
 CREATE TABLE `translate` (
-  `TranslateID` bigint(5) NOT NULL COMMENT 'AutoID',
+  `TranslateID` bigint NOT NULL COMMENT 'AutoID',
   `Texture` longtext NOT NULL COMMENT 'Text in local language',
   `lang` varchar(5) NOT NULL DEFAULT 'da-dk' COMMENT 'Language',
   `Translation` longtext NOT NULL COMMENT 'Local Translation',
-  `TranslationID` int(5) NOT NULL,
-  `lastused` bigint(12) NOT NULL,
-  `en-gb` smallint(1) NOT NULL,
-  `nb-no` smallint(1) NOT NULL DEFAULT '0',
-  `se-se` smallint(1) NOT NULL DEFAULT '0',
-  `sk-sk` smallint(1) NOT NULL DEFAULT '0',
-  `de-de` smallint(1) NOT NULL DEFAULT '0',
-  `nl-nl` smallint(1) NOT NULL DEFAULT '0',
-  `fr-fr` smallint(1) NOT NULL DEFAULT '0',
-  `pl-pl` smallint(1) NOT NULL DEFAULT '0',
-  `ru-ru` smallint(1) NOT NULL DEFAULT '0',
-  `ro-ro` smallint(1) NOT NULL DEFAULT '0',
-  `es-es` smallint(1) NOT NULL DEFAULT '0',
-  `fo-fo` smallint(1) NOT NULL DEFAULT '0'
+  `TranslationID` int NOT NULL,
+  `lastused` bigint NOT NULL,
+  `en-gb` smallint NOT NULL,
+  `nb-no` smallint NOT NULL DEFAULT '0',
+  `se-se` smallint NOT NULL DEFAULT '0',
+  `sk-sk` smallint NOT NULL DEFAULT '0',
+  `de-de` smallint NOT NULL DEFAULT '0',
+  `nl-nl` smallint NOT NULL DEFAULT '0',
+  `fr-fr` smallint NOT NULL DEFAULT '0',
+  `pl-pl` smallint NOT NULL DEFAULT '0',
+  `ru-ru` smallint NOT NULL DEFAULT '0',
+  `ro-ro` smallint NOT NULL DEFAULT '0',
+  `es-es` smallint NOT NULL DEFAULT '0',
+  `fo-fo` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2816,7 +2840,7 @@ CREATE TABLE `translate` (
 --
 
 CREATE TABLE `translate_langs` (
-  `TranslateID` int(7) NOT NULL COMMENT 'TranslateID',
+  `TranslateID` int NOT NULL COMMENT 'TranslateID',
   `language` varchar(5) NOT NULL DEFAULT 'en' COMMENT 'Language',
   `text` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2828,7 +2852,7 @@ CREATE TABLE `translate_langs` (
 --
 
 CREATE TABLE `translations` (
-  `translateid` int(7) NOT NULL,
+  `translateid` int NOT NULL,
   `text` longtext NOT NULL,
   `original_text` longtext NOT NULL,
   `language` varchar(5) NOT NULL
@@ -2841,11 +2865,11 @@ CREATE TABLE `translations` (
 --
 
 CREATE TABLE `unitests` (
-  `uni_id` int(7) NOT NULL COMMENT 'Automated ID',
+  `uni_id` int NOT NULL COMMENT 'Automated ID',
   `uni_title` varchar(255) NOT NULL,
   `uni_url` varchar(255) NOT NULL,
   `status` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0 = failed, 1 = success',
-  `timestp` bigint(12) NOT NULL
+  `timestp` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2855,10 +2879,10 @@ CREATE TABLE `unitests` (
 --
 
 CREATE TABLE `unitest_results` (
-  `result_id` int(11) NOT NULL,
-  `completed` int(7) NOT NULL,
-  `failed` int(7) NOT NULL,
-  `timestp` bigint(12) NOT NULL
+  `result_id` int NOT NULL,
+  `completed` int NOT NULL,
+  `failed` int NOT NULL,
+  `timestp` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2868,10 +2892,10 @@ CREATE TABLE `unitest_results` (
 --
 
 CREATE TABLE `user_token_logging` (
-  `log_id` int(7) NOT NULL COMMENT 'Token Log',
+  `log_id` int NOT NULL COMMENT 'Token Log',
   `token` varchar(255) NOT NULL,
   `url` longtext NOT NULL,
-  `timestp` bigint(12) NOT NULL DEFAULT '0'
+  `timestp` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2881,10 +2905,10 @@ CREATE TABLE `user_token_logging` (
 --
 
 CREATE TABLE `viabill_logger` (
-  `id` int(5) NOT NULL,
+  `id` int NOT NULL,
   `container` longtext NOT NULL,
-  `checked` int(11) NOT NULL DEFAULT '0',
-  `transferred` int(11) NOT NULL DEFAULT '0',
+  `checked` int NOT NULL DEFAULT '0',
+  `transferred` int NOT NULL DEFAULT '0',
   `log_state` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2895,7 +2919,7 @@ CREATE TABLE `viabill_logger` (
 --
 
 CREATE TABLE `webservice_logger` (
-  `serviceid` int(7) NOT NULL,
+  `serviceid` int NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `functionrequest` varchar(255) NOT NULL,
   `container` longtext NOT NULL
@@ -2908,7 +2932,7 @@ CREATE TABLE `webservice_logger` (
 --
 
 CREATE TABLE `yourpark_car` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `numberplate` varchar(7) NOT NULL,
   `country` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2920,7 +2944,7 @@ CREATE TABLE `yourpark_car` (
 --
 
 CREATE TABLE `yourpark_country` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `country` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2931,11 +2955,11 @@ CREATE TABLE `yourpark_country` (
 --
 
 CREATE TABLE `yourpark_parking` (
-  `id` int(11) NOT NULL,
-  `numberplate` int(7) NOT NULL,
-  `start_timestamp` int(11) NOT NULL,
-  `end_timestamp` int(11) NOT NULL,
-  `zone_id` int(11) NOT NULL
+  `id` int NOT NULL,
+  `numberplate` int NOT NULL,
+  `start_timestamp` int NOT NULL,
+  `end_timestamp` int NOT NULL,
+  `zone_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2945,9 +2969,9 @@ CREATE TABLE `yourpark_parking` (
 --
 
 CREATE TABLE `yourpark_parking_meter` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `company` varchar(30) NOT NULL,
-  `time_expiration` int(11) NOT NULL,
+  `time_expiration` int NOT NULL,
   `country` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2958,10 +2982,10 @@ CREATE TABLE `yourpark_parking_meter` (
 --
 
 CREATE TABLE `yourpark_zones` (
-  `zone_id` int(11) NOT NULL,
+  `zone_id` int NOT NULL,
   `company` varchar(30) NOT NULL,
-  `expiretime` int(11) NOT NULL,
-  `country_id` int(11) NOT NULL
+  `expiretime` int NOT NULL,
+  `country_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3381,6 +3405,7 @@ ALTER TABLE `customer_supportemails`
 -- Indeks for tabel `customer_transfer_accounts`
 --
 ALTER TABLE `customer_transfer_accounts`
+  ADD PRIMARY KEY (`accountid`),
   ADD KEY `accountid` (`accountid`),
   ADD KEY `merchantid` (`merchantid`),
   ADD KEY `accountid_2` (`accountid`),
@@ -3709,6 +3734,12 @@ ALTER TABLE `sql_debug_log`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks for tabel `stl_mids`
+--
+ALTER TABLE `stl_mids`
+  ADD PRIMARY KEY (`stl_id`);
+
+--
 -- Indeks for tabel `subscriptions_contacts`
 --
 ALTER TABLE `subscriptions_contacts`
@@ -3861,727 +3892,733 @@ ALTER TABLE `yourpark_zones`
 -- Tilføj AUTO_INCREMENT i tabel `api_globals`
 --
 ALTER TABLE `api_globals`
-  MODIFY `api_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `api_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `api_groups`
 --
 ALTER TABLE `api_groups`
-  MODIFY `api_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `api_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `api_params`
 --
 ALTER TABLE `api_params`
-  MODIFY `api_param` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `api_param` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `api_requests`
 --
 ALTER TABLE `api_requests`
-  MODIFY `request_id` bigint(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `request_id` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `app_dk_economic_sync`
 --
 ALTER TABLE `app_dk_economic_sync`
-  MODIFY `sync_id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `sync_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `app_economic_sync`
 --
 ALTER TABLE `app_economic_sync`
-  MODIFY `sync_id` int(7) NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
+  MODIFY `sync_id` int NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `app_user_invoicing`
 --
 ALTER TABLE `app_user_invoicing`
-  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `invoice_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `app_user_pricing`
 --
 ALTER TABLE `app_user_pricing`
-  MODIFY `user_pricing_id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_pricing_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `bambora_merchants`
 --
 ALTER TABLE `bambora_merchants`
-  MODIFY `bambora_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `bambora_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `beta_codes`
 --
 ALTER TABLE `beta_codes`
-  MODIFY `betaid` int(7) NOT NULL AUTO_INCREMENT COMMENT 'BetaID';
+  MODIFY `betaid` int NOT NULL AUTO_INCREMENT COMMENT 'BetaID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `blacklist_merchant_tokens`
 --
 ALTER TABLE `blacklist_merchant_tokens`
-  MODIFY `blacklist_id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `blacklist_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `blog_id` int(7) NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
+  MODIFY `blog_id` int NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `campaign_codes`
 --
 ALTER TABLE `campaign_codes`
-  MODIFY `campaignid` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `campaignid` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `company_review`
 --
 ALTER TABLE `company_review`
-  MODIFY `ReviewID` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `ReviewID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `consumer_data`
 --
 ALTER TABLE `consumer_data`
-  MODIFY `consumer_id` bigint(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `consumer_id` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `crawler`
 --
 ALTER TABLE `crawler`
-  MODIFY `CrawlerID` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `CrawlerID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `crawler_trustpilot`
 --
 ALTER TABLE `crawler_trustpilot`
-  MODIFY `CrawlerID` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `CrawlerID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `crm_customers`
 --
 ALTER TABLE `crm_customers`
-  MODIFY `crmID` int(7) NOT NULL AUTO_INCREMENT COMMENT 'Unique ID';
+  MODIFY `crmID` int NOT NULL AUTO_INCREMENT COMMENT 'Unique ID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `crm_dashboard`
 --
 ALTER TABLE `crm_dashboard`
-  MODIFY `crm_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `crm_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `crm_login`
 --
 ALTER TABLE `crm_login`
-  MODIFY `user_id` int(6) NOT NULL AUTO_INCREMENT COMMENT 'UserID';
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT COMMENT 'UserID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `crm_login_psp`
 --
 ALTER TABLE `crm_login_psp`
-  MODIFY `pspid` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `pspid` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `crm_login_psp_monthly_data_months`
 --
 ALTER TABLE `crm_login_psp_monthly_data_months`
-  MODIFY `month_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `month_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `crm_queries`
 --
 ALTER TABLE `crm_queries`
-  MODIFY `query_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `query_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_acquirer`
 --
 ALTER TABLE `customer_acquirer`
-  MODIFY `cacquirer_id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `cacquirer_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_activities`
 --
 ALTER TABLE `customer_activities`
-  MODIFY `activity_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `activity_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_agreement`
 --
 ALTER TABLE `customer_agreement`
-  MODIFY `agreement` int(5) NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
+  MODIFY `agreement` int NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_agreement_reviews`
 --
 ALTER TABLE `customer_agreement_reviews`
-  MODIFY `review_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `review_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_app_settings`
 --
 ALTER TABLE `customer_app_settings`
-  MODIFY `setting_id` bigint(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `setting_id` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_complaints`
 --
 ALTER TABLE `customer_complaints`
-  MODIFY `complaintid` int(12) NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
+  MODIFY `complaintid` int NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_csv`
 --
 ALTER TABLE `customer_csv`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_cvr_audit`
 --
 ALTER TABLE `customer_cvr_audit`
-  MODIFY `audit_id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `audit_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_data_collection`
 --
 ALTER TABLE `customer_data_collection`
-  MODIFY `collection_id` bigint(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `collection_id` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_domains`
 --
 ALTER TABLE `customer_domains`
-  MODIFY `DomainID` bigint(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `DomainID` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_expected_revenue`
 --
 ALTER TABLE `customer_expected_revenue`
-  MODIFY `recenueID` int(8) NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
+  MODIFY `recenueID` int NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_important_notifications`
 --
 ALTER TABLE `customer_important_notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `notification_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_invoices`
 --
 ALTER TABLE `customer_invoices`
-  MODIFY `invoiceID` bigint(12) NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
+  MODIFY `invoiceID` bigint NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_lead`
 --
 ALTER TABLE `customer_lead`
-  MODIFY `leadid` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `leadid` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_logins`
 --
 ALTER TABLE `customer_logins`
-  MODIFY `LoginID` int(7) NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
+  MODIFY `LoginID` int NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_logins_activity`
 --
 ALTER TABLE `customer_logins_activity`
-  MODIFY `activityid` int(7) NOT NULL AUTO_INCREMENT COMMENT 'Unique Identifier';
+  MODIFY `activityid` int NOT NULL AUTO_INCREMENT COMMENT 'Unique Identifier';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_logins_apppassword`
 --
 ALTER TABLE `customer_logins_apppassword`
-  MODIFY `password_id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `password_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_login_session_details`
 --
 ALTER TABLE `customer_login_session_details`
-  MODIFY `details_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `details_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_owners`
 --
 ALTER TABLE `customer_owners`
-  MODIFY `OwnerFileID` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `OwnerFileID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_payment_download`
 --
 ALTER TABLE `customer_payment_download`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_payon`
 --
 ALTER TABLE `customer_payon`
-  MODIFY `channelID` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `channelID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_payon_psp`
 --
 ALTER TABLE `customer_payon_psp`
-  MODIFY `pspid` int(7) NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
+  MODIFY `pspid` int NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_products`
 --
 ALTER TABLE `customer_products`
-  MODIFY `product_id` int(7) NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_products_groups`
 --
 ALTER TABLE `customer_products_groups`
-  MODIFY `group_id` int(7) NOT NULL AUTO_INCREMENT COMMENT 'Group ID';
+  MODIFY `group_id` int NOT NULL AUTO_INCREMENT COMMENT 'Group ID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_product_stock_decrease`
 --
 ALTER TABLE `customer_product_stock_decrease`
-  MODIFY `decrease_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `decrease_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_subscriptions`
 --
 ALTER TABLE `customer_subscriptions`
-  MODIFY `subscription_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `subscription_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `customer_transfer_accounts`
 --
 ALTER TABLE `customer_transfer_accounts`
-  MODIFY `accountid` bigint(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `accountid` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `deals_registered_won`
 --
 ALTER TABLE `deals_registered_won`
-  MODIFY `deal_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `deal_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `deployments_performed`
 --
 ALTER TABLE `deployments_performed`
-  MODIFY `deployment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `deployment_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `documentation_code_example`
 --
 ALTER TABLE `documentation_code_example`
-  MODIFY `example_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `example_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `documentation_entities`
 --
 ALTER TABLE `documentation_entities`
-  MODIFY `entities_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `entities_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `documentation_titles`
 --
 ALTER TABLE `documentation_titles`
-  MODIFY `documentation_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `documentation_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `document_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `document_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `documents_groups`
 --
 ALTER TABLE `documents_groups`
-  MODIFY `doc_group_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `doc_group_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `jobid` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `jobid` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `MailQueue`
 --
 ALTER TABLE `MailQueue`
-  MODIFY `MailID` int(5) NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
+  MODIFY `MailID` int NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `MailSMSQueue`
 --
 ALTER TABLE `MailSMSQueue`
-  MODIFY `sms_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `sms_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `mail_template`
 --
 ALTER TABLE `mail_template`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `mail_trigger_mails`
 --
 ALTER TABLE `mail_trigger_mails`
-  MODIFY `mail_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `mail_id` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `mail_wrapper`
 --
 ALTER TABLE `mail_wrapper`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `manual_adjustments`
 --
 ALTER TABLE `manual_adjustments`
-  MODIFY `adjustment_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `adjustment_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `maxtel`
 --
 ALTER TABLE `maxtel`
-  MODIFY `phone_reg` bigint(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `phone_reg` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `merchant_outgoing_transactions`
 --
 ALTER TABLE `merchant_outgoing_transactions`
-  MODIFY `ImportID` bigint(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `ImportID` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `merchant_outgoing_transactions_verification`
 --
 ALTER TABLE `merchant_outgoing_transactions_verification`
-  MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `v_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `merchant_refunds_accounts`
 --
 ALTER TABLE `merchant_refunds_accounts`
-  MODIFY `refund_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `refund_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `merchant_transfer_accounts_daily_overview`
 --
 ALTER TABLE `merchant_transfer_accounts_daily_overview`
-  MODIFY `dateid` bigint(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `dateid` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `navision_exports`
 --
 ALTER TABLE `navision_exports`
-  MODIFY `exports_id` bigint(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `exports_id` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `navision_review`
 --
 ALTER TABLE `navision_review`
-  MODIFY `AutoID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `AutoID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `newsletter`
 --
 ALTER TABLE `newsletter`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT COMMENT 'Unique Identifier';
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'Unique Identifier';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `new_website_blog`
 --
 ALTER TABLE `new_website_blog`
-  MODIFY `blog_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `blog_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `onboarding_data_searcher`
 --
 ALTER TABLE `onboarding_data_searcher`
-  MODIFY `searcher_id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `searcher_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `onboarding_data_searcher_url`
 --
 ALTER TABLE `onboarding_data_searcher_url`
-  MODIFY `searcher_url_id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `searcher_url_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `onboarding_pipedrive_activities`
 --
 ALTER TABLE `onboarding_pipedrive_activities`
-  MODIFY `act_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `act_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `payment_download`
 --
 ALTER TABLE `payment_download`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `payment_link`
 --
 ALTER TABLE `payment_link`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `payment_links_templates`
 --
 ALTER TABLE `payment_links_templates`
-  MODIFY `template_id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `template_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `payon_clearing_institutes`
 --
 ALTER TABLE `payon_clearing_institutes`
-  MODIFY `institute_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `institute_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `pdf_customers`
 --
 ALTER TABLE `pdf_customers`
-  MODIFY `pdf_id` bigint(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `pdf_id` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `plugins`
 --
 ALTER TABLE `plugins`
-  MODIFY `plugin_id` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `plugin_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `plugin_installed`
 --
 ALTER TABLE `plugin_installed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `pricing_plans`
 --
 ALTER TABLE `pricing_plans`
-  MODIFY `pricing_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `pricing_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(5) NOT NULL AUTO_INCREMENT COMMENT 'Product ID';
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT COMMENT 'Product ID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `products_features`
 --
 ALTER TABLE `products_features`
-  MODIFY `features_id` int(7) NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
+  MODIFY `features_id` int NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `products_sync_attributes`
 --
 ALTER TABLE `products_sync_attributes`
-  MODIFY `attribute_id` bigint(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `attribute_id` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `products_sync_product`
 --
 ALTER TABLE `products_sync_product`
-  MODIFY `unique_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `unique_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `qid` int(7) NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
+  MODIFY `qid` int NOT NULL AUTO_INCREMENT COMMENT 'Auto ID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `questions_groups`
 --
 ALTER TABLE `questions_groups`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `rebilling_customer_products`
 --
 ALTER TABLE `rebilling_customer_products`
-  MODIFY `rebilling_products_id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `rebilling_products_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `reviewlist`
 --
 ALTER TABLE `reviewlist`
-  MODIFY `reviewid` int(7) NOT NULL AUTO_INCREMENT COMMENT 'Review ID';
+  MODIFY `reviewid` int NOT NULL AUTO_INCREMENT COMMENT 'Review ID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `robots`
 --
 ALTER TABLE `robots`
-  MODIFY `robot_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `robot_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `robot_actions`
 --
 ALTER TABLE `robot_actions`
-  MODIFY `actionid` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `actionid` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `robot_verify_data_on_website_url_identificators`
 --
 ALTER TABLE `robot_verify_data_on_website_url_identificators`
-  MODIFY `identificator_id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `identificator_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `secure_trading_merchants`
 --
 ALTER TABLE `secure_trading_merchants`
-  MODIFY `secure_id` bigint(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `secure_id` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `server_usage`
 --
 ALTER TABLE `server_usage`
-  MODIFY `usage_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `usage_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `settlement_holidays`
 --
 ALTER TABLE `settlement_holidays`
-  MODIFY `holiday_id` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `holiday_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `shortly_logger`
 --
 ALTER TABLE `shortly_logger`
-  MODIFY `logger_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `logger_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `sql_debug_log`
 --
 ALTER TABLE `sql_debug_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- Tilføj AUTO_INCREMENT i tabel `stl_mids`
+--
+ALTER TABLE `stl_mids`
+  MODIFY `stl_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `subscriptions_contacts`
 --
 ALTER TABLE `subscriptions_contacts`
-  MODIFY `subscriber_id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `subscriber_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `subscriptions_dunning`
 --
 ALTER TABLE `subscriptions_dunning`
-  MODIFY `dunning_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dunning_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `subscriptions_interest`
 --
 ALTER TABLE `subscriptions_interest`
-  MODIFY `interest_id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `interest_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `subscriptions_invoices`
 --
 ALTER TABLE `subscriptions_invoices`
-  MODIFY `invoice_id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `invoice_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `subscriptions_plan`
 --
 ALTER TABLE `subscriptions_plan`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `subscriptions_products`
 --
 ALTER TABLE `subscriptions_products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `subscriptions_subscriptions`
 --
 ALTER TABLE `subscriptions_subscriptions`
-  MODIFY `subscription_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `subscription_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `system_errors`
 --
 ALTER TABLE `system_errors`
-  MODIFY `errorid` int(7) NOT NULL AUTO_INCREMENT COMMENT 'SystemID';
+  MODIFY `errorid` int NOT NULL AUTO_INCREMENT COMMENT 'SystemID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `terminals`
 --
 ALTER TABLE `terminals`
-  MODIFY `TerminalID` int(5) NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
+  MODIFY `TerminalID` int NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `terrorlist`
 --
 ALTER TABLE `terrorlist`
-  MODIFY `ter_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `ter_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `toturials`
 --
 ALTER TABLE `toturials`
-  MODIFY `toturialid` int(3) NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
+  MODIFY `toturialid` int NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `TransID` bigint(12) NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
+  MODIFY `TransID` bigint NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `transaction_touches`
 --
 ALTER TABLE `transaction_touches`
-  MODIFY `TouchID` bigint(12) NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
+  MODIFY `TouchID` bigint NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `translate`
 --
 ALTER TABLE `translate`
-  MODIFY `TranslateID` bigint(5) NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
+  MODIFY `TranslateID` bigint NOT NULL AUTO_INCREMENT COMMENT 'AutoID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `unitests`
 --
 ALTER TABLE `unitests`
-  MODIFY `uni_id` int(7) NOT NULL AUTO_INCREMENT COMMENT 'Automated ID';
+  MODIFY `uni_id` int NOT NULL AUTO_INCREMENT COMMENT 'Automated ID';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `unitest_results`
 --
 ALTER TABLE `unitest_results`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `result_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `user_token_logging`
 --
 ALTER TABLE `user_token_logging`
-  MODIFY `log_id` int(7) NOT NULL AUTO_INCREMENT COMMENT 'Token Log';
+  MODIFY `log_id` int NOT NULL AUTO_INCREMENT COMMENT 'Token Log';
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `viabill_logger`
 --
 ALTER TABLE `viabill_logger`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `webservice_logger`
 --
 ALTER TABLE `webservice_logger`
-  MODIFY `serviceid` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `serviceid` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `yourpark_car`
 --
 ALTER TABLE `yourpark_car`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `yourpark_parking`
 --
 ALTER TABLE `yourpark_parking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Begrænsninger for dumpede tabeller
@@ -4591,10 +4628,10 @@ ALTER TABLE `yourpark_parking`
 -- Begrænsninger for tabel `yourpark_parking`
 --
 ALTER TABLE `yourpark_parking`
-  ADD CONSTRAINT `yourpark_parking_ibfk_1` FOREIGN KEY (`id`) REFERENCES `yourpark_car` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `yourpark_parking_ibfk_1` FOREIGN KEY (`id`) REFERENCES `yourpark_car` (`id`) ON UPDATE CASCADE;
 
 --
 -- Begrænsninger for tabel `yourpark_zones`
 --
 ALTER TABLE `yourpark_zones`
-  ADD CONSTRAINT `yourpark_zones_ibfk_1` FOREIGN KEY (`zone_id`) REFERENCES `yourpark_parking` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `yourpark_zones_ibfk_1` FOREIGN KEY (`zone_id`) REFERENCES `yourpark_parking` (`id`) ON UPDATE CASCADE;
