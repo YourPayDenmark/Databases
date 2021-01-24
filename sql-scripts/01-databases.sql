@@ -17,3 +17,8 @@ CREATE DATABASE IF NOT EXISTS dinterminal_documents;
 CREATE USER IF NOT EXISTS 'dinterminal_documents' identified by '';
 GRANT ALL PRIVILEGES ON dinterminal_documents.* TO 'dinterminal_documents';
 GRANT ALL PRIVILEGES ON dinterminal_documents.* TO 'root';
+
+CREATE DATABASE IF NOT EXISTS di_products;
+CREATE USER IF NOT EXISTS 'di_products' identified by '';
+GRANT ALL PRIVILEGES ON dinterminal_documents.* TO 'di_products';
+GRANT ALL PRIVILEGES ON dinterminal_documents.* TO 'root';
