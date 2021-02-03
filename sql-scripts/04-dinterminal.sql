@@ -913,6 +913,11 @@ CREATE TABLE `customer_cvr` (
   `audittrail` longtext NOT NULL,
   `document_key` varchar(12) NOT NULL,
   `document_token` varchar(120) NOT NULL,
+  `facebook_url` varchar(120) NOT NULL DEFAULT ' ',
+  `estimated_transactions` smallint NOT NULL DEFAULT '0',
+  `yearly_revenue` smallint NOT NULL DEFAULT '0',
+  `approved` smallint NOT NULL DEFAULT '0',
+  `final_approval` varchar(120) NOT NULL,
   `marketplace_instant_approval` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
