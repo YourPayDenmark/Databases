@@ -914,10 +914,6 @@ CREATE TABLE `customer_cvr` (
   `document_key` varchar(12) NOT NULL,
   `document_token` varchar(120) NOT NULL,
   `facebook_url` varchar(120) NOT NULL,
-  `estimated_transactions` varchar(120) NOT NULL,
-  `yearly_revenue` varchar(120) NOT NULL,
-  `approved` varchar(120) NOT NULL,
-  `final_approval` varchar(120) NOT NULL,
   `marketplace_instant_approval` smallint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
