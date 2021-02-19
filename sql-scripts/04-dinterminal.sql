@@ -2988,6 +2988,21 @@ CREATE TABLE `yourpark_zones` (
   `country_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+
+--
+-- Struktur-dump for tabellen `notification_data`
+--
+
+CREATE TABLE `user_notification` (
+  `notification_id` varchar(50) NOT NULL,
+  `notification_active` varchar(255) NOT NULL,
+  `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_id` varchar(50) NOT NULL,
+  `merchant_token` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 --
 -- Begrænsninger for dumpede tabeller
 --
@@ -4637,13 +4652,10 @@ ALTER TABLE `yourpark_zones`
   ADD CONSTRAINT `yourpark_zones_ibfk_1` FOREIGN KEY (`zone_id`) REFERENCES `yourpark_parking` (`id`) ON UPDATE CASCADE;
 
 --
--- Tilføj notifications_mail, notifications_sms, general_notification, new_order_notification, new_subscription_auth_notification , new_subscription_notification i tabel `customer_logins`
+-- Tilføj notifications_mail, notifications_sms i tabel `customer_logins`
 --
 
 ALTER TABLE `customer_logins`
   ADD notifications_mail smallint NOT NULL DEFAULT 0,
   ADD notifications_sms smallint NOT NULL DEFAULT 0,
-  ADD general_notification smallint NOT NULL DEFAULT 0,
-  ADD new_order_notification smallint NOT NULL DEFAULT 0,
-  ADD new_subscription_auth_notification smallint NOT NULL DEFAULT 0,
-  ADD new_subscription_notification smallint NOT NULL DEFAULT 0;
+
