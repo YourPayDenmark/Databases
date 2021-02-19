@@ -4635,3 +4635,15 @@ ALTER TABLE `yourpark_parking`
 --
 ALTER TABLE `yourpark_zones`
   ADD CONSTRAINT `yourpark_zones_ibfk_1` FOREIGN KEY (`zone_id`) REFERENCES `yourpark_parking` (`id`) ON UPDATE CASCADE;
+
+--
+-- Tilføj notifications_mail, notifications_sms, general_notification, new_order_notification, new_subscription_auth_notification , new_subscription_notification i tabel `customer_logins`
+--
+
+ALTER TABLE `customer_logins`
+  ADD notifications_mail smallint NOT NULL DEFAULT 0,
+  ADD notifications_sms smallint NOT NULL DEFAULT 0,
+  ADD general_notification smallint NOT NULL DEFAULT 0,
+  ADD new_order_notification smallint NOT NULL DEFAULT 0,
+  ADD new_subscription_auth_notification smallint NOT NULL DEFAULT 0,
+  ADD new_subscription_notification smallint NOT NULL DEFAULT 0;
