@@ -4657,5 +4657,5 @@ ALTER TABLE `yourpark_zones`
 
 ALTER TABLE `customer_logins`
   ADD notifications_mail smallint NOT NULL DEFAULT 0,
-  ADD notifications_sms smallint NOT NULL DEFAULT 0,
+  ADD notifications_sms smallint NOT NULL DEFAULT 0;
 
