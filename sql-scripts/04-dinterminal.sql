@@ -2991,7 +2991,7 @@ CREATE TABLE `yourpark_zones` (
 
 
 --
--- Struktur-dump for tabellen `notification_data`
+-- Struktur-dump for tabellen `user_notification`
 --
 
 CREATE TABLE `user_notification` (
