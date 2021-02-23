@@ -1152,7 +1152,7 @@ CREATE TABLE `customer_logins` (
   `twofactor` smallint(1) NOT NULL DEFAULT '1' COMMENT 'Two factor login',
   `session_id` varchar(30) NOT NULL,
   `session_lastused` bigint(12) NOT NULL,
-  `user_img` varchar(10) NOT NULL COMMENT 'User Image',
+  `user_img` varchar(255) NOT NULL COMMENT 'User Image',
   `latestlogin` bigint(12) NOT NULL COMMENT 'Latest Login Timestamp',
   `access_rights` varchar(255) NOT NULL,
   `logintype` enum('0','1') NOT NULL COMMENT '0 for Manually, 1 for 1-click-login',
