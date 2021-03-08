@@ -469,8 +469,8 @@ CREATE TABLE `crm_login_psp` (
   `total_volume` bigint NOT NULL,
   `total_kickback` bigint NOT NULL,
   `total_release` bigint NOT NULL,
-  `bank_reg` int NOT NULL,
-  `bank_acc` int NOT NULL
+  `bank_reg` smallint NOT NULL,
+  `bank_acc` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
