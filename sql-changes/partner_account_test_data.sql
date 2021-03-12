@@ -1,9 +1,9 @@
 USE dinterminal;
 
 INSERT INTO `crm_login_psp` (`settlement_days`,`merchant_percentage`,`finders_fee`,`partner_kickback`,`name`) VALUES
-(7,145,0,145,'Partner_Account')
+(7,145,0,145,'Partner_Account');
 INSERT INTO `crm_login` (`username`,`useremail`,`active`,`accesslevel`,`psp`,`pwd`,`heystack`) VALUES
-('partner@yourpay.io','partner@yourpay.io',1,1,1,'1234','asdfghjkop')
+('partner@yourpay.io','partner@yourpay.io',1,1,1,'1234','asdfghjkop');
 INSERT INTO `crm_login_psp_monthly_data_months` (`month_id`, `month_start`) VALUES
 (1,1409529600),
 (2,1412114400),
