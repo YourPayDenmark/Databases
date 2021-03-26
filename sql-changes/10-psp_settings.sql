@@ -1,6 +1,6 @@
 use dinterminal;
 
-CREATE TABLE `psp_settings` (
+CREATE TABLE `psp_system_settings` (
   `psp_id` int(8) NOT NULL,
   `psp_setting` varchar(255) NOT NULL,
   `psp_value` varchar(255) NOT NULL
