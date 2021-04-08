@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `crm_login_psp` (
-  `pspid` int(2) NOT NULL,
+  `pspid` int(10) NOT NULL,
   `name` varchar(255) NOT NULL,
   `short_description` longtext NOT NULL,
   `logo` varchar(255) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `crm_login_psp` (
   `postal` varchar(255) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   `default_language_code` int(11) DEFAULT NULL,
-  `multi_media_share` varchar(255) DEFAULT NULL,
+  `multi_media_share` int(1) DEFAULT NULL,
   `terminal_buy_price` int(11) DEFAULT NULL,
   `terminal_buy_currency` int(11) DEFAULT NULL,
   `bank_information` varchar(255) DEFAULT NULL,
