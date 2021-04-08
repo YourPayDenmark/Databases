@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `user_login_psp` (
   `password` varchar(255) NOT NULL,
+  `secret` varchar(10) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
