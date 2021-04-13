@@ -18,3 +18,6 @@ CREATE TABLE `user_login_psp` (
 ALTER TABLE `user_login_psp`
   ADD PRIMARY KEY (`user_id`);
 COMMIT;
+ALTER TABLE `user_login_psp`
+    AUTO_INCREMENT = 1;
+COMMIT;
