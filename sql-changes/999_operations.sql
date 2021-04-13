@@ -10,3 +10,4 @@ ALTER TABLE `02_payments_declined`
   ADD PRIMARY KEY (`id`),
   ADD KEY `transid` (`transid`);
 
+ALTER TABLE `02_payments_declined` ADD `operation_id` VARCHAR(255) NOT NULL AFTER `merchantid`;
