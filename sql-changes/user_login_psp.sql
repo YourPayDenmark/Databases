@@ -8,7 +8,7 @@ CREATE TABLE `user_login_psp` (
   `name` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
-  `user_id` int(11) NOT NULL DEFAULT '0',
+  `user_id` int(11) NOT NULL,
   `session_id` varchar(255) DEFAULT NULL,
   `access_rights` varchar(255) DEFAULT NULL,
   `language` varchar(255) DEFAULT NULL,
@@ -19,5 +19,5 @@ ALTER TABLE `user_login_psp`
   ADD PRIMARY KEY (`user_id`);
 COMMIT;
 ALTER TABLE `user_login_psp`
-    AUTO_INCREMENT = 1;
+    MODIFY `user_id` INT(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
