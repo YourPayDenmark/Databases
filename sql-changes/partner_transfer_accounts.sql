@@ -2,6 +2,7 @@ USE `dinterminal`
 
 CREATE TABLE `partner_transfer_accounts` (
   `accountid` bigint(12) DEFAULT NULL,
+  `pspid` int(11) DEFAULT NULL,
   `creationtime` bigint(12) DEFAULT NULL,
   `currency` int(3) DEFAULT NULL,
   `settlement_currency` int(3) DEFAULT NULL,
@@ -34,5 +35,10 @@ CREATE TABLE `partner_transfer_accounts` (
   `activation_code` varchar(8) DEFAULT NULL,
   `activation_amount` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-COMMIT;
 
+ALTER TABLE `partner_transfer_accounts`
+  ADD PRIMARY KEY (`accountid`);
+
+ALTER TABLE `partner_transfer_accounts`
+  MODIFY `accountid` bigint(12) NOT NULL AUTO_INCREMENT;
+COMMIT;
