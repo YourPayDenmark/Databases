@@ -31,6 +31,8 @@ INSERT INTO partner_access_rights_list(short_code,endpoint,name,description) VAL
 ('MVD','partner_merchant_data','Merchant view data','Adgang til at se specifikt data over merchant'),
 ('BU' ,'partner_bank_update','Bank update','Tilføje og ændre bankoplysninger på partner kontoen'),
 ('IU' ,'partner_update','Information update','Adgang til at ændre og opdatere informationer på partner kontoen'),
+('UC' ,'partner_user_create', 'User create','Adgang til at oprette nye brugere'),
+('UD' ,'partner_user_delete', 'User delete','Adgang til at fjerne brugere'),
 ('UVS','partner_user_data', 'User view settings','Adgang til at ændre users bruger settings og informationer'),
 ('UUA', 'partner_access_right_update','User update access rights','Adgang til at ændre accessrights på users'),
 ('TOU','partner_terminal_order_update','Terminal order update','Adgang til at opdatere ordre som ikke er 100% complete'),
