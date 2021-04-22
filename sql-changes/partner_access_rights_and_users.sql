@@ -17,11 +17,10 @@ CREATE TABLE `user_login_psp` (
 
 INSERT INTO `user_login_psp` (`password`, `name`, `phone`, `email`, `user_id`, `session_id`, `language`, `pspid`, `reset_token`, `reset_token_expiry`, `secret`) VALUES
 ('', NULL, NULL, '', 1000000,  NULL, NULL, NULL, NULL, NULL, '');
-​
 
-ALTER TABLE `user_login_psp` ADD PRIMARY KEY (`user_id`);
+ALTER TABLE `user_login_psp` ADD PRIMARY KEY(`user_id`);
 
-ALTER TABLE `user_login_psp` MODIFY `user_id` INT(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user_login_psp` MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 
 CREATE TABLE `partner_access_rights` (
