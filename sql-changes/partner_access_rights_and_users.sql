@@ -19,23 +19,20 @@ INSERT INTO `user_login_psp` (`password`, `name`, `phone`, `email`, `user_id`, `
 ('', NULL, NULL, '', 1000000,  NULL, NULL, NULL, NULL, NULL, '');
 ​
 
-ALTER TABLE `user_login_psp`
-  ADD PRIMARY KEY (`user_id`);
-COMMIT;
-ALTER TABLE `user_login_psp`
-    MODIFY `user_id` INT(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
+ALTER TABLE `user_login_psp` ADD PRIMARY KEY (`user_id`);
+
+ALTER TABLE `user_login_psp` MODIFY `user_id` INT(11) NOT NULL AUTO_INCREMENT;
 
 
-create table partner_access_rights (
+CREATE TABLE `partner_access_rights` (
 short_code varchar(5) NOT NULL,
 user_id int(11) NOT NULL,
 enabled BOOLEAN NOT NULL DEFAULT false,
 last_updated int(11) NOT NULL,
-FOREIGN KEY (user_id) REFERENCES user_login_psp(user_id)
+FOREIGN KEY (user_id) REFERENCES user_login_psp(`user_id`)
 );
 
-create table partner_access_rights_list (
+CREATE TABLE `partner_access_rights_list` (
 short_code varchar(5) NOT NULL,
 name varchar(50) NOT NULL,
 endpoint varchar(50),
@@ -43,8 +40,8 @@ description longtext NOT NULL,
 editable_with varchar(5) NOT NULL DEFAULT 'UUA'
 );
 
-CREATE VIEW partner_access_rights_view AS SELECT * FROM partner_access_rights 
-INNER JOIN partner_access_rights_list 
+CREATE VIEW `partner_access_rights_view` AS SELECT * FROM `partner_access_rights` 
+INNER JOIN `partner_access_rights_list` 
 USING (short_code);
 
 INSERT INTO partner_access_rights_list(short_code,endpoint,name,description) VALUES
@@ -71,3 +68,5 @@ INSERT INTO partner_access_rights_list(short_code,endpoint,name,description) VAL
 ('VS' ,'' ,'view statistics','Adgang til at se siden med partners statestikker'),
 ('VML','psp_merchant_list' ,'View merchant list','Adgang til at se listen over merchants'), 
 ('VUL','psp_user_list', 'View user list','Adgang til at se partner kontoens bruger liste');
+
+COMMIT;
