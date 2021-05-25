@@ -68,4 +68,6 @@ INSERT INTO partner_access_rights_list(short_code,endpoint,name,description) VAL
 ('VML','psp_merchant_list' ,'View merchant list','Adgang til at se listen over merchants'), 
 ('VUL','psp_user_list', 'View user list','Adgang til at se partner kontoens bruger liste');
 
+ALTER TABLE `crm_login_psp` MODIFY column `default_language_code` varchar(5);
+
 COMMIT;
