@@ -1,6 +1,6 @@
 
 {
-    "name": "yourpay/databases",
+    "name": "yourpaypayments/databases",
     "description": "common classes for webservice including controllers",
     "license": "MIT",
     "authors": [
